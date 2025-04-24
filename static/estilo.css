@@ -1,10 +1,106 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    text-align: center;
-    padding: 50px;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background: #0079F2;
+    color: #fff;
+}
+
+.contenedor {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 h1 {
-    color: #333;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.cuadro-izq {
+    display: flex;
+    align-items: center;
+}
+
+.modo{
+	padding: 10px 15px;
+}
+
+.modo-btn {
+    border: 1px solid #555;
+	background:#333;	
+    border-radius: 50%;
+	transform: scaleX(-1);
+    font-size: 1.5rem;
+	text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modo-btn:hover {
+    background: rgba(0, 0, 0, 0.1); /* Fondo gris claro al pasar el mouse */
+}
+
+.btn-login, .btn-registro, .modo {
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-login {
+    border: 2px solid white;
+    color: white;
+    background: transparent;
+    margin-right: 10px;
+}
+
+.btn-registro {
+    background: black;
+    color: white;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #333;
+    color: #fff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
