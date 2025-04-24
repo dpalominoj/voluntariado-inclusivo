@@ -3,10 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hola Mundo</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-    <h1>HOLA MUNDO</h1>
+    <header>
+        <div class="contenedor">
+            <h1>Nombre de la Página</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Actividades</a></li>
+                    <li><a href="#">Ayuda</a></li>
+                </ul>
+            </nav>
+			<div class="cuadro-izq">
+				<span class="modo"><a href="#" class="modo-btn" aria-label="modo-oscuro">&#127769;</a></span>                
+                <a href="#" class="btn-login">Iniciar sesión</a>
+                <a href="#" class="btn-registro">Registrarse</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section id="inicio">
+            <h2>Bienvenido a nuestra página</h2>
+            <p>Descripción breve de la página y su propósito.</p>
+        </section>
+        <section id="actividades">
+            <h2>Actividades</h2>
+            <p>Lista de actividades disponibles.</p>
+        </section>
+        <section id="ayuda">
+            <h2>Ayuda</h2>
+            <p>Información de contacto y recursos de ayuda.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>
