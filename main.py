@@ -25,8 +25,21 @@ def create_tables():
 
 # Modelo de ejemplo
 class Usuario(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(100), nullable=False)
+    __tablename__ = 'usuarios'
+    id_usuario = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    DNI = db.Column(db.String(8), unique=True)
+    nombre = db.Column(db.String(100))
+    apellido = db.Column(db.String(100))
+    email = db.Column(db.String(150), unique=True)
+    contrasena_hash = db.Column(db.String(255))
+    celular = db.Column(db.String(9))
+    direccion = db.Column(db.Text)
+    fecha_nacimiento = db.Column(db.Date)
+    genero = db.Column(db.Enum('masculino', 'femenino', 'prefiero_no_decir'))
+    perfil = db.Column(db.Enum('voluntario', 'organizador', 'administrador'))
+    tiene_discapacidad = db.Column(db.Boolean)
+    estado_usuario = db.Column(db.Enum('activo', 'inactivo', 'pendiente'))
+    fecha_registro = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp())
 
 # Ruta principal
 @app.route('/')
