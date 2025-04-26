@@ -46,27 +46,29 @@ class Usuario(db.Model):
 def inicio():
     return render_template('inicio.html')
 
-@app.route('/login')
-def login():
+@app.route('/login', methods=['GET'])
+def login_page():
     return render_template('login.html')
 
-@app.route('/registro')
-def registro():
+@app.route('/registro', methods=['GET'])
+def registro_page():
     return render_template('registro.html')
+
     
 # Manejando formularios
 @app.route('/login', methods=['POST'])
-def login():
+def login_user():
     username = request.form['username']
     password = request.form['password']
     return f'Iniciando sesión para {username}'
-
+    
 @app.route('/registro', methods=['POST'])
-def registro():
+def registro_user():
     username = request.form['username']
     email = request.form['email']
     password = request.form['password']
     return f'Registrando a {username} con el correo {email}'
+
 
 if __name__ == '__main__':
     db.create_all()  # Crea todas las tablas
