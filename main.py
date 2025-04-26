@@ -8,6 +8,21 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///voluntariado.db' #voluntariad
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+def execute_sql_script(script_file):
+    with app.app_context():
+        try:
+            with open(script_file, 'r') as f:
+                sql_script = f.read()
+            db.session.execute(sql_script)
+            db.session.commit()
+        except Exception as e:
+            print(f"Error al ejecutar el script SQL: {e}")
+            db.session.rollback()
+
+@app.before_first_request
+def create_tables():
+    execute_sql_script('database/esquema.sql')
+
 # Modelo de ejemplo
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
