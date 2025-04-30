@@ -46,7 +46,7 @@ app = Flask(__name__)
 # Ruta principal
 @app.route("/")
 def inicio():
-    return render_template("inicio.html")
+    return render_template("Inicio.html")
 
 @app.route("/login")
 def login():
