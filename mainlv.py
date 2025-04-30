@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 # from flask_sqlalchemy import SQLAlchemy  # configurand... base de datos
 
 app = Flask(__name__)
@@ -44,17 +44,17 @@ app = Flask(__name__)
 #     fecha_registro = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp())
 
 # Ruta principal
-@app.route('/')
+@app.route("/")
 def inicio():
-    return render_template('inicio.html')
+    return render_template("inicio.html")
 
-@app.route('/login', methods=['GET'])
-def login_page():
-    return render_template('login.html')
+@app.route("/login")
+def login():
+    return render_template("login.html")
 
-@app.route('/registro', methods=['GET'])
-def registro_page():
-    return render_template('registro.html')
+@app.route("/registro")
+def registro():
+    return render_template("registro.html")
 
 # Comentamos las rutas que manejan formularios
 # @app.route('/login', methods=['POST'])
@@ -70,7 +70,7 @@ def registro_page():
 #     password = request.form['password']
 #     return f'Registrando a {username} con el correo {email}'
 
-if __name__ == '__main__':
-    # db.create_all()  # Todavia no se usará la base de datos
+if __name__ == "__mainlv__":
     app.run(debug=True)
+    # db.create_all()  # Todavia no se usará la base de datos
     # app.run(host='0.0.0.0', port=3000)  # ¿accesible?
