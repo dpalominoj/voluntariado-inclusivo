@@ -70,7 +70,7 @@ def registro():
 #     password = request.form['password']
 #     return f'Registrando a {username} con el correo {email}'
 
-if __name__ == "__mainlv__":
+if __name__ == "__main__":
     app.run(debug=True)
     # db.create_all()  # Todavia no se usará la base de datos
     # app.run(host='0.0.0.0', port=3000)  # ¿accesible?
