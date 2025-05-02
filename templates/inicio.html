@@ -8,8 +8,7 @@
   <!--Ruta_Directa_html <link rel="stylesheet" href="estilos.css"> -->
   <!--Ruta_Directa_html <script src="javascript.js" defer></script> -->
   <!--Ruta_Flash--> <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
-  
-  
+  <!--Ruta_Flash--> <script src="{{ url_for('static', filename='javascript.js') }}" defer></script>  
 </head>
 <body>
   <!-- Navbar -->
@@ -224,14 +223,13 @@
 	<div class="cont_frm">
 	  <span class="cerrarPopup" onclick="cerrarMod()">×</span>
 	  <div class="encab_frm">
-	    <h3>Iniciar Sesión</h3>
-		<!-- <button id="cerrar-login">&times;</button> -->		
+	    <h3>Iniciar Sesión</h3>		
 	  </div>
-	  <form class="formulario">
-	    <label for="user">Usuario (DNI)</label><input type="text" id="usr">
-		<label for="psw">Contraseña</label><input type="password" id="psw">
-		<div class="olvido-psw">¿Olvidaste tu contraseña?</div>
-		<button type="submit" class="iniciar-ses">Iniciar Sesión</button>
+	  <form class="formulario" action="{{ url_for('login') }}" method="POST">
+	    <label for="user">Usuario (DNI)</label><input type="text" id="usr" name="usuario" pattern="[0-9]{8}" maxlength="8" required>
+	    <label for="psw">Contraseña</label><input type="password" id="psw" name="contraseña" minlength="8" maxlength="20" spellcheck="false" autocapitalize="off" required>
+	    <div class="olvido-psw">¿Olvidaste tu contraseña?</div>
+	    <button type="submit" class="iniciar-ses">Iniciar Sesión</button>
 	  </form>
 	  <div class="pie_frm">
 		<p>¿No tienes cuenta? <button>Registrate</button></p>
@@ -247,14 +245,14 @@
 	  <div class="encab_frm">
 	    <h3>Crear Cuenta</h3>	
 	  </div>
-	  <form class="formulario">
+	  <form class="formulario" action="{{ url_for('registro') }}" method="POST">
 	    <div class="nom-apel">
-			<div><label for="nombre">Nombres</label><input type="text" id="nom"></div>
-			<div><label for="apellido">Apellidos</label><input type="text" id="apel"></div>
+			<div><label for="nombre">Nombres</label><input type="text" id="nom" name="nombres"></div>
+			<div><label for="apellido">Apellidos</label><input type="text" id="apel" name="apellidos"></div>
 		</div>
-		<label for="user">N° de DNI</label><input type="text" id="dni">
-		<label for="psw1">Contraseña</label><input type="password" id="psw1">
-		<label for="psw2">Confirmar contraseña</label><input type="password" id="psw2">
+		<label for="user">N° de DNI</label><input type="text" id="dni" name="user" pattern="[0-9]{8}" maxlength="8" required>
+		<label for="psw1">Contraseña</label><input type="password" id="psw1" name="passw1" minlength="8" maxlength="20" autocapitalize="off" required>
+		<label for="psw2">Confirmar contraseña</label><input type="password" id="psw2" name="passw2" minlength="8" maxlength="20" autocapitalize="off" required>
 		<fieldset>
 		  <legend>¿Desea indicar si cuenta con alguna discapacidad?</legend>
 		  <!--<legend>Preferencia de Accesibilidad</legend>
@@ -296,6 +294,5 @@
 	  </div>
 	</div>
   </div>
-<!--Ruta_Flash--> <script src="{{ url_for('static', filename='javascript.js') }}"></script>
 </body>
 </html>
