@@ -8,8 +8,13 @@
 html, body { margin:0; padding:0; font-family:'Montserrat',sans-serif; background:var(--fondo); color:var(--texto); }
 .cont, .prog, .test { max-width:1200px; margin:0 auto; }
 
-/* Estilo de mensajes Flash */
-.flashes { font-size:5rem; list-style-type: none; padding: 10px; margin: 10px; background-color: #ffdddd; border: 1px solid red; color: red; font-weight: bold; }
+/* Estilo de mensaje Jinja Flash */
+.mensaje-flash { position:fixed; padding:15px; max-width:300px; box-shadow:0 2px 10px rgba(0,0,0,0.2); animation:desap 1s ease-out forwards; animation-delay:4s; }
+.mensaje-flash.success { background-color: #d4edda; /* verde claro */ border: 2px solid #155724; /* verde oscuro */ }
+.mensaje-flash.error { background-color: #f8d7da; /* rojo claro */  border: 2px solid #721c24; /* rojo oscuro */ }
+@keyframes desap {
+  to {  opacity:0; transform:translateY(-10px); visibility:hidden; }
+}
 
 /* Navbar */
 nav { position:fixed; top:0; width:100%; background:var(--blanco); box-shadow:0 2px 5px rgba(0,0,0,0.1); }
