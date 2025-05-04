@@ -299,7 +299,7 @@
 	  {% if mensajes %}
 	    {% for categoria, mensaje in mensajes %}
 	      <div class="mensaje-flash {{ categoria }}">
-	        <h5>{{ mensaje }}</h5>
+	        <h5>{{ mensaje|safe }}</h5>
 	      </div>
 	    {% endfor %}
 	  {% endif %}
