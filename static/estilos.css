@@ -5,7 +5,7 @@
   --texto: #333;
   --blanco: #fff;
 }
-html, body { margin:0; padding:0; font-family:'Montserrat',sans-serif; background:var(--fondo); color:var(--texto); }
+html, body { margin:0; top:30px; right:20px; padding:0; font-family:'Montserrat',sans-serif; background:var(--fondo); color:var(--texto); }
 .cont, .prog, .test { max-width:1200px; margin:0 auto; }
 
 /* Estilo de mensaje Jinja Flash */
