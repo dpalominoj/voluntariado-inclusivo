@@ -8,6 +8,9 @@
 html, body { margin:0; padding:0; font-family:'Montserrat',sans-serif; background:var(--fondo); color:var(--texto); }
 .cont, .prog, .test { max-width:1200px; margin:0 auto; }
 
+/* Estilo de mensajes Flash */
+.flashes { list-style-type: none; padding: 10px; margin: 10px; background-color: #ffdddd; border: 1px solid red; color: red; font-weight: bold; }
+
 /* Navbar */
 nav { position:fixed; top:0; width:100%; background:var(--blanco); box-shadow:0 2px 5px rgba(0,0,0,0.1); }
 nav .cont { display:flex; align-items:center; justify-content:space-between; height:70px; }
