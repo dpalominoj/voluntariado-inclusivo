@@ -1,5 +1,5 @@
 Flask==3.1.0                  #Framework web base
-Flask-Login==0.6.3            #Gestionara sesión usuario/login/logout
-Flask-WTF==1.2.1              #validará formularios
-Flask-SQLAlchemy==3.1.1       #ORM DB
-email-validator==2.1.0.post1  # Necesario para validar correos en Flask-WTF
+#Flask-Login==0.6.3            #Gestionara sesión usuario/login/logout
+#Flask-WTF==1.2.1              #validará formularios
+#Flask-SQLAlchemy==3.1.1       #ORM DB
+#email-validator==2.1.0.post1  # Necesario para validar correos en Flask-WTF
