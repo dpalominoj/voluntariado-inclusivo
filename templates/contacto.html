@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KONECTAi - CONTACTO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!--Ruta_Directa_html <link rel="stylesheet" href="estilos.css"> -->
+  <!--Ruta_Directa_html <script src="js-actv.js" defer></script> -->
+  <!--Ruta_Flash --><link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+  <!--Ruta_Flash --><script src="{{ url_for('static', filename='js-contacto.js') }}" defer></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav id="navbar">
+    <div class="cont">
+      <div class="logo"><a href="{{ url_for('inicio') }}" class="a-logolink">       
+		<span>🌐</span> <!-- svg logo 🌎 -->
+        <span>KONECTAi</span></a>  
+      </div>
+      <ul class="menu">
+        <li><a href="{{ url_for('inicio') }}" class="a-menulink">INICIO</a></li>
+        <li><a href="{{ url_for('actividades') }}" class="a-menulink">ACTIVIDADES</a></li>
+        <li><a href="{{ url_for('contacto') }}" class="a-menulink">CONTACTO</a></li>
+        <li><a href="{{ url_for('ayuda') }}" class="a-menulink">AYUDA</a></li>
+      </ul>
+	  <div class="botones">
+		<button id="m-oscuro" class="btn-oscuro" onclick="modoOscuro()">🌙</button>	  
+		<button id="signInBtn" class="btn-s" onclick="abrirLogin()">Iniciar Sesión</button>
+        <button id="signUpBtn" class="btn-p" onclick="abrirRegistro()">Registrarse</button>
+      </div>
+      <button id="mobileMenuBtn" class="btn-menu">☰</button>
+    </div>
+    <div id="mobileMenu" class="menu-movil">
+      <ul>
+        <li><a href="{{ url_for('inicio') }}" class="a-menulink">Inicio</a></li>
+        <li><a href="{{ url_for('actividades') }}" class="a-menulink">Programas</a></li>
+        <li><a href="{{ url_for('contacto') }}" class="a-menulink">Sobre Nosotros</a></li>
+        <li><a href="{{ url_for('ayuda') }}" class="a-menulink">Contacto</a></li>
+        <li><button class="btn-s" onclick="abrirLogin()">Iniciar Sesión</button></li>
+        <li><button class="btn-p" onclick="abrirRegistro()">Registrarse</button></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- Body de contacto --> 
+  <div class="img-fondo">
+	<form action="" class="frm-contacto">
+		<h3>CONTÁCTANOS</h3>
+		<p>Estamos aquí para escucharte y apoyarte, Completa el formulario y nos pondremos en contacto contigo pronto.</p>
+		<div class="grupo">
+			<input type="text" class="form-control" required="">
+			<label>Tu Nombre</label>
+			<span class="border"></span>
+		</div>
+		<div class="grupo">
+			<input type="text" class="form-control" required="">
+			<label for="">Tu Correo Electrónico</label>
+			<span class="border"></span>
+		</div>
+		<div class="grupo">
+			<input name="" id="" class="form-control" required="">
+			<label for="">Tu mensaje</label>
+			<span class="border"></span>
+		</div>
+		<button type="submit" class="enviar">Enviar<i class="flecha">&raquo;</i></button>
+	</form>
+  </div>
+  
+  
+  <!-- Modal Iniciar Sesión -->
+  <div id="signInModal" class="modal">
+	<div class="fondo_frm"> </div>
+	<div class="cont_frm">
+	  <span class="cerrarPopup" onclick="cerrarMod()">×</span>
+	  <div class="encab_frm">
+	    <h3>Iniciar Sesión</h3>		
+	  </div>
+	  <form class="formulario" action="{{ url_for('login') }}" method="POST">
+	    <label for="user">Usuario (DNI)</label><input type="text" id="usr" name="usuario" pattern="[0-9]{8}" maxlength="8" required>
+	    <label for="psw">Contraseña</label><input type="password" id="psw" name="contraseña" minlength="8" maxlength="20" spellcheck="false" autocapitalize="off" required>
+	    <div class="olvido-psw">¿Olvidaste tu contraseña?</div>
+	    <button type="submit" class="iniciar-ses">Iniciar Sesión</button>
+	  </form>
+	  <div class="pie_frm">
+		<p>¿No tienes cuenta? <button type="button" onclick="abrirRegistro()">>Registrate</button></p>
+	  </div>
+	</div>
+  </div>
+  
+   <!-- Modal Registro -->
+  <div id="signUpModal" class="modal">
+	<div class="fondo_frm"> </div>
+	<div class="cont_frm">
+	  <span class="cerrarPopup" onclick="cerrarMod()">×</span>
+	  <div class="encab_frm">
+	    <h3>Crear Cuenta</h3>	
+	  </div>
+	  <form class="formulario" action="{{ url_for('registro') }}" method="POST">
+	    <div class="nom-apel">
+			<div><label for="nombre">Nombres</label><input type="text" id="nom" name="nombres" required></div>
+			<div><label for="apellido">Apellidos</label><input type="text" id="apel" name="apellidos" required></div>
+		</div>
+		<label for="user">N° de DNI</label><input type="text" id="dni" name="dni" pattern="[0-9]{8}" maxlength="8" inputmode="numeric" required>
+		<label for="psw1">Contraseña</label><input type="password" id="psw1" name="passw1" minlength="8" maxlength="20" autocapitalize="off" required>
+		<label for="psw2">Confirmar contraseña</label><input type="password" id="psw2" minlength="8" maxlength="20" autocapitalize="off" required>
+		<fieldset>
+		  <legend>¿Desea indicar si cuenta con alguna discapacidad?</legend>
+		  <!--<legend>Preferencia de Accesibilidad</legend>
+		  ¿Necesitas alguna adaptación? ¿Desea indicar si requiere algún ajuste para su participación? 
+		  <h5>¿Desea indicar si cuenta con alguna discapacidad?</h5> -->
+		  <div class="rpta">
+			<input type="radio" name="accs" id="disc_no" value="no" checked><label for="disc_no">No, ninguna</label>
+			<input type="radio" name="accs" id="disc_si" value="si"><label for="disc_si">Si, tengo condiciones limitantes</label>
+		  </div>
+		  <div id="selDisc" class="sel">
+			<button type="button" id="btnDiscapacidad">— Selecciona el tipo de limitación —<span>&nbsp;▼</span></button>
+			<div class="sel-cont">
+				<label><input type="checkbox" name="disc[]" value="visual">Visual (limitación en percepción óptica)</label>
+				<label><input type="checkbox" name="disc[]" value="auditiva">Auditiva (dificultad en la comprensión de sonido)</label>
+				<label><input type="checkbox" name="disc[]" value="motriz">Motriz (dificultad en la movilidad fisica)</label>
+				<label><input type="checkbox" name="disc[]" value="cognitiva">Cognitiva (limitación en proceso de aprendizaje)</label>
+				<label><input type="checkbox" name="disc[]" value="otra" id="chkOtraDisc">Ingresar Otro</label>
+				<textarea id="otraDisc" name="otra_discap" placeholder="Describe otra limitación"></textarea>
+			</div>
+		  </div>		  
+		</fieldset>
+		<fieldset>
+		  <legend>¿Tiene alguna preferencia para voluntariado?</legend>
+		  <div id="selPref" class="sel">
+			<button type="button" id="btnPrefer">— Seleccione sus preferencias —<span>&nbsp;▼</span></button>
+			<div class="sel-cont">
+				<label><input type="checkbox" name="pref[]" value="a_comunitario">Apoyo comunitario</label>
+				<label><input type="checkbox" name="pref[]" value="tecnologia">Tecnología</label>
+				<label><input type="checkbox" name="pref[]" value="deporte">Eventos deportivos</label>
+				<label><input type="checkbox" name="pref[]" value="m_ambiente">Medio ambiente</label>
+				<label><input type="checkbox" name="pref[]" value="educacion">Educación</label>
+			</div>
+		  </div>
+		</fieldset>
+		<button type="submit" class="iniciar-reg">Registrarse</button>
+	  </form>
+	  <div class="pie_frm">
+		<p>¿Ya tienes una cuenta? <button type="button" onclick="abrirLogin()">Inicia sesión</button></p>
+	  </div>
+	</div>
+  </div>
+</body>
+</html>
