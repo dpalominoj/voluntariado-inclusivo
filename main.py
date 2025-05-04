@@ -22,7 +22,7 @@ def registro():
     preferencias = request.form.getlist('pref[]')      # Preferencias marcadas
 
     if passw1 != passw2:
-        flash('Las contraseñas no coinciden \n intente nuevamente','error')
+        flash('Las contraseñas no coinciden</br>intente nuevamente','error')
         return redirect(url_for('inicio'))
 
     # Falta implementar para DB
@@ -39,7 +39,7 @@ def login():
     if usuario == "73992058" and contraseña == "palomino":  # Simulando
         flash(f'Bienvenido {usuario}', 'success')
     else:
-        flash('Usuario o contraseña incorrecta \n intente nuevamente', 'error')
+        flash('Usuario o contraseña incorrecta</br>intente nuevamente', 'error')
     return redirect(url_for('inicio'))
 
 @app.route('/actividades')
