@@ -10,6 +10,8 @@
   <!--Ruta_Flash --> <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
   <!--Ruta_Flash --> <script src="{{ url_for('static', filename='javascript.js') }}" defer></script>
 </head>
+<body>
+<!-- Mensaje flash -->
 {% with mensajes = get_flashed_messages() %}
   {% if mensajes %}
     <ul class="flashes">
@@ -19,7 +21,7 @@
     </ul>
   {% endif %}
 {% endwith %}
-<body>
+
   <!-- Navbar -->
   <nav id="navbar">
     <div class="cont">
