@@ -38,6 +38,7 @@ def login():
     # Aquí podrías validar con base de datos
     if usuario == "73992058" and contraseña == "palomino":  # Simulando
         flash(f'Bienvenido {usuario}', 'success')
+        return redirect(url_for('dashboard'))
     else:
         flash('Usuario o contraseña incorrecta <br> intente nuevamente', 'error')
     return redirect(url_for('inicio'))
