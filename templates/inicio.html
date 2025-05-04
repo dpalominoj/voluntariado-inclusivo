@@ -11,17 +11,6 @@
   <!--Ruta_Flash --> <script src="{{ url_for('static', filename='javascript.js') }}" defer></script>
 </head>
 <body>
-<!-- Mensaje flash -->
-{% with mensajes = get_flashed_messages() %}
-  {% if mensajes %}
-    <ul class="flashes">
-      {% for mensaje in mensajes %}
-        <li>{{ mensaje }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-
   <!-- Navbar -->
   <nav id="navbar">
     <div class="cont">
@@ -306,7 +295,15 @@
 	</div>
   </div>
   <div class="popup">
-    </div>
-  </div>
+    <!-- Mensaje Jinja flash -->
+	{% with mensajes = get_flashed_messages(with_categories=true) %}
+	  {% if mensajes %}
+	    {% for categoria, mensaje in mensajes %}
+	      <div class="mensaje-flash {{ categoria }}">
+	        <p>{{ mensaje }}</p>
+	      </div>
+	    {% endfor %}
+	  {% endif %}
+	{% endwith %}
 </body>
 </html>
