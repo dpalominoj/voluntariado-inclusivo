@@ -11,7 +11,8 @@ html, body { margin:0; padding:0; font-family:'Montserrat',sans-serif; backgroun
 /* Navbar */
 nav { position:fixed; top:0; width:100%; background:var(--blanco); box-shadow:0 2px 5px rgba(0,0,0,0.1); }
 nav .cont { display:flex; align-items:center; justify-content:space-between; height:70px; }
-.menu, a { display:flex; list-style:none; text-decoration: none; font-weight:520; gap:1rem;}
+.a-logolink { text-decoration:none; }
+.menu, .a-menulink { display:flex; list-style:none; text-decoration: none; font-weight:520; gap:1rem;}
 .btn-menu, .menu-movil { display:none; }
 .logo span { font-size:1.8rem; font-weight:bold; color:var(--primario); }
 .btn-p, .btn-s { padding:0.5rem 1rem; border:none; cursor:pointer; font-size:1.15rem; border-radius: 0.5rem; }
@@ -91,8 +92,31 @@ legend { font-weight:500; }
 .sel-cont { display: none; position: relative; background-color: #f9f9f9; min-width: 230px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1;}
 .sel-cont label { display: block; margin:1px; }
 .sel:hover .sel-cont { display:block; }
+#otraDisc { display:none; }
+label:has(#chkOtraDisc:checked) + textarea { display: block; }
 .iniciar-reg { margin-top: 20px; background:var(--primario); color:var(--blanco); padding: 10px; border-radius: 5px; border:none; cursor:pointer; font-weight:bold;}
 .iniciar-reg:hover { background-color: #4338ca; }
+
+/* Contacto */
+.img-fondo { min-height:100vh; display:flex; align-items:center; background:url("../images/fondo-contacto.jpg") no-repeat; background-size:cover; text-align: center; color:var(--blanco); }
+.img-fondo h3 { font-size:3.5rem; margin:1px; }
+.frm-contacto { max-width:758px; margin:auto; background:#39459b; border:10px solid #0d99d7; padding:85px; }
+.grupo { display: flex; flex-direction: column; position: relative; margin: 38px 0; }
+.grupo input {height: 30px; color:var(--blanco); background:transparent; border:none; outline:none;font-size:medium; border-bottom:2px solid #BBDEFB; transition:border-color 0.3s ease; }
+.grupo label { position: absolute;}
+.grupo input:focus~label, .grupo input:valid~label { font-size:0.8rem; top:10px; transform:translateY(-180%); }
+.enviar { width:162px; height:51px; border:2px solid #fff; margin:auto; margin-top:60px; cursor:pointer; display:flex; align-items:center; justify-content:center; background:none; color:#fff; text-transform:uppercase; }
+button .flecha { display:none; margin-left:0.5em; font-weight:bold; transition:margin-left 0.3s ease; }
+button:hover .flecha { display:inline-block; margin-left: em; }
+
+/* Ayuda */
+.titulo { padding:80px 0 12px; text-align:center; }
+.titulo h1 { font-weight:700; font-size:2.5rem; color: #1e40af; }
+.titulo p { font-size:1.2rem; color:#4b5563; font-weight:500; }
+.content-ayuda { max-width:720px; margin:0 auto; background:var(--blanco); border-radius: 12px; padding:2rem; box-shadow:0 8px 24px rgba(0,0,0,0.05); }
+.pregunta { text-align:left; padding: 5px; font-size:1rem; }
+.pregunta ul { margin:0; }
+.subtitle { font-weight:700; font-size:1.5rem; color:#1e3a8a; margin:0.6rem; border-left:6px solid #2563eb; padding-left:0.75rem; }
 
 /* Vista Móvil */
 @media (max-width: 768px){
@@ -108,4 +132,7 @@ legend { font-weight:500; }
 	footer { padding:30px 10px; }
 	.pie-cont { grid-template-columns:1fr; gap:1.5rem; text-align:center; }
 	footer ul { list-style:none; }
+	.img-fondo { background:none; }
+	.frm-contacto { padding: 80px 11px; }
+	.img-fondo h3 {font-size:1.5rem; }
  }

@@ -19,9 +19,6 @@ function modoOscuro(){
 	const body = document.body;
 	const btnModo = document.getElementById('m-oscuro');
 	const navbar = document.getElementById('navbar');
-	const impacto = document.getElementsByClassName('impacto')[0] ;
-	const testimcards = document.getElementsByClassName('test-card');
-	const contentform = document.getElementsByClassName('cont_frm');
 	
 	if(oscuro){
 		//modo claro
@@ -34,13 +31,6 @@ function modoOscuro(){
 		body.style.backgroundColor = "black";
 		body.style.color = "white";
 		navbar.style.background = "black";
-		impacto.style.color = "black";
-		for(let card of testimcards){
-			card.style.color = "black";
-		}
-		for(let frm of contentform){
-			frm.style.color = "black";
-		}
         btnModo.textContent = "🌞";
 	}
 	oscuro = !oscuro;
@@ -68,9 +58,3 @@ function cerrarMod(){
 	formLogin.style.display = "none";
 	formRegis.style.display = "none";
 }
-
-// Funcionalidad lista desplegable
-const listaselect = document.getElementById('selDisc');
-document.querySelector('.rpta').onchange = 
-    () => listaselect.style.display = disc_si.checked ? 'inline-block' : 'none';
-	
