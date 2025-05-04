@@ -41,7 +41,12 @@ def login():
     else:
         flash('Usuario o contraseña incorrecta <br> intente nuevamente', 'error')
     return redirect(url_for('inicio'))
-
+    
+# Ruta de panel de usuario    
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+    
 @app.route('/actividades')
 def actividades():
     return render_template('actividades.html')
