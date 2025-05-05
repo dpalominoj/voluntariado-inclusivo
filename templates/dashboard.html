@@ -42,8 +42,7 @@
 
   <main class="dashboard-main">
     <div class="cont">
-      <h1>Bienvenido, {{ usuario.nombres }}</h1>
-      
+      <h1>Bienvenido, {{ usuario.nombres }}</h1>      
       <div class="dashboard-grid">
         <!-- Datos Personales -->
     	<section class="prog">
@@ -54,6 +53,30 @@
         <p><strong>Fecha de registro:</strong> {{ usuario.fecha_registro.strftime('%d/%m/%Y') }}</p>
 		<a href="#" class="btn-s">Editar Perfil</a>
 	  </div>	  
+	</section>
+	<!-- Discapacidades registradas -->
+    	<section class="impacto">
+	  {% if usuario.discapacidades %}
+        <div class="card">
+            <h3>Discapacidades registradas:</h3>
+            <ul>
+                {% for disc in usuario.discapacidades %}
+            <li>{{ disc.descripcion }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+	  {% endif %}
+	  
+	  {% if usuario.preferencias %}
+        <div class="card">
+            <h3>Preferencias de voluntariado:</h3>
+            <ul>
+                {% for pref in usuario.preferencias %}
+            <li>{{ pref.descripcion }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+	  {% endif %}		
 	</section>
 	      
             {% if usuario.discapacidades %}
