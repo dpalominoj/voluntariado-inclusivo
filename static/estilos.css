@@ -7,6 +7,7 @@
 }
 html, body { margin:0; top:30px; right:20px; padding:0; font-family:'Montserrat',sans-serif; background:var(--fondo); color:var(--texto); }
 .cont, .prog, .test { max-width:1200px; margin:0 auto; }
+a { text-decoration:none; }
 .a-particip { text-decoration:none; color:var(--blanco); }
 
 /* Estilo de mensaje Jinja Flash */
