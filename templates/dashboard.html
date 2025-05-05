@@ -17,7 +17,7 @@
         <span>KONECTAi</span></a>  
       </div>
       <ul class="menu">
-        <li><a href="{{ url_for('dashboard') }}" class="a-menulink">MI PANEL</a></li>
+        <li><a href="{{ url_for('inicio') }}" class="a-menulink">INICIO</a></li>
         <li><a href="{{ url_for('actividades') }}" class="a-menulink">ACTIVIDADES</a></li>
         <li><a href="{{ url_for('contacto') }}" class="a-menulink">CONTACTO</a></li>
         <li><a href="{{ url_for('ayuda') }}" class="a-menulink">AYUDA</a></li>
@@ -25,13 +25,16 @@
       <div class="botones">
         <button id="m-oscuro" class="btn-oscuro" onclick="modoOscuro()">🌙</button>
         <span class="usuario-info">Hola, {{ session.usuario_nombre.split()[0] }}</span>
+		<svg class="ic-perfil" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+			<path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
+		</svg> -->
         <a href="{{ url_for('logout') }}" class="btn-s">Cerrar Sesión</a>
       </div>
       <button id="mobileMenuBtn" class="btn-menu">☰</button>
     </div>
     <div id="mobileMenu" class="menu-movil">
       <ul>
-        <li><a href="{{ url_for('dashboard') }}" class="a-menulink">Mi Panel</a></li>
+        <li><a href="{{ url_for('inicio') }}" class="a-menulink">Inicio</a></li>
         <li><a href="{{ url_for('actividades') }}" class="a-menulink">Actividades</a></li>
         <li><a href="{{ url_for('contacto') }}" class="a-menulink">Contacto</a></li>
         <li><a href="{{ url_for('ayuda') }}" class="a-menulink">Ayuda</a></li>
@@ -113,7 +116,7 @@
               <h3>{{ actividad.nombre }}</h3>
               <p>{{ actividad.descripcion }}</p>
               <p><strong>Fecha:</strong> {{ actividad.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
-              <p><strong>Ubicación:</strong> {{ actividad.ubicacion }}</p>
+              p><strong>Ubicación:</strong> {{ actividad.ubicacion }}</p>
               
               <form action="{{ url_for('inscribir_actividad', actividad_id=actividad.id) }}" method="POST">
                 <button type="submit" class="btn-p">Inscribirse</button>
