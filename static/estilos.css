@@ -8,6 +8,7 @@
 html, body { margin:0; top:30px; right:20px; padding:0; font-family:'Montserrat',sans-serif; background:var(--fondo); color:var(--texto); }
 .cont, .prog, .test { max-width:1200px; margin:0 auto; }
 a { text-decoration:none; }
+a:link, a:visited { color:blue; }
 .a-particip { text-decoration:none; color:var(--blanco); }
 
 /* Estilo de mensaje Jinja Flash */
@@ -29,6 +30,7 @@ nav .cont { display:flex; align-items:center; justify-content:space-between; hei
 .btn-p { background:var(--primario); color:var(--blanco); }
 .btn-s { background:transparent; border:2px solid var(--primario); color:var(--primario); }
 .btn-oscuro { transform:scaleX(-1); filter: hue-rotate(90deg); }
+.ic-perfil { width:1.5rem; height:auto; }
 
 /* Navbar Móvil */
 .menu-movil.active { display:inline-block; }
@@ -127,6 +129,12 @@ button:hover .flecha { display:inline-block; margin-left: em; }
 .pregunta { text-align:left; padding: 5px; font-size:1rem; }
 .pregunta ul { margin:0; }
 .subtitle { font-weight:700; font-size:1.5rem; color:#1e3a8a; margin:0.6rem; border-left:6px solid #2563eb; padding-left:0.75rem; }
+
+/* Perfil */
+.actividad-card { flex:0 0 280px; scroll-snap-align:start; padding:1rem; box-shadow:0 2px 6px rgba(0,0,0,0.15);}
+.flecha { position:absolute; top:50%; transform:translateY(-50%); background:#007bff; color:#fff; width:36px; height:36px; border-radius:50%;}
+.flecha.prev { left:8px; }
+.flecha.next { right: 8px; }
 
 /* Vista Móvil */
 @media (max-width: 768px){
