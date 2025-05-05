@@ -11,11 +11,10 @@ usuario_discapacidad = db.Table('usuario_discapacidad',
 )
 
 # Tabla asociativa para usuario_preferencia
-usuario_discapacidad = db.Table('usuario_discapacidad',
+usuario_preferencia = db.Table('usuario_preferencia',
     db.Column('usuario_id', db.Integer, db.ForeignKey('usuarios.id'), primary_key=True),
-    db.Column('discapacidad_id', db.Integer, db.ForeignKey('discapacidades.id'), primary_key=True)
+    db.Column('preferencia_id', db.Integer, db.ForeignKey('preferencias.id'), primary_key=True)
 )
-
 
 class Usuario(db.Model):
     __tablename__ = 'usuarios'
@@ -31,10 +30,11 @@ class Usuario(db.Model):
     
     # Relaciones
     discapacidades = db.relationship('Discapacidad', secondary=usuario_discapacidad, 
-                                    backref=db.backref('usuarios', lazy='dynamic'))
+                                     backref=db.backref('usuarios', lazy='dynamic'))
     preferencias = db.relationship('Preferencia', secondary=usuario_preferencia, 
-                                 backref=db.backref('usuarios', lazy='dynamic'))
+                                   backref=db.backref('usuarios', lazy='dynamic'))
     participaciones = db.relationship('Participacion', backref='usuario', lazy=True)
+
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
