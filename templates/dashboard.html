@@ -46,7 +46,7 @@
       
       <div class="dashboard-grid">
         <!-- Datos Personales -->
-    <section class="prog">
+    	<section class="prog">
 	  <div style="text-align:left;">
 		<h2>Mi Perfil</h2>
 		<p><strong>Nombre:</strong> {{ usuario.nombres }} {{ usuario.apellidos }}</p>
@@ -55,14 +55,7 @@
 		<a href="#" class="btn-s">Editar Perfil</a>
 	  </div>	  
 	</section>
-        <!-- Sección de Perfil -->
-        <div class="dashboard-card">
-          <h2>Mi Perfil</h2>
-          <div class="perfil-info">
-            <p><strong>Nombre:</strong> {{ usuario.nombres }} {{ usuario.apellidos }}</p>
-            <p><strong>DNI:</strong> {{ usuario.dni }}</p>
-            <p><strong>Fecha de registro:</strong> {{ usuario.fecha_registro.strftime('%d/%m/%Y') }}</p>
-            
+	      
             {% if usuario.discapacidades %}
             <div class="discapacidades">
               <h3>Discapacidades registradas:</h3>
