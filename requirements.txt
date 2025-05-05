@@ -1,4 +1,11 @@
-Flask==3.1.0                  #Framework web base
+Flask==2.3.3
+Flask-SQLAlchemy==3.1.1
+Flask-Migrate==4.0.5
+Werkzeug==2.3.7
+SQLAlchemy==2.0.22
+python-dotenv==1.0.0
+
+#--Flask==3.1.0                  #Framework web base
 #Flask-Login==0.6.3            #Gestionara sesión usuario/login/logout
 #Flask-WTF==1.2.1              #validará formularios
 #Flask-SQLAlchemy==3.1.1       #ORM DB
