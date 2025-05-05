@@ -1,7 +1,49 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
+from models import db, Usuario, Discapacidad, Preferencia, Actividad, Participacion
 
 app = Flask(__name__)
 app.secret_key = '852456'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///konectai.db'  # SQLite para desarrollo
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://usuario:clave@localhost/konectai'  # MySQL para producción
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Inicializar extensiones
+db.init_app(app)
+migrate = Migrate(app, db)
+
+# Creación de tablas
+@app.before_first_request
+def create_tables():
+    db.create_all()
+    
+    # Verifica si ya existen datos
+    if Discapacidad.query.count() == 0:
+        # datos iniciales de discapacidades
+        discapacidades = [
+            Discapacidad(nombre='visual', descripcion='Limitación en percepción óptica'),
+            Discapacidad(nombre='auditiva', descripcion='Dificultad en la comprensión de sonido'),
+            Discapacidad(nombre='motriz', descripcion='Dificultad en la movilidad física'),
+            Discapacidad(nombre='cognitiva', descripcion='Limitación en proceso de aprendizaje')
+        ]
+        db.session.add_all(discapacidades)
+        
+    if Preferencia.query.count() == 0:
+        # datos iniciales de preferencias
+        preferencias = [
+            Preferencia(nombre='a_comunitario', descripcion='Apoyo comunitario'),
+            Preferencia(nombre='tecnologia', descripcion='Tecnología'),
+            Preferencia(nombre='deporte', descripcion='Eventos deportivos'),
+            Preferencia(nombre='m_ambiente', descripcion='Medio ambiente'),
+            Preferencia(nombre='educacion', descripcion='Educación')
+        ]
+        db.session.add_all(preferencias)
+        
+    db.session.commit()
 
 # Ruta principal
 @app.route("/")
@@ -17,40 +59,109 @@ def registro():
     passw1 = request.form.get('passw1')
     passw2 = request.form.get('psw2')
     acceso_discapacidad = request.form.get('accs')     # Checkbox valor del radio
-    discapacidad = request.form.getlist('disc[]')      # Si marcó alguna discapacidad
+    discapacidad_ids = request.form.getlist('disc[]')  # Si marcó alguna discapacidad
     otras_discap = request.form.get('otra_discap')     # Si escribe otra discapacidad
-    preferencias = request.form.getlist('pref[]')      # Preferencias marcadas
-
+    preferencia_ids = request.form.getlist('pref[]')   # Preferencias marcadas
+    
+    # Validación de contraseñas
     if passw1 != passw2:
-        flash('Las contraseñas no coinciden <br> intente nuevamente','error')
+        flash('Las contraseñas no coinciden <br> intente nuevamente', 'error')
         return redirect(url_for('inicio'))
-
-    # Falta implementar para DB
-    flash('Registro guardado correctamente.', 'success')
+    
+    # Verificar si el DNI ya existe
+    usuario_existente = Usuario.query.filter_by(dni=dni).first()
+    if usuario_existente:
+        flash('El DNI ya está registrado <br> intente con otro o inicie sesión', 'error')
+        return redirect(url_for('inicio'))
+    
+    # Crear nuevo usuario
+    nuevo_usuario = Usuario(
+        dni=dni,
+        nombres=nombres,
+        apellidos=apellidos
+    )
+    nuevo_usuario.set_password(passw1)
+    
+    # Agregar discapacidades seleccionadas
+    if acceso_discapacidad == 'si' and discapacidad_ids:
+        for disc_id in discapacidad_ids:
+            discapacidad = Discapacidad.query.filter_by(nombre=disc_id).first()
+            if discapacidad:
+                nuevo_usuario.discapacidades.append(discapacidad)
+    
+    # Agregar preferencias seleccionadas
+    if preferencia_ids:
+        for pref_id in preferencia_ids:
+            preferencia = Preferencia.query.filter_by(nombre=pref_id).first()
+            if preferencia:
+                nuevo_usuario.preferencias.append(preferencia)
+    
+    # Guardar en la base de datos
+    db.session.add(nuevo_usuario)
+    db.session.commit()
+    
+    flash('Registro guardado correctamente. Ya puede iniciar sesión.', 'success')
     return redirect(url_for('inicio'))
 
 # Ruta de login
 @app.route('/login', methods=['POST'])
 def login():
-    usuario = request.form.get('usuario')
+    dni = request.form.get('usuario')
     contraseña = request.form.get('contraseña')
-
-    # Aquí podrías validar con base de datos
-    if usuario == "73992058" and contraseña == "palomino":  # Simulando
-        flash(f'Bienvenido {usuario}', 'success')
+    
+    # Buscar usuario por DNI
+    usuario = Usuario.query.filter_by(dni=dni).first()
+    
+    if usuario and usuario.check_password(contraseña):
+        # Actualizar último acceso
+        usuario.ultimo_acceso = datetime.utcnow()
+        db.session.commit()
+        
+        # Guardar información en la sesión
+        session['usuario_id'] = usuario.id
+        session['usuario_dni'] = usuario.dni
+        session['usuario_nombre'] = f"{usuario.nombres} {usuario.apellidos}"
+        
+        flash(f'Bienvenido {usuario.nombres}', 'success')
         return redirect(url_for('dashboard'))
     else:
         flash('Usuario o contraseña incorrecta <br> intente nuevamente', 'error')
+        return redirect(url_for('inicio'))
+
+# Ruta de cierre de sesión
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash('Sesión cerrada correctamente', 'success')
     return redirect(url_for('inicio'))
-    
-# Ruta de panel de usuario    
+
+# Ruta de panel de control
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html')
+    # Verificar si el usuario está logueado
+    if 'usuario_id' not in session:
+        flash('Debe iniciar sesión para acceder', 'error')
+        return redirect(url_for('inicio'))
     
+    # Obtener información del usuario
+    usuario = Usuario.query.get(session['usuario_id'])
+    
+    # Obtener actividades disponibles
+    actividades = Actividad.query.filter_by(estado='activa').all()
+    
+    # Obtener participaciones del usuario
+    participaciones = Participacion.query.filter_by(usuario_id=session['usuario_id']).all()
+    
+    return render_template('dashboard.html', 
+                          usuario=usuario, 
+                          actividades=actividades,
+                          participaciones=participaciones)
+
 @app.route('/actividades')
 def actividades():
-    return render_template('actividades.html')
+    # Obtener todas las actividades
+    todas_actividades = Actividad.query.all()
+    return render_template('actividades.html', actividades=todas_actividades)
 
 @app.route('/contacto')
 def contacto():
@@ -59,6 +170,43 @@ def contacto():
 @app.route('/ayuda')
 def ayuda():
     return render_template('ayuda.html')
+
+# Ruta para inscribirse a una actividad
+@app.route('/inscribir/<int:actividad_id>', methods=['POST'])
+def inscribir_actividad(actividad_id):
+    # Verificar si el usuario está logueado
+    if 'usuario_id' not in session:
+        flash('Debe iniciar sesión para inscribirse', 'error')
+        return redirect(url_for('inicio'))
     
+    # Verificar si la actividad existe
+    actividad = Actividad.query.get(actividad_id)
+    if not actividad:
+        flash('La actividad no existe', 'error')
+        return redirect(url_for('dashboard'))
+    
+    # Verificar si ya está inscrito
+    participacion_existente = Participacion.query.filter_by(
+        usuario_id=session['usuario_id'],
+        actividad_id=actividad_id
+    ).first()
+    
+    if participacion_existente:
+        flash('Ya estás inscrito en esta actividad', 'info')
+        return redirect(url_for('dashboard'))
+    
+    # Crear nueva participación
+    nueva_participacion = Participacion(
+        usuario_id=session['usuario_id'],
+        actividad_id=actividad_id,
+        estado='registrado'
+    )
+    
+    db.session.add(nueva_participacion)
+    db.session.commit()
+    
+    flash(f'Te has inscrito correctamente a la actividad: {actividad.nombre}', 'success')
+    return redirect(url_for('dashboard'))
+
 if __name__ == "__main__":
     app.run(debug=True)
