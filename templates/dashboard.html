@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KONECTAi - Panel de Usuario</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!--Ruta_Directa_html <link rel="stylesheet" href="estilos.css"> -->
-  <!--Ruta_Directa_html <script src="javascript.js" defer></script> -->
-  <!--Ruta_Flash -->  <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
-  <!--Ruta_Flash --> <script src="{{ url_for('static', filename='javascript.js') }}" defer></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+  <script src="{{ url_for('static', filename='javascript.js') }}" defer></script>
 </head>
 <body>
   <!-- Navbar -->
@@ -19,7 +17,7 @@
         <span>KONECTAi</span></a>  
       </div>
       <ul class="menu">
-        <li><a href="{{ url_for('inicio') }}" class="a-menulink">INICIO</a></li>
+        <li><a href="{{ url_for('dashboard') }}" class="a-menulink">MI PANEL</a></li>
         <li><a href="{{ url_for('actividades') }}" class="a-menulink">ACTIVIDADES</a></li>
         <li><a href="{{ url_for('contacto') }}" class="a-menulink">CONTACTO</a></li>
         <li><a href="{{ url_for('ayuda') }}" class="a-menulink">AYUDA</a></li>
@@ -27,16 +25,13 @@
       <div class="botones">
         <button id="m-oscuro" class="btn-oscuro" onclick="modoOscuro()">🌙</button>
         <span class="usuario-info">Hola, {{ session.usuario_nombre.split()[0] }}</span>
-		<!-- <svg class="ic-perfil" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
-			<path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
-		</svg> -->
         <a href="{{ url_for('logout') }}" class="btn-s">Cerrar Sesión</a>
       </div>
       <button id="mobileMenuBtn" class="btn-menu">☰</button>
     </div>
     <div id="mobileMenu" class="menu-movil">
       <ul>
-        <li><a href="{{ url_for('inicio') }}" class="a-menulink">Inicio</a></li>
+        <li><a href="{{ url_for('dashboard') }}" class="a-menulink">Mi Panel</a></li>
         <li><a href="{{ url_for('actividades') }}" class="a-menulink">Actividades</a></li>
         <li><a href="{{ url_for('contacto') }}" class="a-menulink">Contacto</a></li>
         <li><a href="{{ url_for('ayuda') }}" class="a-menulink">Ayuda</a></li>
@@ -44,88 +39,92 @@
       </ul>
     </div>
   </nav>
-  
-  <main style="padding:100px 0 80px;">
-	<!-- Datos Personales -->
-    <section class="prog">
-	  <div style="text-align:left;">
-		<h2>Mi Perfil</h2>
-		<p><strong>Nombre:</strong> {{ usuario.nombres }} {{ usuario.apellidos }}</p>
-        <p><strong>DNI:</strong> {{ usuario.dni }}</p>
-        <p><strong>Fecha de registro:</strong> {{ usuario.fecha_registro.strftime('%d/%m/%Y') }}</p>
-		<a href="#" class="btn-s">Editar Perfil</a>
-	  </div>	  
-	</section>
-	
-	<!-- Discapacidades registradas -->
-    <section class="impacto">
-	  {% if usuario.discapacidades %}
-        <div class="card">
-            <h3>Discapacidades registradas:</h3>
-            <ul>
+
+  <main class="dashboard-main">
+    <div class="cont">
+      <h1>Bienvenido, {{ usuario.nombres }}</h1>
+      
+      <div class="dashboard-grid">
+        <!-- Sección de Perfil -->
+        <div class="dashboard-card">
+          <h2>Mi Perfil</h2>
+          <div class="perfil-info">
+            <p><strong>Nombre:</strong> {{ usuario.nombres }} {{ usuario.apellidos }}</p>
+            <p><strong>DNI:</strong> {{ usuario.dni }}</p>
+            <p><strong>Fecha de registro:</strong> {{ usuario.fecha_registro.strftime('%d/%m/%Y') }}</p>
+            
+            {% if usuario.discapacidades %}
+            <div class="discapacidades">
+              <h3>Discapacidades registradas:</h3>
+              <ul>
                 {% for disc in usuario.discapacidades %}
-            <li>{{ disc.descripcion }}</li>
+                <li>{{ disc.descripcion }}</li>
                 {% endfor %}
-            </ul>
-        </div>
-	  {% endif %}
-	  
-	  {% if usuario.preferencias %}
-        <div class="card">
-            <h3>Preferencias de voluntariado:</h3>
-            <ul>
+              </ul>
+            </div>
+            {% endif %}
+            
+            {% if usuario.preferencias %}
+            <div class="preferencias">
+              <h3>Preferencias de voluntariado:</h3>
+              <ul>
                 {% for pref in usuario.preferencias %}
-            <li>{{ pref.descripcion }}</li>
+                <li>{{ pref.descripcion }}</li>
                 {% endfor %}
-            </ul>
+              </ul>
+            </div>
+            {% endif %}
+            
+            <a href="#" class="btn-s">Editar Perfil</a>
+          </div>
         </div>
-	  {% endif %}		
-	</section>
-	
-	<!-- Actividades inscritas-->
-    <section class="test">
-      <h2>Mis Actividades</h2>
-	  {% if participaciones %}
-	  <div class="test-cards">
-        {% for participacion in participaciones %}
-        <div class="test-card">
-        <h3>{{ participacion.actividad.nombre }}</h3>
-            <p>{{ participacion.actividad.descripcion }}</p>
-            <p><strong>Fecha:</strong> {{ participacion.actividad.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
-            <p><strong>Ubicación:</strong> {{ participacion.actividad.ubicacion }}</p>
-            <p><strong>Estado:</strong> <span>{{ participacion.estado }}</span></p>
+        
+        <!-- Sección de Actividades Inscritas -->
+        <div class="dashboard-card">
+          <h2>Mis Actividades</h2>
+          
+          {% if participaciones %}
+          <div class="actividades-lista">
+            {% for participacion in participaciones %}
+            <div class="actividad-card">
+              <h3>{{ participacion.actividad.nombre }}</h3>
+              <p>{{ participacion.actividad.descripcion }}</p>
+              <p><strong>Fecha:</strong> {{ participacion.actividad.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
+              <p><strong>Ubicación:</strong> {{ participacion.actividad.ubicacion }}</p>
+              <p><strong>Estado:</strong> <span class="estado {{ participacion.estado }}">{{ participacion.estado }}</span></p>
+            </div>
+            {% endfor %}
+          </div>
+          {% else %}
+          <p>No estás inscrito en ninguna actividad aún.</p>
+          {% endif %}
         </div>
-        {% endfor %}
-	  </div>
-      {% else %}
-        <p>No estás inscrito en ninguna actividad aún.</p>
-      {% endif %}	
-	</Sección>
-	
-	<!-- actividades disponibles -->
-	<section class="impacto">
-	  <h2>Actividades Disponibles</h2>
-	  <a class="flecha prev" href="#card-{{ actividades[-1].id }}" aria-label="Anterior">&#8592;</a>
-	  <a class="flecha next" href="#card-{{ actividades[0].id }}" aria-label="Siguiente">&#8594;</a>
-	  {% if actividades %}
-	  {%<div class="actividades-disponibles">
-        {% for actividad in actividades %}
-        <div class="actividad-card">
-            <h3>{{ actividad.nombre }}</h3>
-            <p>{{ actividad.descripcion }}</p>
-            <p><strong>Fecha:</strong> {{ actividad.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
-            p><strong>Ubicación:</strong> {{ actividad.ubicacion }}</p>
+        
+        <!-- Sección de Actividades Disponibles -->
+        <div class="dashboard-card">
+          <h2>Actividades Disponibles</h2>
+          
+          {% if actividades %}
+          <div class="actividades-disponibles">
+            {% for actividad in actividades %}
+            <div class="actividad-card">
+              <h3>{{ actividad.nombre }}</h3>
+              <p>{{ actividad.descripcion }}</p>
+              <p><strong>Fecha:</strong> {{ actividad.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
+              <p><strong>Ubicación:</strong> {{ actividad.ubicacion }}</p>
               
-            <form action="{{ url_for('inscribir_actividad', actividad_id=actividad.id) }}" method="POST">
-            <button type="submit" class="btn-p">Inscribirse</button>
-            </form>
+              <form action="{{ url_for('inscribir_actividad', actividad_id=actividad.id) }}" method="POST">
+                <button type="submit" class="btn-p">Inscribirse</button>
+              </form>
+            </div>
+            {% endfor %}
+          </div>
+          {% else %}
+          <p>No hay actividades disponibles en este momento.</p>
+          {% endif %}
         </div>
-        {% endfor %}
-	  {%</div>
-	  {%{% else %}
-	  {%<p>No hay actividades disponibles en este momento.</p>
-	  {%{% endif %}
-	</section>
+      </div>
+    </div>
   </main>
 
   <!-- Footer -->
