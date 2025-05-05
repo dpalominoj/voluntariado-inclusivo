@@ -33,6 +33,12 @@ app = create_app()
 @app.route("/")
 def inicio():
     return render_template("inicio.html")
+    
+#Ruta participar (mensaje inhabilitado)    
+@app.route('/participar')
+def participar():
+    flash('No disponible por el momento<br>ya que me encuentro programando<br>a full', 'error')
+    return redirect(url_for('inicio'))
 
 # Ruta de registro
 @app.route('/registro', methods=['POST'])
