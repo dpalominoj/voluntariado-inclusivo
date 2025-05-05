@@ -78,6 +78,25 @@
         </div>
 	  {% endif %}		
 	</section>
+	<!-- Actividades inscritas-->
+    	<section class="test">
+      	<h2>Mis Actividades</h2>
+	  {% if participaciones %}
+	  <div class="test-cards">
+        {% for participacion in participaciones %}
+        <div class="test-card">
+        <h3>{{ participacion.actividad.nombre }}</h3>
+            <p>{{ participacion.actividad.descripcion }}</p>
+            <p><strong>Fecha:</strong> {{ participacion.actividad.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
+            <p><strong>Ubicación:</strong> {{ participacion.actividad.ubicacion }}</p>
+            <p><strong>Estado:</strong> <span>{{ participacion.estado }}</span></p>
+        </div>
+        {% endfor %}
+	  </div>
+      {% else %}
+        <p>No estás inscrito en ninguna actividad aún.</p>
+      {% endif %}	
+	</Sección>
 	      
             {% if usuario.discapacidades %}
             <div class="discapacidades">
