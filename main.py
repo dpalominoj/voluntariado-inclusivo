@@ -9,57 +9,25 @@ from database.seed_data import seed_database
 def create_app():
     app = Flask(__name__)
     app.secret_key = '852456'    
-    # Configuración de la base de datos
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///konectai.db'  # SQLite para desarrollo
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///konectai.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False    
-    # Inicializar la base de datos
     db.init_app(app)
-    migrate = Migrate(app, db)    
-    with app.app_context():
-        db.create_all()  # Crear tablas
-        seed_database()  # Poblar con datos iniciales    
-    # Importar rutas
-    from routes import register_routes
-    register_routes(app)    
-return app
-app = create_app()
-
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///konectai.db'  # SQLite para desarrollo
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://usuario:clave@localhost/konectai'  # MySQL para producción
-#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Inicializar extensiones
-db.init_app(app)
-migrate = Migrate(app, db)
-
-# Creación de tablas
-@app.before_first_request
-def create_tables():
-    db.create_all()
+    Migrate(app, db)
     
-    # Verifica si ya existen datos
-    if Discapacidad.query.count() == 0:
-        # datos iniciales de discapacidades
-        discapacidades = [
-            Discapacidad(nombre='visual', descripcion='Limitación en percepción óptica'),
-            Discapacidad(nombre='auditiva', descripcion='Dificultad en la comprensión de sonido'),
-            Discapacidad(nombre='motriz', descripcion='Dificultad en la movilidad física'),
-            Discapacidad(nombre='cognitiva', descripcion='Limitación en proceso de aprendizaje')
-        ]
-        db.session.add_all(discapacidades)
-        
-    if Preferencia.query.count() == 0:
-        # datos iniciales de preferencias
-        preferencias = [
-            Preferencia(nombre='a_comunitario', descripcion='Apoyo comunitario'),
-            Preferencia(nombre='tecnologia', descripcion='Tecnología'),
-            Preferencia(nombre='deporte', descripcion='Eventos deportivos'),
-            Preferencia(nombre='m_ambiente', descripcion='Medio ambiente'),
-            Preferencia(nombre='educacion', descripcion='Educación')
-        ]
-        db.session.add_all(preferencias)
-        
-    db.session.commit()
+    with app.app_context():
+        db.create_all()
+        try:
+            seed_database()
+        except Exception as e:
+            print(f"Error al poblar la base de datos: {e}")
+    
+    # Eliminar si no usas routes.py
+    # from routes import register_routes
+    # register_routes(app)
+
+    return app
+
+app = create_app()
 
 # Ruta principal
 @app.route("/")
