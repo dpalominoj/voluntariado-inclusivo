@@ -14,7 +14,6 @@ usuario_discapacidad = db.Table('usuario_discapacidad',
 usuario_discapacidad = db.Table('usuario_discapacidad',
      db.Column('usuario_id', db.Integer, db.ForeignKey('usuarios.id'), primary_key=True),
      db.Column('discapacidad_id', db.Integer, db.ForeignKey('discapacidades.id'), primary_key=True),
-     db.Column('otra_descripcion', db.String(255), nullable=True)
      db.Column('discapacidad_id', db.Integer, db.ForeignKey('discapacidades.id'), primary_key=True)
  )
 
