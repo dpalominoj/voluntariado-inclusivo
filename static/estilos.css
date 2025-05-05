@@ -22,7 +22,7 @@ a { text-decoration:none; }
 /* Navbar */
 nav { position:fixed; top:0; width:100%; background:var(--blanco); box-shadow:0 2px 5px rgba(0,0,0,0.1); }
 nav .cont { display:flex; align-items:center; justify-content:space-between; height:70px; }
-.a-logolink { text-decoration:none; }
+.a-logolink { text-decoration:none; color:blue; }
 .menu, .a-menulink { display:flex; list-style:none; text-decoration: none; font-weight:520; gap:1rem;}
 .btn-menu, .menu-movil { display:none; }
 .logo span { font-size:1.8rem; font-weight:bold; color:var(--primario); }
