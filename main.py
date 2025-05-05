@@ -37,7 +37,7 @@ def inicio():
 #Ruta participar (mensaje inhabilitado)    
 @app.route('/participar')
 def participar():
-    flash('No disponible por el momento<br>ya que me encuentro programando<br>a full', 'error')
+    flash('No disponible por el momento<br>ya que me encuentro<br>programando a full', 'error')
     return redirect(url_for('inicio'))
 
 # Ruta de registro
