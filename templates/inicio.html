@@ -51,7 +51,7 @@
         <p>Únete a nuestra comunidad de voluntarios y marca la diferencia en la vida de quienes más lo necesitan. Creamos espacios inclusivos donde todos pueden participar.</p>
         <div class="bot-hero">
           <button class="btn-p" onclick="abrirRegistro()">Comenzar ahora</button>
-          <button class="btn-s" ><a href="{{ url_for('dashboard') }}" style="text-decoration:none;" >Conocer más</a></button>
+          <button class="btn-s" ><a href="{{ url_for('dashboard') }}">Conocer más</a></button>
         </div>
       </div>
       <div class="img-hero" >
@@ -94,7 +94,7 @@
           <div class="cuerpo">
 			  <h3>Educación Inclusiva</h3>
 			  <p>Apoya a estudiantes con necesidades especiales.</p>
-			  <button class="btn-p">Participar</button>
+			  <button class="btn-p"><a href="{{ url_for('participar') }}">Participar</a></button>
 		  </div>
         </article>
 		<article class="card">
@@ -102,7 +102,7 @@
 		  <div class="cuerpo">
 			  <h3>Medio Ambiente</h3>
 			  <p>Participa en proyectos de reforestación.</p>
-			  <button class="btn-p">Participar</button>
+			  <button class="btn-p"><a href="{{ url_for('participar') }}">Participar</a></button>
 		  </div>
         </article>
 		<article class="card">
@@ -110,7 +110,7 @@
 		  <div class="cuerpo">
 			  <h3>Apoyo Comunitario</h3>
 			  <p>Colabora en comedores sociales y visitas a residencias de ancianos.</p>
-			  <button class="btn-p">Participar</button>
+			  <button class="btn-p"><a href="{{ url_for('participar') }}">Participar</a></button>
 		  </div>
         </article>
       </div>
