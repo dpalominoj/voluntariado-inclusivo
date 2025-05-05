@@ -97,36 +97,15 @@
         <p>No estás inscrito en ninguna actividad aún.</p>
       {% endif %}	
 	</Sección>
-	<!-- actividades disponibles -->
-	<section class="impacto">
-	  <h2>Actividades Disponibles</h2>
-	  <a class="flecha prev" href="#card-{{ actividades[-1].id }}" aria-label="Anterior">&#8592;</a>
-	  <a class="flecha next" href="#card-{{ actividades[0].id }}" aria-label="Siguiente">&#8594;</a>
-	  {% if actividades %}
-	  {%<div class="actividades-disponibles">
-        {% for actividad in actividades %}
-        <div class="actividad-card">
-            <h3>{{ actividad.nombre }}</h3>
-            <p>{{ actividad.descripcion }}</p>
-            <p><strong>Fecha:</strong> {{ actividad.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
-            p><strong>Ubicación:</strong> {{ actividad.ubicacion }}</p>
-              
-            <form action="{{ url_for('inscribir_actividad', actividad_id=actividad.id) }}" method="POST">
-            <button type="submit" class="btn-p">Inscribirse</button>
-            </form>
-        </div>
-        {% endfor %}
-	  {%</div>
-	  {%{% else %}
-	  {%<p>No hay actividades disponibles en este momento.</p>
-	  {%{% endif %}
-	</section>
+	
 	      
         
         <!-- Sección de Actividades Disponibles -->
         <div class="dashboard-card">
           <h2>Actividades Disponibles</h2>
-          
+          <a class="flecha prev" href="#card-{{ actividades[-1].id }}" aria-label="Anterior">&#8592;</a>
+	  <a class="flecha next" href="#card-{{ actividades[0].id }}" aria-label="Siguiente">&#8594;</a>
+		
           {% if actividades %}
           <div class="actividades-disponibles">
             {% for actividad in actividades %}
