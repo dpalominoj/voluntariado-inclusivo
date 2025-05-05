@@ -27,7 +27,7 @@
         <span class="usuario-info">Hola, {{ session.usuario_nombre.split()[0] }}</span>
 		<svg class="ic-perfil" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
 			<path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
-		</svg> -->
+		</svg>
         <a href="{{ url_for('logout') }}" class="btn-s">Cerrar Sesión</a>
       </div>
       <button id="mobileMenuBtn" class="btn-menu">☰</button>
@@ -100,6 +100,30 @@
         <p>No estás inscrito en ninguna actividad aún.</p>
       {% endif %}	
 	</Sección>
+	<!-- actividades disponibles -->
+	<section class="impacto">
+	  <h2>Actividades Disponibles</h2>
+	  <a class="flecha prev" href="#card-{{ actividades[-1].id }}" aria-label="Anterior">&#8592;</a>
+	  <a class="flecha next" href="#card-{{ actividades[0].id }}" aria-label="Siguiente">&#8594;</a>
+	  {% if actividades %}
+	  {%<div class="actividades-disponibles">
+        {% for actividad in actividades %}
+        <div class="actividad-card">
+            <h3>{{ actividad.nombre }}</h3>
+            <p>{{ actividad.descripcion }}</p>
+            <p><strong>Fecha:</strong> {{ actividad.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
+            <p><strong>Ubicación:</strong> {{ actividad.ubicacion }}</p>
+              
+            <form action="{{ url_for('inscribir_actividad', actividad_id=actividad.id) }}" method="POST">
+            <button type="submit" class="btn-p">Inscribirse</button>
+            </form>
+        </div>
+        {% endfor %}
+	  {%</div>
+	  {%{% else %}
+	  {%<p>No hay actividades disponibles en este momento.</p>
+	  {%{% endif %}
+	</section>
 	
 	      
         
@@ -116,7 +140,7 @@
               <h3>{{ actividad.nombre }}</h3>
               <p>{{ actividad.descripcion }}</p>
               <p><strong>Fecha:</strong> {{ actividad.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
-              p><strong>Ubicación:</strong> {{ actividad.ubicacion }}</p>
+              <p><strong>Ubicación:</strong> {{ actividad.ubicacion }}</p>
               
               <form action="{{ url_for('inscribir_actividad', actividad_id=actividad.id) }}" method="POST">
                 <button type="submit" class="btn-p">Inscribirse</button>
