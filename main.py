@@ -3,8 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
-from database.models import db, Usuario, Discapacidad, Preferencia, Actividad, Participacion
-from seed_data import seed_database
+from models import db, Usuario, Discapacidad, Preferencia, Actividad, Participacion
+from database.seed_data import seed_database
 
 def create_app():
     app = Flask(__name__)
