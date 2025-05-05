@@ -8,8 +8,8 @@
 html, body { margin:0; top:30px; right:20px; padding:0; font-family:'Montserrat',sans-serif; background:var(--fondo); color:var(--texto); }
 .cont, .prog, .test { max-width:1200px; margin:0 auto; }
 a { text-decoration:none; }
-a:visited { color:blue; }
-.a-particip { text-decoration:none; color:var(--blanco); }
+/* a:link, a:visited { color:blue; }
+.a-particip { text-decoration:none; color:var(--blanco); } */
 
 /* Estilo de mensaje Jinja Flash */
 .mensaje-flash { position:fixed; top:50px; right:20px; padding:12px; max-width:300px; box-shadow:0 2px 10px rgba(0,0,0,0.2); animation:desap 1s ease-out forwards; animation-delay:5s; }
