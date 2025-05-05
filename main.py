@@ -4,13 +4,29 @@ from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from models import db, Usuario, Discapacidad, Preferencia, Actividad, Participacion
+from database.seed_data import seed_database
 
-app = Flask(__name__)
-app.secret_key = '852456'
+def create_app():
+    app = Flask(__name__)
+    app.secret_key = '852456'    
+    # Configuración de la base de datos
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///konectai.db'  # SQLite para desarrollo
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False    
+    # Inicializar la base de datos
+    db.init_app(app)
+    migrate = Migrate(app, db)    
+    with app.app_context():
+        db.create_all()  # Crear tablas
+        seed_database()  # Poblar con datos iniciales    
+    # Importar rutas
+    from routes import register_routes
+    register_routes(app)    
+return app
+app = create_app()
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///konectai.db'  # SQLite para desarrollo
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///konectai.db'  # SQLite para desarrollo
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://usuario:clave@localhost/konectai'  # MySQL para producción
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inicializar extensiones
 db.init_app(app)
