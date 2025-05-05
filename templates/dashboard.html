@@ -24,8 +24,8 @@
       </ul>
       <div class="botones">
         <button id="m-oscuro" class="btn-oscuro" onclick="modoOscuro()">🌙</button>
-        <span class="usuario-info">Hola, Dany</span>
-        <a href="#" class="btn-s">Cerrar Sesión</a>
+        <span class="usuario-info">Hola, {{ session.usuario_nombre.split()[0] }}</span>
+        <a href="{{ url_for('logout') }}" class="btn-s">Cerrar Sesión</a>
       </div>
       <button id="mobileMenuBtn" class="btn-menu">☰</button>
     </div>
@@ -35,42 +35,45 @@
         <li><a href="{{ url_for('actividades') }}" class="a-menulink">Actividades</a></li>
         <li><a href="{{ url_for('contacto') }}" class="a-menulink">Contacto</a></li>
         <li><a href="{{ url_for('ayuda') }}" class="a-menulink">Ayuda</a></li>
-        <li><a href="#" class="btn-s">Cerrar Sesión</a></li>
+        <li><a href="{{ url_for('logout') }}" class="btn-s">Cerrar Sesión</a></li>
       </ul>
     </div>
   </nav>
 
   <main class="dashboard-main">
     <div class="cont">
-      <h1>Bienvenido, {{ usuario }}</h1>
+      <h1>Bienvenido, {{ usuario.nombres }}</h1>
       
       <div class="dashboard-grid">
         <!-- Sección de Perfil -->
         <div class="dashboard-card">
           <h2>Mi Perfil</h2>
           <div class="perfil-info">
-            <p><strong>Nombre:</strong> Dany Palomino</p>
-            <p><strong>DNI:</strong> 73992058</p>
-            <p><strong>Fecha de registro:</strong> 03/05/2025</p>
+            <p><strong>Nombre:</strong> {{ usuario.nombres }} {{ usuario.apellidos }}</p>
+            <p><strong>DNI:</strong> {{ usuario.dni }}</p>
+            <p><strong>Fecha de registro:</strong> {{ usuario.fecha_registro.strftime('%d/%m/%Y') }}</p>
             
-            {% if usuario %}
+            {% if usuario.discapacidades %}
             <div class="discapacidades">
               <h3>Discapacidades registradas:</h3>
               <ul>
-                <li>Discapacidades 1</li>
-                <li>Discapacidades 2</li>
+                {% for disc in usuario.discapacidades %}
+                <li>{{ disc.descripcion }}</li>
+                {% endfor %}
               </ul>
             </div>
             {% endif %}
             
-            
+            {% if usuario.preferencias %}
             <div class="preferencias">
               <h3>Preferencias de voluntariado:</h3>
               <ul>
-                <li>Preferencia 1</li>
-                <li>Preferencia 2</li>
+                {% for pref in usuario.preferencias %}
+                <li>{{ pref.descripcion }}</li>
+                {% endfor %}
               </ul>
             </div>
+            {% endif %}
             
             <a href="#" class="btn-s">Editar Perfil</a>
           </div>
@@ -80,37 +83,45 @@
         <div class="dashboard-card">
           <h2>Mis Actividades</h2>
           
-          
+          {% if participaciones %}
           <div class="actividades-lista">
+            {% for participacion in participaciones %}
             <div class="actividad-card">
-              <h3>participacion.actividad.nombre</h3>
-              <p>participacion.actividad.descripcion</p>
-              <p><strong>Fecha:</strong> 05/05/2025 13:15</p>
-              <p><strong>Ubicación:</strong>participacion.actividad.ubicacion</p>
-              <p><strong>Estado:</strong> <span class="estado">participacion.estado</span></p>
+              <h3>{{ participacion.actividad.nombre }}</h3>
+              <p>{{ participacion.actividad.descripcion }}</p>
+              <p><strong>Fecha:</strong> {{ participacion.actividad.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
+              <p><strong>Ubicación:</strong> {{ participacion.actividad.ubicacion }}</p>
+              <p><strong>Estado:</strong> <span class="estado {{ participacion.estado }}">{{ participacion.estado }}</span></p>
             </div>
+            {% endfor %}
           </div>
+          {% else %}
           <p>No estás inscrito en ninguna actividad aún.</p>
+          {% endif %}
         </div>
         
         <!-- Sección de Actividades Disponibles -->
         <div class="dashboard-card">
           <h2>Actividades Disponibles</h2>
           
-         
+          {% if actividades %}
           <div class="actividades-disponibles">
+            {% for actividad in actividades %}
             <div class="actividad-card">
-              <h3>actividad.nombre </h3>
-              <p>actividad.descripcion</p>
-              <p><strong>Fecha:</strong>actividad.fecha.strftime('%d/%m/%Y %H:%M') </p>
-              <p><strong>Ubicación:</strong>actividad.ubicacion </p>
+              <h3>{{ actividad.nombre }}</h3>
+              <p>{{ actividad.descripcion }}</p>
+              <p><strong>Fecha:</strong> {{ actividad.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
+              <p><strong>Ubicación:</strong> {{ actividad.ubicacion }}</p>
               
-              <form >
+              <form action="{{ url_for('inscribir_actividad', actividad_id=actividad.id) }}" method="POST">
                 <button type="submit" class="btn-p">Inscribirse</button>
               </form>
             </div>
+            {% endfor %}
           </div>
+          {% else %}
           <p>No hay actividades disponibles en este momento.</p>
+          {% endif %}
         </div>
       </div>
     </div>
