@@ -43,7 +43,7 @@
     </div>
   </nav>
 
-  <main>  
+  <main><h1></br></h1>  
       <div class="dashboard-grid">
         <!-- Datos Personales -->
     	<section class="prog">
@@ -55,10 +55,11 @@
 		<a href="#" class="btn-s">Editar Perfil</a>
 	  </div>	  
 	</section>
+	      
 	<!-- Discapacidades registradas -->
     	<section class="impacto">
 	  {% if usuario.discapacidades %}
-        <div class="card">
+        <div class="stats">
             <h3>Discapacidades registradas:</h3>
             <ul>
                 {% for disc in usuario.discapacidades %}
@@ -69,7 +70,7 @@
 	  {% endif %}
 	  
 	  {% if usuario.preferencias %}
-        <div class="card">
+        <div class="stats">
             <h3>Preferencias de voluntariado:</h3>
             <ul>
                 {% for pref in usuario.preferencias %}
