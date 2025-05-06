@@ -57,9 +57,9 @@
 	</section>
 	      
 	<!-- Discapacidades registradas -->
-    	<section class="impacto">
+    	<section class="stats">
 	  {% if usuario.discapacidades %}
-        <div class="stats">
+        <div class="are">
             <h3>Discapacidades registradas:</h3>
             <ul>
                 {% for disc in usuario.discapacidades %}
@@ -70,7 +70,7 @@
 	  {% endif %}
 	  
 	  {% if usuario.preferencias %}
-        <div class="stats">
+        <div class="are">
             <h3>Preferencias de voluntariado:</h3>
             <ul>
                 {% for pref in usuario.preferencias %}
