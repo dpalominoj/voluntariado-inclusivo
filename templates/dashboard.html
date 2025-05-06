@@ -100,14 +100,14 @@
       {% endif %}	
 	</section>
 	<!-- actividades disponibles -->
-	<section class="hero">
+	<section class="impacto">
 	  <h2>Actividades Disponibles</h2>
 	  <a class="flecha prev" href="#card-{{ actividades[-1].id }}" aria-label="Anterior">&#8592;</a>
 	  <a class="flecha next" href="#card-{{ actividades[0].id }}" aria-label="Siguiente">&#8594;</a>
 	  {% if actividades %}
-	  <div class="test-cards">
+	  <div class="cards">
             {% for actividad in actividades %}
-            <div class="test-card">
+            <div class="card">
             	<h3>{{ actividad.nombre }}</h3>
             	<p>{{ actividad.descripcion }}</p>
             	<p><strong>Fecha:</strong> {{ actividad.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
