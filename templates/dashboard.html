@@ -85,14 +85,14 @@
       	<h2>Mis Actividades</h2>
 	  {% if participaciones %}
 	  <div class="test-cards">
-        {% for participacion in participaciones %}
-        <div class="test-card">
-        <h3>{{ participacion.actividad.nombre }}</h3>
-            <p>{{ participacion.actividad.descripcion }}</p>
-            <p><strong>Fecha:</strong> {{ participacion.actividad.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
-            <p><strong>Ubicación:</strong> {{ participacion.actividad.ubicacion }}</p>
-            <p><strong>Estado:</strong> <span>{{ participacion.estado }}</span></p>
-        </div>
+	      {% for participacion in participaciones %}
+	      <div class="test-card">
+	      <h3>{{ participacion.actividad.nombre }}</h3>
+		<p>{{ participacion.actividad.descripcion }}</p>
+		<p><strong>Fecha:</strong> {{ participacion.actividad.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
+	        <p><strong>Ubicación:</strong> {{ participacion.actividad.ubicacion }}</p>
+	        <p><strong>Estado:</strong> <span>{{ participacion.estado }}</span></p>
+          </div>
         {% endfor %}
 	  </div>
       {% else %}
@@ -105,9 +105,9 @@
 	  <a class="flecha prev" href="#card-{{ actividades[-1].id }}" aria-label="Anterior">&#8592;</a>
 	  <a class="flecha next" href="#card-{{ actividades[0].id }}" aria-label="Siguiente">&#8594;</a>
 	  {% if actividades %}
-	  <div class="actividades-disponibles">
+	  <div class="test-cards">
             {% for actividad in actividades %}
-            <div class="actividad-card">
+            <div class="test-card">
             	<h3>{{ actividad.nombre }}</h3>
             	<p>{{ actividad.descripcion }}</p>
             	<p><strong>Fecha:</strong> {{ actividad.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
