@@ -134,6 +134,7 @@ button:hover .flecha { display:inline-block; margin-left: em; }
 .flecha { position:absolute; top:50%; transform:translateY(-50%); background:#007bff; color:#fff; width:36px; height:36px; border-radius:50%;}
 .flecha.prev { left:8px; }
 .flecha.next { right: 8px; }
+.stats { display:flex; justify-content:left; gap:12rem; }
 
 /* Vista Móvil */
 @media (max-width: 768px){
