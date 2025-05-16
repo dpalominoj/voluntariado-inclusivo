@@ -25,11 +25,19 @@
         <li><a href="{{ url_for('contacto') }}" class="a-menulink">CONTACTO</a></li>
         <li><a href="{{ url_for('ayuda') }}" class="a-menulink">AYUDA</a></li>
       </ul>
-	  <div class="botones">
-		<button id="m-oscuro" class="btn-oscuro" onclick="modoOscuro()">🌙</button>	  
-		<button id="signInBtn" class="btn-s" onclick="abrirLogin()">Iniciar Sesión</button>
-        <button id="signUpBtn" class="btn-p" onclick="abrirRegistro()">Registrarse</button>
-      </div>
+	<div class="botones">
+		{% if session['usuario_id'] %}
+		  <div class="usuario-info">
+		    <img src="{{ url_for('static', filename='Images/fondo-contacto.jpg') }}" alt="Avatar" class="avatar-usuario">
+		    <span class="nombre-usuario">{{ session['usuario_nombre'] }}</span>
+		    <a href="{{ url_for('logout') }}" class="btn-logout">Cerrar sesión</a>
+		  </div>
+		{% else %}
+		  <button id="m-oscuro" class="btn-oscuro" onclick="modoOscuro()">🌙</button>
+		  <button id="signInBtn" class="btn-s" onclick="abrirLogin()">Iniciar Sesión</button>
+		  <button id="signUpBtn" class="btn-p" onclick="abrirRegistro()">Registrarse</button>
+		{% endif %}
+      	</div>
       <button id="mobileMenuBtn" class="btn-menu">☰</button>
     </div>
     <div id="mobileMenu" class="menu-movil">
