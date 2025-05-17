@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}KONECTAi - Voluntariado Inclusivo{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.userway.org/widget.js" data-account="w1p59Fihx2" data-position="5"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+  <script src="{{ url_for('static', filename='javascript.js') }}" defer></script>
+</head>
+<body>
+<!-- Navbar -->
+  <nav id="navbar">
+    <div class="cont">
+      <div class="logo"><a href="{{ url_for('inicio') }}" class="a-logolink">       
+		<span>🌐</span> <!-- svg logo 🌎 -->
+        <span>KONECTAi</span></a>  
+      </div>
+      <ul class="menu">
+        <li><a href="{{ url_for('inicio') }}" class="a-menulink">INICIO</a></li>
+        <li><a href="{{ url_for('actividades') }}" class="a-menulink">ACTIVIDADES</a></li>
+        <li><a href="{{ url_for('contacto') }}" class="a-menulink">CONTACTO</a></li>
+        <li><a href="{{ url_for('ayuda') }}" class="a-menulink">AYUDA</a></li>
+      </ul>
+	<div class="botones">
+		{% if session['usuario_id'] %}
+		  <div class="usuario-info">		    	
+		    <span class="nombre-usuario">{{ session.usuario_nombre.split()[0] }}</span>
+			<a href="{{ url_for('dashboard') }}">
+			<svg class="ic-perfil" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+				<path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
+			</svg> </a>
+		    <a href="{{ url_for('logout') }}" class="btn-s">Cerrar sesión</a>
+		  </div>
+		{% else %}
+		  <button id="m-oscuro" class="btn-oscuro" onclick="modoOscuro()">🌙</button>
+		  <button id="signInBtn" class="btn-s" onclick="abrirLogin()">Iniciar Sesión</button>
+		  <button id="signUpBtn" class="btn-p" onclick="abrirRegistro()">Registrarse</button>
+		{% endif %}
+      	</div>
+      <button id="mobileMenuBtn" class="btn-menu">☰</button>
+    </div>
+    <div id="mobileMenu" class="menu-movil">
+      <ul>
+        {% if session['usuario_id'] %}
+    		  <div class="usuario-info">		    	
+    		    <span class="nombre-usuario">{{ session.usuario_nombre.split()[0] }}</span>
+    			<a href="{{ url_for('dashboard') }}">
+    			<svg class="ic-perfil" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+    				<path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
+    			</svg> </a>
+    		    <a href="{{ url_for('logout') }}" class="btn-s">Cerrar sesión</a>
+    		  </div>
+        {% else %}
+        <li><a href="{{ url_for('inicio') }}" class="a-menulink">Inicio</a></li>
+        <li><a href="{{ url_for('actividades') }}" class="a-menulink">Programas</a></li>
+        <li><a href="{{ url_for('contacto') }}" class="a-menulink">Sobre Nosotros</a></li>
+        <li><a href="{{ url_for('ayuda') }}" class="a-menulink">Contacto</a></li>
+        <li><button class="btn-s" onclick="abrirLogin()">Iniciar Sesión</button></li>
+        <li><button class="btn-p" onclick="abrirRegistro()">Registrarse</button></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+  
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="pie-cont">
+      <div class="fbox info">
+        <h3 class="logo-f">🌐<!-- svg --><span>KONECTAi</span></h3>
+        <span>Creando oportunidades de voluntariado <br> inclusivo para todos.</span>
+      </div>
+      <div class="fbox links">
+        <div>
+          <h3>Programas</h3>
+          <ul>
+			<li>Educación Inclusiva</li>
+			<li>Deporte Inclusivo</li>
+			<li>Medio Ambiente</li>
+		  </ul>
+        </div>
+      </div>
+	  <div class="fbox nosotros">
+	  <h3>Sobre Nosotros</h3>
+        <ul>
+          <li>Nuestra Misión</li>
+          <li>Alianzas</li>
+          <li>Transparencia</li>
+        </ul>
+      </div>
+      <div class="fbox contacto">
+	  <h3>Contacto</h3>
+        <ul>
+          <li>Calle Principal S/N, Huancayo</li>
+          <li>info.grupof@konectai.org</li>
+          <li>+51 923 456 789</li>
+        </ul>
+      </div>
+    </div>
+	<div class="linea cont"> </div>
+	<p class="cpy">© 2025. Todos los derechos reservados.</p>   
+  </footer>
+
+  <!-- Modal Iniciar Sesión -->
+  <div id="signInModal" class="modal">
+	<div class="fondo_frm"> </div>
+	<div class="cont_frm">
+	  <span class="cerrarPopup" onclick="cerrarMod()">×</span>
+	  <div class="encab_frm">
+	    <h3>Iniciar Sesión</h3>		
+	  </div>
+	  <form class="formulario" action="{{ url_for('login') }}" method="POST">
+	    <label for="user">Usuario (DNI)</label><input type="text" id="usr" name="usuario" pattern="[0-9]{8}" maxlength="8" required>
+	    <label for="psw">Contraseña</label><input type="password" id="psw" name="contraseña" minlength="8" maxlength="20" spellcheck="false" autocapitalize="off" required>
+	    <div class="olvido-psw">¿Olvidaste tu contraseña?</div>
+	    <button type="submit" class="iniciar-ses">Iniciar Sesión</button>
+	  </form>
+	  <div class="pie_frm">
+		<p>¿No tienes cuenta? <button type="button" onclick="abrirRegistro()">>Registrate</button></p>
+	  </div>
+	</div>
+  </div>
+  
+   <!-- Modal Registro -->
+  <div id="signUpModal" class="modal">
+	<div class="fondo_frm"> </div>
+	<div class="cont_frm">
+	  <span class="cerrarPopup" onclick="cerrarMod()">×</span>
+	  <div class="encab_frm">
+	    <h3>Crear Cuenta</h3>	
+	  </div>
+	  <form class="formulario" action="{{ url_for('registro') }}" method="POST">
+	    <div class="nom-apel">
+			<div><label for="nombre">Nombres</label><input type="text" id="nom" name="nombres" required></div>
+			<div><label for="apellido">Apellidos</label><input type="text" id="apel" name="apellidos" required></div>
+		</div>
+		<label for="user">N° de DNI</label><input type="text" id="dni" name="dni" pattern="[0-9]{8}" maxlength="8" inputmode="numeric" required>
+		<label for="psw1">Contraseña</label><input type="password" id="psw1" name="passw1" minlength="8" maxlength="20" autocapitalize="off" required>
+		<label for="psw2">Confirmar contraseña</label><input type="password" id="psw2" name="psw2" minlength="8" maxlength="20" autocapitalize="off" required>
+		<fieldset>
+		  <legend>¿Desea indicar si cuenta con alguna discapacidad?</legend>
+		  <div class="rpta">
+			<input type="radio" name="accs" id="disc_no" value="no" checked><label for="disc_no">No, ninguna</label>
+			<input type="radio" name="accs" id="disc_si" value="si"><label for="disc_si">Si, tengo condiciones limitantes</label>
+		  </div>
+		  <div id="selDisc" class="sel">
+			<button type="button" id="btnDiscapacidad">— Selecciona el tipo de limitación —<span>&nbsp;▼</span></button>
+			<div class="sel-cont">
+				<label><input type="checkbox" name="disc[]" value="visual">Visual (limitación en percepción óptica)</label>
+				<label><input type="checkbox" name="disc[]" value="auditiva">Auditiva (dificultad en la comprensión de sonido)</label>
+				<label><input type="checkbox" name="disc[]" value="motriz">Motriz (dificultad en la movilidad fisica)</label>
+				<label><input type="checkbox" name="disc[]" value="cognitiva">Cognitiva (limitación en proceso de aprendizaje)</label>
+				<label><input type="checkbox" name="disc[]" value="otra" id="chkOtraDisc">Ingresar Otro</label>
+				<textarea id="otraDisc" name="otra_discap" placeholder="Describe otra limitación"></textarea>
+			</div>
+		  </div>		  
+		</fieldset>
+		<fieldset>
+		  <legend>¿Tiene alguna preferencia para voluntariado?</legend>
+		  <div id="selPref" class="sel">
+			<button type="button" id="btnPrefer">— Seleccione sus preferencias —<span>&nbsp;▼</span></button>
+			<div class="sel-cont">
+				<label><input type="checkbox" name="pref[]" value="a_comunitario">Apoyo comunitario</label>
+				<label><input type="checkbox" name="pref[]" value="tecnologia">Tecnología</label>
+				<label><input type="checkbox" name="pref[]" value="deporte">Eventos deportivos</label>
+				<label><input type="checkbox" name="pref[]" value="m_ambiente">Medio ambiente</label>
+				<label><input type="checkbox" name="pref[]" value="educacion">Educación</label>
+			</div>
+		  </div>
+		</fieldset>
+		<button type="submit" class="iniciar-reg">Registrarse</button>
+	  </form>
+	  <div class="pie_frm">
+		<p>¿Ya tienes una cuenta? <button type="button" onclick="abrirLogin()">Inicia sesión</button></p>
+	  </div>
+	</div>
+  </div>
+    <!-- Mensaje Jinja flash -->
+	{% with mensajes = get_flashed_messages(with_categories=true) %}
+	  {% if mensajes %}
+	    {% for categoria, mensaje in mensajes %}
+	      <div class="mensaje-flash {{ categoria }}">
+	        <h5>{{ mensaje|safe }}</h5>
+	      </div>
+	    {% endfor %}
+	  {% endif %}
+	{% endwith %}
+</body>
+</html>
