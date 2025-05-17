@@ -28,7 +28,7 @@
 
 /* Imagen de la actividad */
 .actividad-imagen {
-    position: relative;
+    position: static;
     height: 200px;
     overflow: hidden;
 }
