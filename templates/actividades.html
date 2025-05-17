@@ -7,38 +7,95 @@
 
 {% block content %}
 <!-- Contenido específico de ACTIVIDADES -->
-<main><h1></br></h1>
-    <!-- Programas -->
-    <section class="prog">
-      <h1>Nuestros Programas de Voluntariado</h1>
-      <p>Ofrecemos oportunidades según tus habilidades e intereses.</p>
-      <div class="cards">
-        <article class="card">
-          <div class="icono i1"><!-- svg -->🌻</div>
-          <div class="cuerpo">
-			  <h3>Educación Inclusiva</h3>
-			  <p>Apoya a estudiantes con necesidades especiales.</p>
-			  <button class="btn-p">Participar</button>
-		  </div>
-        </article>
-		<article class="card">
-          <div class="icono i2"><!-- svg -->🌼</div>
-		  <div class="cuerpo">
-			  <h3>Medio Ambiente</h3>
-			  <p>Participa en proyectos de reforestación.</p>
-			  <button class="btn-p">Participar</button>
-		  </div>
-        </article>
-		<article class="card">
-          <div class="icono i3"><!-- svg -->🌸</div>
-		  <div class="cuerpo">
-			  <h3>Apoyo Comunitario</h3>
-			  <p>Colabora en comedores sociales y visitas a residencias de ancianos.</p>
-			  <button class="btn-p">Participar</button>
-		  </div>
-        </article>
-      </div>
-    </section>
-  </main>
+<main><h1></br></h2>
+	<!-- Filtros de búsqueda -->
+	<section class="filtros-actividades">
+	  <div class="cont">
+	    <h2>Encuentra tu voluntariado ideal</h2>
+	    <form class="filtros-form">
+	      <select name="tipo">
+	        <option value="">Todos los tipos</option>
+	        <option value="educacion">Educación</option>
+	        <option value="medioambiente">Medio Ambiente</option>
+	        <!-- Más opciones -->
+	      </select>
+	      <select name="accesibilidad">
+	        <option value="">Nivel de accesibilidad</option>
+	        <option value="alta">Alta accesibilidad</option>
+	        <option value="media">Media accesibilidad</option>
+	        <!-- Más opciones -->
+	      </select>
+	      <button type="submit" class="btn-p">Filtrar</button>
+	    </form>
+	  </div>
+	</section>
+	
+	<!-- Actividades disponibles -->
+	<section class="actividades-container">
+	  <div class="cont">
+	    {% if actividades %}
+	    <div class="actividades-grid">
+	      {% for actividad in actividades %}
+	      <div class="actividad-card">
+	        <!-- Imagen de la actividad -->
+	        <div class="actividad-imagen">
+	          <img src="{{ url_for('static', filename='img/actividades/' + actividad.imagen) if actividad.imagen else url_for('static', filename='img/actividad-default.jpg') }}" alt="{{ actividad.nombre }}">
+	          <div class="compatibilidad-badge">{{ actividad.compatibilidad }}% Compatible</div>
+	        </div>
+	        
+	        <!-- Contenido de la tarjeta -->
+	        <div class="actividad-contenido">
+	          <div class="actividad-header">
+	            <h3>{{ actividad.nombre }}</h3>
+	            <span class="organizacion">{{ actividad.organizacion }}</span>
+	          </div>
+	          
+	          <div class="actividad-detalles">
+	            <div class="detalle-item">
+	              <svg class="icono" viewBox="0 0 24 24"><path d="M19,4H17V3a1,1,0,0,0-2,0V4H9V3A1,1,0,0,0,7,3V4H5A3,3,0,0,0,2,7V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V7A3,3,0,0,0,19,4Zm1,15a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V12H20Zm0-9H4V7A1,1,0,0,1,5,6H7V7A1,1,0,0,0,9,7V6h6V7a1,1,0,0,0,2,0V6h2a1,1,0,0,1,1,1Z"/></svg>
+	              <span>{{ actividad.fecha.strftime('%d/%m/%Y') }}</span>
+	            </div>
+	            <div class="detalle-item">
+	              <svg class="icono" viewBox="0 0 24 24"><path d="M12,2a8,8,0,0,0-8,8c0,5.4,7.05,11.5,7.35,11.76a1,1,0,0,0,1.3,0C13,21.5,20,15.4,20,10A8,8,0,0,0,12,2Zm0,17.65c-2.13-2-6-6.31-6-9.65a6,6,0,0,1,12,0C18,13.34,14.13,17.66,12,19.65ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z"/></svg>
+	              <span>{{ actividad.ubicacion }}</span>
+	            </div>
+	          </div>
+	          
+	          <!-- Indicadores de accesibilidad -->
+	          <div class="accesibilidad">
+	            <span class="accesibilidad-label">Accesibilidad:</span>
+	            <div class="accesibilidad-icons">
+	              {% for i in range(5) %}
+	                {% if i < actividad.nivel_accesibilidad %}
+	                  <svg class="icono-accesibilidad" viewBox="0 0 24 24"><path d="M17.56,21a1,1,0,0,1-.46-.11L12,18.22l-5.1,2.67a1,1,0,0,1-1.45-1.06l1-5.63-4.12-4a1,1,0,0,1-.25-1,1,1,0,0,1,.81-.68l5.7-.83,2.51-5.13a1,1,0,0,1,1.8,0l2.54,5.12,5.7.83a1,1,0,0,1,.81.68,1,1,0,0,1-.25,1l-4.12,4,1,5.63a1,1,0,0,1-.4,1,1,1,0,0,1-.62.18Z"/></svg>
+	                {% else %}
+	                  <svg class="icono-accesibilidad" viewBox="0 0 24 24"><path d="M22,9.67A1,1,0,0,0,21.14,9l-5.69-.83L12.9,3a1,1,0,0,0-1.8,0L8.55,8.16,2.86,9a1,1,0,0,0-.81.68,1,1,0,0,0,.25,1l4.13,4-1,5.68a1,1,0,0,0,1.45,1.07L12,18.76l5.1,2.68a.93.93,0,0,0,.46.12,1,1,0,0,0,.59-.19,1,1,0,0,0,.4-1l-1-5.68,4.13-4A1,1,0,0,0,22,9.67Zm-6.15,4a1,1,0,0,0-.29.89l.72,4.19-3.76-2a1,1,0,0,0-.94,0l-3.76,2,.72-4.19a1,1,0,0,0-.29-.89l-3-3,4.21-.61a1,1,0,0,0,.76-.55L12,5.7l1.88,3.82a1,1,0,0,0,.76.55l4.21.61Z"/></svg>
+	                {% endif %}
+	              {% endfor %}
+	            </div>
+	          </div>
+	          
+	          <!-- Botones de acción -->
+	          <div class="actividad-acciones">
+	            <button class="btn-guardar">
+	              <svg viewBox="0 0 24 24"><path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"/></svg>
+	            </button>
+	            <form action="{{ url_for('inscribir_actividad', actividad_id=actividad.id) }}" method="POST">
+	              <button type="submit" class="btn-p">Participar</button>
+	            </form>
+	          </div>
+	        </div>
+	      </div>
+	      {% endfor %}
+	    </div>
+	    {% else %}
+	    <div class="sin-actividades">
+	      <img src="{{ url_for('static', filename='img/no-actividades.svg') }}" alt="No hay actividades">
+	      <p>No encontramos actividades disponibles en este momento.</p>
+	    </div>
+	    {% endif %}
+	  </div>
+	</section>
+</main>
 
 {% endblock %}
