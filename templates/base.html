@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}KONECTAi - Voluntariado Inclusivo{% endblock %}</title>
+  <title>{% block title %}KONECTAi - Voluntariado Inclusivo{% endblock %}</title>	
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.userway.org/widget.js" data-account="w1p59Fihx2" data-position="5"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+  {% block styles %}{% endblock %}
   <script src="{{ url_for('static', filename='javascript.js') }}" defer></script>
 </head>
 <body>
