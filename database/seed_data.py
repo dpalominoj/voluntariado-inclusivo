@@ -37,7 +37,7 @@ def seed_database():
                 cupo_maximo=20,
                 estado='activa',
                 organizacion='Biblioteca Nacional del Perú',
-                imagen='images/lectura_inclusiva.jpg',
+                imagen='lectura_inclusiva.jpg',
                 compatibilidad=85,
                 nivel_accesibilidad=5
             ),
@@ -49,7 +49,7 @@ def seed_database():
                 cupo_maximo=30,
                 estado='activa',
                 organizacion='ONG Verde Esperanza',
-                imagen='static/images/reforestacion_accesible.jpg',
+                imagen='reforestacion_accesible.jpg',
                 compatibilidad=92,
                 nivel_accesibilidad=4
             ),
@@ -61,7 +61,7 @@ def seed_database():
                 cupo_maximo=15,
                 estado='activa',
                 organizacion='Fundación Somos Uno',
-                imagen='static/images/voluntariado_rehabilitacion.jpg',
+                imagen='voluntariado_rehabilitacion.jpg',
                 compatibilidad=78,
                 nivel_accesibilidad=3
             ),
@@ -73,7 +73,7 @@ def seed_database():
                 cupo_maximo=25,
                 estado='activa',
                 organizacion='TecnoInclusión Perú',
-                imagen='static/images/tecnologia_asistiva.jpg',
+                imagen='tecnologia_asistiva.jpg',
                 compatibilidad=88,
                 nivel_accesibilidad=5
             ),
@@ -85,7 +85,7 @@ def seed_database():
                 cupo_maximo=40,
                 estado='activa',
                 organizacion='Red de Apoyo Solidario',
-                imagen='static/images/comedor_popular.jpg',
+                imagen='comedor_popular.jpg',
                 compatibilidad=100,
                 nivel_accesibilidad=1
             ),
@@ -97,7 +97,7 @@ def seed_database():
                 cupo_maximo=35,
                 estado='activa',
                 organizacion='EcoMar Perú',
-                imagen='static/images/limpieza_costera.jpg',
+                imagen='limpieza_costera.jpg',
                 compatibilidad=100,
                 nivel_accesibilidad=1
             ),
@@ -109,7 +109,7 @@ def seed_database():
                 cupo_maximo=10,
                 estado='activa',
                 organizacion='Educa Rural',
-                imagen='static/images/tutorias_rurales.jpg',
+                imagen='tutorias_rurales.jpg',
                 compatibilidad=98,
                 nivel_accesibilidad=1
             ),
@@ -121,7 +121,7 @@ def seed_database():
                 cupo_maximo=20,
                 estado='activa',
                 organizacion='Colectivo Cultura Viva',
-                imagen='static/images/arte_urbano.jpg',
+                imagen='arte_urbano.jpg',
                 compatibilidad=97,
                 nivel_accesibilidad=2
             ),
@@ -133,7 +133,7 @@ def seed_database():
                 cupo_maximo=25,
                 estado='activa',
                 organizacion='Defensa Civil Joven',
-                imagen='static/images/brigada_emergencia.jpg',
+                imagen='brigada_emergencia.jpg',
                 compatibilidad=99,
                 nivel_accesibilidad=1
             ),
@@ -145,7 +145,7 @@ def seed_database():
                 cupo_maximo=30,
                 estado='activa',
                 organizacion='Manos que Suman',
-                imagen='static/images/pintado_escuelas.jpg',
+                imagen='pintado_escuelas.jpg',
                 compatibilidad=100,
                 nivel_accesibilidad=1
             ),
@@ -157,7 +157,7 @@ def seed_database():
                 cupo_maximo=50,
                 estado='activa',
                 organizacion='Red Peruana de Deporte Inclusivo',
-                imagen='static/images/festival_deportivo.jpg',
+                imagen='festival_deportivo.jpg',
                 compatibilidad=95,
                 nivel_accesibilidad=4
             )
