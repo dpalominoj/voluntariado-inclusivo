@@ -40,19 +40,6 @@
     transform: scale(1.05);
 }
 
-/* Badge de compatibilidad */
-.compatibilidad-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
 /* Contenido de la tarjeta */
 .actividad-contenido {
     padding: 1.5rem;
@@ -100,7 +87,6 @@
 .seccion-compatibilidad {
     margin-bottom: 0.75rem;
 }
-
 .detalle-item {
     display: flex;
     align-items: center;
@@ -108,8 +94,6 @@
     font-size: 0.9rem;
     color: #4b5563;
 }
-
-/* Accesibilidad */
 .seccion-accesibilidad {
     display: flex;
     align-items: center;
@@ -121,7 +105,6 @@
     color: #4b5563;
     margin-right: 0.5rem;
 }
-
 /* Compatibilidad */
 .seccion-compatibilidad {
     font-weight: 600;
@@ -192,12 +175,10 @@
 .icono-accesibilidad.baja {
     fill: #ef4444;
 }
-
-/* Compatibilidad */
-.compatibilidad-text {
+.seccion-compatibilidad {
     font-weight: 600;
     color: #4f46e5;
-    margin: 0.5rem 0;
+    margin: 0.5rem 0 1.5rem 0; /* Doble espacio antes de los botones */
 }
 
 /* Botones de acción */
