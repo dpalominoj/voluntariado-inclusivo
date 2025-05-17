@@ -38,6 +38,10 @@ Tabla: actividades
 - ubicacion
 - cupo_maximo
 - estado (activa/cancelada/completa)
+- organizacion
+- imagen  # Ruta de imagen
+- compatibilidad # Valor entre 0 y 100
+- nivel_accesibilidad
 
 Tabla: participaciones
 - id (PK, AUTO_INCREMENT)
