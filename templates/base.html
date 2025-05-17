@@ -43,8 +43,12 @@
     </div>
     <div id="mobileMenu" class="menu-movil">
       <ul>
-        {% if session['usuario_id'] %}
-    		  <li><div class="usuario-info">		    	
+        {% if session['usuario_id'] %}    		  
+	      	<li><a href="{{ url_for('inicio') }}" class="a-menulink">Inicio</a></li>
+        	<li><a href="{{ url_for('actividades') }}" class="a-menulink">Programas</a></li>
+        	<li><a href="{{ url_for('contacto') }}" class="a-menulink">Sobre Nosotros</a></li>
+        	<li><a href="{{ url_for('ayuda') }}" class="a-menulink">Contacto</a></li>
+	      	<li><div class="usuario-info">		    	
     		    <span class="nombre-usuario">{{ session.usuario_nombre.split()[0] }}</span>
     			<a href="{{ url_for('dashboard') }}">
     			<svg class="ic-perfil" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
@@ -52,11 +56,7 @@
     			</svg>
 			</a>
     		    <a href="{{ url_for('logout') }}" class="btn-s">Cerrar sesión</a>
-    		  </div></li>
-	      	<li><a href="{{ url_for('inicio') }}" class="a-menulink">Inicio</a></li>
-        	<li><a href="{{ url_for('actividades') }}" class="a-menulink">Programas</a></li>
-        	<li><a href="{{ url_for('contacto') }}" class="a-menulink">Sobre Nosotros</a></li>
-        	<li><a href="{{ url_for('ayuda') }}" class="a-menulink">Contacto</a></li>
+    		</div></li>
         {% else %}
         <li><a href="{{ url_for('inicio') }}" class="a-menulink">Inicio</a></li>
         <li><a href="{{ url_for('actividades') }}" class="a-menulink">Programas</a></li>
