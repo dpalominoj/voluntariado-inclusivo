@@ -73,4 +73,16 @@ function cerrarMod(){
 const listaselect = document.getElementById('selDisc');
 document.querySelector('.rpta').onchange = 
     () => listaselect.style.display = disc_si.checked ? 'inline-block' : 'none';
+
+// Scroll con tecla espacio (bajar) y tecla shift+espacio (subir)
+document.addEventListener('keydown', function(event) {
+  if (event.code === 'Space') {
+    event.preventDefault();
+    const scrollAmount = event.shiftKey ? -window.innerHeight * 0.8 : window.innerHeight * 0.8;
+    window.scrollBy({
+      top: scrollAmount,
+      behavior: 'smooth'
+    });
+  }
+});
 	
