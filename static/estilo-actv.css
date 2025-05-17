@@ -56,9 +56,9 @@
 /* Contenido de la tarjeta */
 .actividad-contenido {
     padding: 1.5rem;
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
+    gap: 0.5rem; /* Espacio uniforme entre elementos */
 }
 
 .actividad-header h3 {
@@ -66,42 +66,35 @@
     font-size: 1.25rem;
     color: #111827;
     font-weight: 600;
-    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 0.5rem;
 }
 
 .organizacion {
     display: block;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #4f46e5;
-    margin: 0.3rem 0 1rem;
     font-weight: 500;
+    margin-bottom: 1rem;
 }
 
-/* Detalles de la actividad */
-.actividad-detalles {
-    margin: 1rem 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+/* Elementos con saltos de línea claros */
+.detalle-fecha, 
+.detalle-ubicacion,
+.seccion-accesibilidad,
+.seccion-compatibilidad {
+    margin-bottom: 0.75rem;
 }
 
 .detalle-item {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
     font-size: 0.9rem;
     color: #4b5563;
 }
 
-.icono {
-    width: 18px;
-    height: 18px;
-    fill: #6b7280;
-    margin-right: 0.5rem;
-}
-
-/* Indicadores de accesibilidad */
-.accesibilidad {
-    margin: 1rem 0;
+/* Accesibilidad */
+.seccion-accesibilidad {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -110,61 +103,39 @@
 .accesibilidad-label {
     font-size: 0.9rem;
     color: #4b5563;
-}
-
-.accesibilidad-icons {
-    display: flex;
-    gap: 0.2rem;
-}
-
-.icono-accesibilidad {
-    width: 16px;
-    height: 16px;
-}
-
-.icono-accesibilidad.alta {
-    fill: #10b981;
-}
-.icono-accesibilidad.media {
-    fill: #f59e0b;
-}
-.icono-accesibilidad.baja {
-    fill: #ef4444;
+    margin-right: 0.5rem;
 }
 
 /* Compatibilidad */
-.compatibilidad-text {
+.seccion-compatibilidad {
     font-weight: 600;
     color: #4f46e5;
-    margin: 0.5rem 0;
+    margin: 0.5rem 0 1.5rem 0; /* Doble espacio antes de los botones */
 }
 
-/* Botones de acción */
+/* Botones */
 .actividad-acciones {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-top: auto;
     padding-top: 1rem;
-    gap: 0.75rem;
 }
+
 .btn-participar {
+    width: 100%;
     background-color: #10b981;
     color: white;
     border: none;
     border-radius: 6px;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1rem;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    flex-grow: 1;
     text-align: center;
+    font-size: 0.95rem;
 }
 
 .btn-participar:hover {
     background-color: #059669;
 }
-
 /* Estado cuando no hay actividades */
 .sin-actividades {
     text-align: center;
