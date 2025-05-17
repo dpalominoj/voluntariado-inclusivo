@@ -23,11 +23,7 @@ class Usuario(db.Model):
     dni = db.Column(db.String(8), unique=True, nullable=False)
     nombres = db.Column(db.String(100), nullable=False)
     apellidos = db.Column(db.String(100), nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False)    
-    organizacion = db.Column(db.String(100), nullable=True)
-    imagen = db.Column(db.String(255), nullable=True)  # Ruta de imagen
-    compatibilidad = db.Column(db.Integer, nullable=True)  # Porcentaje
-    nivel_accesibilidad = db.Column(db.Integer, nullable=True)
+    password_hash = db.Column(db.String(256), nullable=False)
     fecha_registro = db.Column(db.DateTime, default=datetime.utcnow)
     ultimo_acceso = db.Column(db.DateTime, nullable=True)
     estado = db.Column(db.String(20), default='activo')
@@ -75,10 +71,15 @@ class Actividad(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable=False)
     descripcion = db.Column(db.Text, nullable=True)
+    organizacion = db.Column(db.String(100), nullable=True)
+    imagen = db.Column(db.String(255), nullable=True)  # Ruta de imagen
+    compatibilidad = db.Column(db.Integer, nullable=True)  # Porcentaje
+    nivel_accesibilidad = db.Column(db.Integer, nullable=True)
     fecha = db.Column(db.DateTime, nullable=False)
     ubicacion = db.Column(db.String(255), nullable=False)
     cupo_maximo = db.Column(db.Integer, nullable=True)
     estado = db.Column(db.String(20), default='activa')
+    
     
     # Relaciones
     participaciones = db.relationship('Participacion', backref='actividad', lazy=True)
