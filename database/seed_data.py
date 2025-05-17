@@ -26,34 +26,147 @@ def seed_database():
         db.session.add_all(preferencias)
     
     # Crear algunas actividades de ejemplo si no existen
-    if Actividad.query.count() == 0:
-        fecha_base = datetime.now() + timedelta(days=7)
-        actividades = [
-            Actividad(
-                nombre='Taller de Inclusión Digital',
-                descripcion='Aprende a utilizar herramientas digitales para personas con diversas discapacidades',
-                fecha=fecha_base + timedelta(days=1),
-                ubicacion='Centro Cultural de Huancayo',
-                cupo_maximo=25,
-                estado='activa'
-            ),
-            Actividad(
-                nombre='Reforestación en el Parque Nacional',
-                descripcion='Ayuda a plantar árboles nativos en zonas deforestadas',
-                fecha=fecha_base + timedelta(days=6),
-                ubicacion='Parque Nacional Huaytapallana',
-                cupo_maximo=40,
-                estado='activa'
-            ),
-            Actividad(
-                nombre='Visita a Residencia de Adultos Mayores',
-                descripcion='Comparte tiempo de calidad con adultos mayores',
-                fecha=fecha_base + timedelta(days=11),
-                ubicacion='Residencia San Vicente, Huancayo',
-                cupo_maximo=15,
-                estado='activa'
-            )
-        ]
-        db.session.add_all(actividades)
-    
+   from datetime import datetime, timedelta
+
+# Crear actividades si no existen
+if Actividad.query.count() == 0:
+    fecha_base = datetime.now() + timedelta(days=7)
+
+    actividades = [
+        Actividad(
+            nombre='Taller de Lectura Inclusiva',
+            descripcion='Sesiones semanales de lectura accesible con voluntarios oyentes y personas con discapacidad auditiva.',
+            fecha=fecha_base,
+            ubicacion='Lima, Perú',
+            cupo_maximo=20,
+            estado='activa',
+            organizacion='Biblioteca Nacional del Perú',
+            imagen='static/images/lectura_inclusiva.jpg',
+            compatibilidad=85,
+            nivel_accesibilidad=5
+        ),
+        Actividad(
+            nombre='Jornada de Reforestación Accesible',
+            descripcion='Actividad ambiental con caminos adaptados para voluntarios con movilidad reducida. Incluye interpretación en lengua de señas.',
+            fecha=fecha_base + timedelta(days=3),
+            ubicacion='Cusco, Perú',
+            cupo_maximo=30,
+            estado='activa',
+            organizacion='ONG Verde Esperanza',
+            imagen='static/images/reforestacion_accesible.jpg',
+            compatibilidad=92,
+            nivel_accesibilidad=4
+        ),
+        Actividad(
+            nombre='Voluntariado en Centro de Rehabilitación Infantil',
+            descripcion='Apoyo en juegos y dinámicas inclusivas para niños con discapacidad motriz y cognitiva.',
+            fecha=fecha_base + timedelta(days=10),
+            ubicacion='Arequipa, Perú',
+            cupo_maximo=15,
+            estado='activa',
+            organizacion='Fundación Somos Uno',
+            imagen='static/images/voluntariado_rehabilitacion.jpg',
+            compatibilidad=78,
+            nivel_accesibilidad=3
+        ),
+        Actividad(
+            nombre='Capacitación en Tecnología Asistiva',
+            descripcion='Capacitación para el uso de software de accesibilidad, orientado a voluntarios que apoyan a personas con discapacidad visual.',
+            fecha=fecha_base + timedelta(days=14),
+            ubicacion='Trujillo, Perú',
+            cupo_maximo=25,
+            estado='activa',
+            organizacion='TecnoInclusión Perú',
+            imagen='static/images/tecnologia_asistiva.jpg',
+            compatibilidad=88,
+            nivel_accesibilidad=5
+        ),
+        Actividad(
+            nombre='Voluntariado en Comedor Popular',
+            descripcion='Apoyo logístico en la preparación y distribución de alimentos en zonas vulnerables. No se requieren adaptaciones especiales.',
+            fecha=fecha_base + timedelta(days=5),
+            ubicacion='Callao, Perú',
+            cupo_maximo=40,
+            estado='activa',
+            organizacion='Red de Apoyo Solidario',
+            imagen='static/images/comedor_popular.jpg',
+            compatibilidad=100,
+            nivel_accesibilidad=1
+        ),
+        Actividad(
+            nombre='Campaña de Limpieza Costera',
+            descripcion='Recojo de residuos sólidos en playas del litoral para proteger el ecosistema marino. Requiere desplazamiento prolongado.',
+            fecha=fecha_base + timedelta(days=6),
+            ubicacion='Chorrillos, Lima, Perú',
+            cupo_maximo=35,
+            estado='activa',
+            organizacion='EcoMar Perú',
+            imagen='static/images/limpieza_costera.jpg',
+            compatibilidad=100,
+            nivel_accesibilidad=1
+        ),
+        Actividad(
+            nombre='Tutorías Escolares en Zonas Rurales',
+            descripcion='Voluntariado presencial para reforzamiento escolar en comunidades rurales. Implica caminatas y acceso limitado a servicios.',
+            fecha=fecha_base + timedelta(days=9),
+            ubicacion='Huancavelica, Perú',
+            cupo_maximo=10,
+            estado='activa',
+            organizacion='Educa Rural',
+            imagen='static/images/tutorias_rurales.jpg',
+            compatibilidad=98,
+            nivel_accesibilidad=1
+        ),
+        Actividad(
+            nombre='Festival Juvenil de Arte Urbano',
+            descripcion='Organización y montaje de espacios artísticos para jóvenes. Incluye armado de estructuras y coordinación en campo.',
+            fecha=fecha_base + timedelta(days=13),
+            ubicacion='Barranco, Lima, Perú',
+            cupo_maximo=20,
+            estado='activa',
+            organizacion='Colectivo Cultura Viva',
+            imagen='static/images/arte_urbano.jpg',
+            compatibilidad=97,
+            nivel_accesibilidad=2
+        ),
+        Actividad(
+            nombre='Brigada de Emergencia Comunitaria',
+            descripcion='Simulacros y talleres sobre primeros auxilios y evacuación ante desastres. Participación física activa requerida.',
+            fecha=fecha_base + timedelta(days=15),
+            ubicacion='Chiclayo, Perú',
+            cupo_maximo=25,
+            estado='activa',
+            organizacion='Defensa Civil Joven',
+            imagen='static/images/brigada_emergencia.jpg',
+            compatibilidad=99,
+            nivel_accesibilidad=1
+        ),
+        Actividad(
+            nombre='Pintado de Escuelas en Renovación',
+            descripcion='Apoyo en mejora de infraestructura escolar mediante tareas de pintado, limpieza y reparaciones básicas.',
+            fecha=fecha_base + timedelta(days=17),
+            ubicacion='Ayacucho, Perú',
+            cupo_maximo=30,
+            estado='activa',
+            organizacion='Manos que Suman',
+            imagen='static/images/pintado_escuelas.jpg',
+            compatibilidad=100,
+            nivel_accesibilidad=1
+        ),
+        Actividad(
+            nombre='Festival Deportivo Inclusivo',
+            descripcion='Evento deportivo con actividades adaptadas para voluntarios y participantes con distintas habilidades.',
+            fecha=fecha_base + timedelta(days=21),
+            ubicacion='Piura, Perú',
+            cupo_maximo=50,
+            estado='activa',
+            organizacion='Red Peruana de Deporte Inclusivo',
+            imagen='static/images/festival_deportivo.jpg',
+            compatibilidad=95,
+            nivel_accesibilidad=4
+        )
+    ]
+
+    db.session.add_all(actividades)
     db.session.commit()
+
