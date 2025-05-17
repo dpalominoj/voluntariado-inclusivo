@@ -23,7 +23,11 @@ class Usuario(db.Model):
     dni = db.Column(db.String(8), unique=True, nullable=False)
     nombres = db.Column(db.String(100), nullable=False)
     apellidos = db.Column(db.String(100), nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False)
+    password_hash = db.Column(db.String(256), nullable=False)    
+    organizacion = db.Column(db.String(100), nullable=True)
+    imagen = db.Column(db.String(255), nullable=True)  # Ruta de imagen
+    compatibilidad = db.Column(db.Integer, nullable=True)  # Porcentaje
+    nivel_accesibilidad = db.Column(db.Integer, nullable=True)
     fecha_registro = db.Column(db.DateTime, default=datetime.utcnow)
     ultimo_acceso = db.Column(db.DateTime, nullable=True)
     estado = db.Column(db.String(20), default='activo')
