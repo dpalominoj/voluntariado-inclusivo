@@ -324,6 +324,11 @@
 	          </div>
 	        </div>
 	      </fieldset>
+		    
+	      <div class="checkbox-container">
+                <input type="checkbox" id="acepto_datos" name="acepto_datos" required>
+                <label for="acepto_datos">Acepto el <a href="{{ url_for('static', filename='tratamiento_datos.pdf') }}" et="_blank">tratamiento de datos</a> </label>
+	      </div>
 	
 	      <button type="submit" class="iniciar-reg">Registrarse</button>
 	    </form>
