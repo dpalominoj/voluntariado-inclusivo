@@ -250,92 +250,92 @@
   </div>
   
    <!-- Modal Registro -->
-  <div id="signUpModal" class="modal">
-    <div class="fondo_frm"> </div>
-    <div class="cont_frm">
-        <span class="cerrarPopup" onclick="cerrarMod()">×</span>
-        <div class="encab_frm">
-            <h3>Crear Cuenta</h3>
-            <p>Únete a nuestra comunidad para empezar a transformar vidas.</p>
-        </div>
-        <form class="formulario" action="{{ url_for('registro') }}" method="POST">
-            <div class="nom-apel">
-                <div>
-                    <label for="nombre">Nombres</label>
-                    <input type="text" id="nom" name="nombres" placeholder="Ej: Juan" required>
-                </div>
-                <div>
-                    <label for="apellido">Apellidos</label>
-                    <input type="text" id="apel" name="apellidos" placeholder="Ej: Pérez" required>
-                </div>
-            </div>
-            <label for="email">Correo Electrónico</label>
-            <input type="email" id="email" name="email" placeholder="ejemplo@dominio.com" required>
-            <label for="dni">N° de DNI</label>
-            <input type="text" id="dni" name="dni" pattern="[0-9]{8}" maxlength="8" inputmode="numeric" placeholder="Solo 8 dígitos" required>
-            <label for="psw1">Contraseña</label>
-            <input type="password" id="psw1" name="passw1" minlength="8" maxlength="20" autocapitalize="off" required>
-            <div class="password-strength-indicator"></div> <label for="psw2">Confirmar contraseña</label>
-            <input type="password" id="psw2" name="psw2" minlength="8" maxlength="20" autocapitalize="off" required>
+	<div id="signUpModal" class="modal">
+	  <div class="fondo_frm"></div>
+	  
+	  <div class="cont_frm">
+	    <span class="cerrarPopup" onclick="cerrarMod()">×</span>
+	    
+	    <div class="encab_frm">
+	      <h3>Crear Cuenta</h3>  
+	    </div>
+	    
+	    <form class="formulario" action="{{ url_for('registro') }}" method="POST">
+	      
+	      <div class="nom-apel">
+	        <div>
+	          <label for="nombre">Nombres</label>
+	          <input type="text" id="nom" name="nombres" required>
+	        </div>
+	        <div>
+	          <label for="apellido">Apellidos</label>
+	          <input type="text" id="apel" name="apellidos" required>
+	        </div>
+	      </div>
+	
+	      <label for="dni">N° de DNI</label>
+	      <input type="text" id="dni" name="dni" pattern="[0-9]{8}" maxlength="8" inputmode="numeric" required>
+	
+	      <label for="psw1">Contraseña</label>
+	      <input type="password" id="psw1" name="passw1" minlength="8" maxlength="20" autocapitalize="off" required>
+	
+	      <label for="psw2">Confirmar contraseña</label>
+	      <input type="password" id="psw2" name="psw2" minlength="8" maxlength="20" autocapitalize="off" required>
+	
+	      <fieldset>
+	        <legend>¿Desea indicar si cuenta con alguna discapacidad?</legend>
+	        <div class="rpta">
+	          <input type="radio" name="accs" id="disc_no" value="no" checked>
+	          <label for="disc_no">No, ninguna</label>
+	          
+	          <input type="radio" name="accs" id="disc_si" value="si">
+	          <label for="disc_si">Sí, tengo condiciones limitantes</label>
+	        </div>
+	
+	        <div id="selDisc" class="sel">
+	          <button type="button" id="btnDiscapacidad">
+	            — Selecciona el tipo de limitación —
+	            <span>&nbsp;▼</span>
+	          </button>
+	          <div class="sel-cont">
+	            <label><input type="checkbox" name="disc[]" value="visual">Visual (limitación en percepción óptica)</label>
+	            <label><input type="checkbox" name="disc[]" value="auditiva">Auditiva (dificultad en la comprensión de sonido)</label>
+	            <label><input type="checkbox" name="disc[]" value="motriz">Motriz (dificultad en la movilidad física)</label>
+	            <label><input type="checkbox" name="disc[]" value="cognitiva">Cognitiva (limitación en proceso de aprendizaje)</label>
+	            <label><input type="checkbox" name="disc[]" value="otra" id="chkOtraDisc">Ingresar Otro</label>
+	            <textarea id="otraDisc" name="otra_discap" placeholder="Describe otra limitación"></textarea>
+	          </div>
+	        </div>
+	      </fieldset>
+	
+	      <fieldset>
+	        <legend>¿Tiene alguna preferencia para voluntariado?</legend>
+	        <div id="selPref" class="sel">
+	          <button type="button" id="btnPrefer">
+	            — Seleccione sus preferencias —
+	            <span>&nbsp;▼</span>
+	          </button>
+	          <div class="sel-cont">
+	            <label><input type="checkbox" name="pref[]" value="a_comunitario">Apoyo comunitario</label>
+	            <label><input type="checkbox" name="pref[]" value="tecnologia">Tecnología</label>
+	            <label><input type="checkbox" name="pref[]" value="deporte">Eventos deportivos</label>
+	            <label><input type="checkbox" name="pref[]" value="m_ambiente">Medio ambiente</label>
+	            <label><input type="checkbox" name="pref[]" value="educacion">Educación</label>
+	          </div>
+	        </div>
+	      </fieldset>
+	
+	      <button type="submit" class="iniciar-reg">Registrarse</button>
+	    </form>
+	
+	    <div class="pie_frm">
+	      <p>¿Ya tienes una cuenta? 
+	        <button type="button" onclick="abrirLogin()">Inicia sesión</button>
+	      </p>
+	    </div>
+	  </div>
+	</div>
 
-            <fieldset class="fieldset-profile-type">
-                <legend>¿Cómo deseas participar?</legend>
-                <div class="rpta profile-type-options">
-                    <input type="radio" name="tipo_perfil" id="perfil_voluntario" value="voluntario" checked>
-                    <label for="perfil_voluntario">Quiero ser Voluntario/a</label>
-                    <input type="radio" name="tipo_perfil" id="perfil_organizador" value="organizador">
-                    <label for="perfil_organizador">Quiero organizar actividades</label>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Información de Accesibilidad (Opcional)</legend>
-                <p class="description">¿Deseas indicarnos si tienes alguna condición o necesidad de accesibilidad? Esto nos ayuda a ofrecerte oportunidades más adecuadas y asegurar tu cómoda participación.</p>
-                <div class="rpta">
-                    <input type="radio" name="accs" id="disc_no" value="no" checked><label for="disc_no">No, ninguna</label>
-                    <input type="radio" name="accs" id="disc_si" value="si"><label for="disc_si">Sí, tengo necesidades de accesibilidad</label>
-                </div>
-                <div id="selDisc" class="sel">
-                    <button type="button" id="btnDiscapacidad" class="sel-button">— Selecciona el tipo de condición —<span class="arrow-icon">&nbsp;▼</span></button>
-                    <div class="sel-cont">
-                        <label><input type="checkbox" name="disc[]" value="visual">Visual (limitación en percepción óptica)</label>
-                        <label><input type="checkbox" name="disc[]" value="auditiva">Auditiva (dificultad en la comprensión de sonido)</label>
-                        <label><input type="checkbox" name="disc[]" value="motriz">Motriz (dificultad en la movilidad física)</label>
-                        <label><input type="checkbox" name="disc[]" value="cognitiva">Cognitiva (limitación en proceso de aprendizaje)</label>
-                        <label><input type="checkbox" name="disc[]" value="otra" id="chkOtraDisc">Otra condición</label>
-                        <textarea id="otraDisc" name="otra_discap" placeholder="Describe brevemente otra condición" class="hidden-textarea"></textarea>
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Preferencias de Voluntariado (Opcional)</legend>
-                <p class="description">Selecciona las áreas que más te interesan para el voluntariado.</p>
-                <div id="selPref" class="sel">
-                    <button type="button" id="btnPrefer" class="sel-button">— Selecciona tus preferencias —<span class="arrow-icon">&nbsp;▼</span></button>
-                    <div class="sel-cont">
-                        <label><input type="checkbox" name="pref[]" value="a_comunitario">Apoyo comunitario</label>
-                        <label><input type="checkbox" name="pref[]" value="tecnologia">Tecnología</label>
-                        <label><input type="checkbox" name="pref[]" value="deporte">Eventos deportivos</label>
-                        <label><input type="checkbox" name="pref[]" value="m_ambiente">Medio ambiente</label>
-                        <label><input type="checkbox" name="pref[]" value="educacion">Educación</label>
-                    </div>
-                </div>
-            </fieldset>
-
-            <div class="checkbox-container">
-                <input type="checkbox" id="acepto_datos" name="acepto_datos" required>
-                <label for="acepto_datos">Acepto la <a href="#" target="_blank">Política de Privacidad</a> y los <a href="#" target="_blank">Términos de Servicio</a>.</label>
-            </div>
-            <p class="small-text">Al registrarte, aceptas recibir comunicaciones relacionadas con el voluntariado.</p>
-
-            <button type="submit" class="iniciar-reg">Registrarse</button>
-        </form>
-        <div class="pie_frm">
-            <p>¿Ya tienes una cuenta? <button type="button" onclick="abrirLogin()">Inicia sesión</button></p>
-        </div>
-    </div>
-</div>
     <!-- Mensaje Jinja flash -->
 	{% with mensajes = get_flashed_messages(with_categories=true) %}
 	  {% if mensajes %}
