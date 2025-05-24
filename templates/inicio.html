@@ -261,38 +261,31 @@
 	    
 	    <form class="formulario" action="{{ url_for('registro') }}" method="POST">
 	      
-	      <div class="nom-dni">
-	        <div class="nombre-container">
+	      <div class="nom-apel">
+	        <div>
 	          <label for="nombre">Nombres</label>
 	          <input type="text" id="nom" name="nombres" required>
 	        </div>
-	        <div class="dni-container">
-	          <label for="dni">N° de DNI</label>
-	          <input type="text" id="dni" name="dni" pattern="[0-9]{8}" maxlength="8" inputmode="numeric" required>
+	        <div>
+	          <label for="apellido">Apellidos</label>
+	          <input type="text" id="apel" name="apellidos" required>
 	        </div>
 	      </div>
 	
-	      <div class="password-container">
-	        <label for="psw1">Contraseña</label>
-	        <input type="password" id="psw1" name="passw1" minlength="8" maxlength="20" autocapitalize="off" required>
-	      </div>
+	      <label for="dni">N° de DNI</label>
+	      <input type="text" id="dni" name="dni" pattern="[0-9]{8}" maxlength="8" inputmode="numeric" required>
 	
-	      <div class="confirm-password-container">
-	        <label for="psw2">Confirmar contraseña</label>
-	        <input type="password" id="psw2" name="psw2" minlength="8" maxlength="20" autocapitalize="off" required>
-	      </div>
-	      
-	      <div class="perfil-container">
-	        <label>Tipo de perfil</label>
-	        <div class="perfil-options">
-	          <input type="radio" id="voluntario" name="perfil" value="voluntario" checked class="hidden-radio">
-	          <label for="voluntario" class="perfil-btn">Voluntario/a</label>
-	          
-	          <input type="radio" id="organizador" name="perfil" value="organizador" class="hidden-radio">
-	          <label for="organizador" class="perfil-btn">Organizador</label>
-	        </div>
-	      </div>
-	      
+	      <label for="psw1">Contraseña</label>
+	      <input type="password" id="psw1" name="passw1" minlength="8" maxlength="20" autocapitalize="off" required>
+	
+	      <label for="psw2">Confirmar contraseña</label>
+	      <input type="password" id="psw2" name="psw2" minlength="8" maxlength="20" autocapitalize="off" required>
+		    
+	      <label for="perfil">Tipo de perfil</label>
+		<div>
+			<button>Voluntario/a</button><button>Organizador</button>
+		</div>		
+	
 	      <fieldset>
 	        <legend>¿Desea indicar si cuenta con alguna discapacidad?</legend>
 	        <div class="rpta">
@@ -335,10 +328,10 @@
 	          </div>
 	        </div>
 	      </fieldset>
-	      
+		    
 	      <div class="checkbox-container">
-	        <input type="checkbox" id="acepto_datos" name="acepto_datos" required>
-	        <label for="acepto_datos">Acepto el <a href="{{ url_for('static', filename='tratamiento_datos.pdf') }}" target="_blank">tratamiento de datos</a> </label>
+                <input type="checkbox" id="acepto_datos" name="acepto_datos" required>
+                <label for="acepto_datos">Acepto el <a href="{{ url_for('static', filename='tratamiento_datos.pdf') }}" target="_blank">tratamiento de datos</a> </label>
 	      </div>
 	
 	      <button type="submit" class="iniciar-reg">Registrarse</button>
