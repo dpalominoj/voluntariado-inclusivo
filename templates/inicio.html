@@ -283,8 +283,9 @@
 	      <input type="password" id="psw2" name="psw2" minlength="8" maxlength="20" autocapitalize="off" required>
 		    
 	      <label for="perfil">Tipo de perfil</label>
-		    <button>Voluntario/a</button><button>Organizador</button>
-	      <input type="text" id="perfil" name="tipo_perfil" >
+		<div>
+			<button>Voluntario/a</button><button>Organizador</button>
+		</div>		
 	
 	      <fieldset>
 	        <legend>¿Desea indicar si cuenta con alguna discapacidad?</legend>
@@ -331,7 +332,7 @@
 		    
 	      <div class="checkbox-container">
                 <input type="checkbox" id="acepto_datos" name="acepto_datos" required>
-                <label for="acepto_datos">Acepto el <a href="{{ url_for('static', filename='tratamiento_datos.pdf') }}" et="_blank">tratamiento de datos</a> </label>
+                <label for="acepto_datos">Acepto el <a href="{{ url_for('static', filename='tratamiento_datos.pdf') }}" target="_blank">tratamiento de datos</a> </label>
 	      </div>
 	
 	      <button type="submit" class="iniciar-reg">Registrarse</button>
