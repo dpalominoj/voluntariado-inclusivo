@@ -259,21 +259,17 @@
 	      <h3>Crear Cuenta</h3>  
 	    </div>
 	    
-	    <form class="formulario" action="{{ url_for('registro') }}" method="POST">
-	      
+	    <form class="formulario" action="{{ url_for('registro') }}" method="POST">	      
 	      <div class="nom-apel">
 	        <div>
 	          <label for="nombre">Nombres</label>
 	          <input type="text" id="nom" name="nombres" required>
 	        </div>
 	        <div>
-	          <label for="apellido">Apellidos</label>
-	          <input type="text" id="apel" name="apellidos" required>
+	          <label for="dni">N° de DNI</label>
+	          <input type="text" id="dni" name="dni" pattern="[0-9]{8}" maxlength="8" inputmode="numeric" required>
 	        </div>
 	      </div>
-	
-	      <label for="dni">N° de DNI</label>
-	      <input type="text" id="dni" name="dni" pattern="[0-9]{8}" maxlength="8" inputmode="numeric" required>
 	
 	      <label for="psw1">Contraseña</label>
 	      <input type="password" id="psw1" name="passw1" minlength="8" maxlength="20" autocapitalize="off" required>
@@ -282,18 +278,16 @@
 	      <input type="password" id="psw2" name="psw2" minlength="8" maxlength="20" autocapitalize="off" required>
 		    
 	      <label for="perfil">Tipo de perfil</label>
-		<div>
-			<button>Voluntario/a</button><button>Organizador</button>
-		</div>		
+	      <div>
+		<input type="radio" id="voluntario" name="perfil" value="voluntario" checked> <label for="voluntario" class="perfil-btn">Voluntario/a</label>		          
+		<input type="radio" id="organizador" name="perfil" value="organizador"> <label for="organizador" class="perfil-btn">Organizador</label>		
+	      </div>		
 	
 	      <fieldset>
 	        <legend>¿Desea indicar si cuenta con alguna discapacidad?</legend>
 	        <div class="rpta">
-	          <input type="radio" name="accs" id="disc_no" value="no" checked>
-	          <label for="disc_no">No, ninguna</label>
-	          
-	          <input type="radio" name="accs" id="disc_si" value="si">
-	          <label for="disc_si">Sí, tengo condiciones limitantes</label>
+	          <input type="radio" name="accs" id="disc_no" value="no" checked> <label for="disc_no">No, ninguna</label>
+	          <input type="radio" name="accs" id="disc_si" value="si"> <label for="disc_si">Sí, tengo condiciones limitantes</label>	          
 	        </div>
 	
 	        <div id="selDisc" class="sel">
@@ -320,8 +314,6 @@
 	            <span>&nbsp;▼</span>
 	          </button>
 	          <div class="sel-cont">
-	            <label><input type="checkbox" name="pref[]" value="a_comunitario">Apoyo comunitario</label>
-	            <label><input type="checkbox" name="pref[]" value="tecnologia">Tecnología</label>
 	            <label><input type="checkbox" name="pref[]" value="deporte">Eventos deportivos</label>
 	            <label><input type="checkbox" name="pref[]" value="m_ambiente">Medio ambiente</label>
 	            <label><input type="checkbox" name="pref[]" value="educacion">Educación</label>
@@ -331,7 +323,7 @@
 		    
 	      <div class="checkbox-container">
                 <input type="checkbox" id="acepto_datos" name="acepto_datos" required>
-                <label for="acepto_datos">Acepto el <a href="{{ url_for('static', filename='tratamiento_datos.pdf') }}" target="_blank">tratamiento de datos</a> </label>
+                <label for="acepto_datos">Acepto el <a href="{{ url_for('static', filename='tratamiento_datos.pdf') }}" target="_blank">tratamiento de datos personales</a> </label>
 	      </div>
 	
 	      <button type="submit" class="iniciar-reg">Registrarse</button>
