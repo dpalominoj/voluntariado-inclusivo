@@ -285,10 +285,10 @@
 	      <div class="perfil-container">
 	        <label>Tipo de perfil</label>
 	        <div class="perfil-options">
-	          <input type="radio" id="voluntario" name="perfil" value="voluntario" checked>
+	          <input type="radio" id="voluntario" name="perfil" value="voluntario" checked class="hidden-radio">
 	          <label for="voluntario" class="perfil-btn">Voluntario/a</label>
 	          
-	          <input type="radio" id="organizador" name="perfil" value="organizador">
+	          <input type="radio" id="organizador" name="perfil" value="organizador" class="hidden-radio">
 	          <label for="organizador" class="perfil-btn">Organizador</label>
 	        </div>
 	      </div>
@@ -350,7 +350,7 @@
 	      </p>
 	    </div>
 	  </div>
-	</div> 
+	</div>
 
     <!-- Mensaje Jinja flash -->
 	{% with mensajes = get_flashed_messages(with_categories=true) %}
