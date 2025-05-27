@@ -1,3 +1,33 @@
 {% extends "dashboard/base-dash.html" %}
 
 {% block title %}Panel de Voluntario - KONECTAi{% endblock %}
+
+{% block menupanel %}
+  <div class="flex-1 overflow-y-auto px-2 py-4 space-y-2">
+			<a class="flex items-center px-4 py-3 text-rice-paper hover:bg-jade-green/20 rounded-lg transition-all duration-200 group" href="#">
+				<div class="w-6 h-6 mr-3 bg-jade-green/30 group-hover:bg-jade-green rounded-full flex items-center justify-center">
+					<div class="w-2 h-2 bg-jade-green rounded-full group-hover:scale-125 transition-transform"></div>
+				</div>
+				<span class="font-medium">Mis Actividades</span>
+				<span class="ml-auto text-xs text-rice-paper/50 group-hover:text-rice-paper">5</span>
+			</a>
+			<a class="flex items-center px-4 py-3 text-rice-paper hover:bg-jade-green/20 rounded-lg transition-all duration-200 group" href="#">
+				<div class="w-6 h-6 mr-3 bg-jade-green/30 group-hover:bg-jade-green rounded-full flex items-center justify-center">
+					<div class="w-2 h-2 bg-jade-green rounded-full group-hover:scale-125 transition-transform"></div>
+				</div>
+				<span class="font-medium">Mis Preferencias</span>
+			</a>
+			<a class="flex items-center px-4 py-3 text-rice-paper hover:bg-jade-green/20 rounded-lg transition-all duration-200 group" href="#">
+				<div class="w-6 h-6 mr-3 bg-jade-green/30 group-hover:bg-jade-green rounded-full flex items-center justify-center">
+					<div class="w-2 h-2 bg-jade-green rounded-full group-hover:scale-125 transition-transform"></div>
+				</div>
+				<span class="font-medium">Mis Limitaciones</span>
+			</a>
+			<a class="flex items-center px-4 py-3 text-rice-paper hover:bg-jade-green/20 rounded-lg transition-all duration-200 group" href="#">
+				<div class="w-6 h-6 mr-3 bg-jade-green/30 group-hover:bg-jade-green rounded-full flex items-center justify-center">
+					<div class="w-2 h-2 bg-jade-green rounded-full group-hover:scale-125 transition-transform"></div>
+				</div>
+				<span class="font-medium">Configuraciones</span>
+			</a>
+		</div>
+{% endblock %}
