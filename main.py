@@ -149,15 +149,15 @@ def dashboard():
 
 @app.route('/voluntario')
 def voluntario():
-    return render_template('voluntario.html')
+    return render_template('dashboard/voluntario.html')
 
 @app.route('/organizador')
 def organizador():
-    return render_template('organizador.html')
+    return render_template('dashboard/organizador.html')
 
 @app.route('/administrador')
 def administrador():
-    return render_template('administrador.html')
+    return render_template('dashboard/administrador.html')
     
 @app.route('/actividades')
 def actividades():
