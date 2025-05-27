@@ -31,3 +31,37 @@
 			</a>
 		</div>
 {% endblock %}
+
+{% block contenidodash %}
+	<!-- Estadísticas rápidas -->
+	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+		  <div aria-label="Número de programas activos" class="bg-indigo-50 rounded-lg p-6 flex items-center space-x-4 shadow-sm" role="region">
+			<div class="p-3 bg-indigo-100 rounded-full text-indigo-700"><i class="fas fa-hands-helping fa-2x"></i></div>
+			<div>
+				<p class="text-3xl font-bold text-indigo-700">5</p>
+				<p class="text-sm font-medium text-indigo-900">Programas activos</p>
+			</div>
+		  </div>
+		  <div aria-label="Número de programas activos" class="bg-green-50 rounded-lg p-6 flex items-center space-x-4 shadow-sm" role="region">
+			<div class="p-3 bg-green-100 rounded-full text-green-700"><i class="fas fa-clock fa-2x"></i></div>
+			<div>
+				<p class="text-3xl font-bold text-green-700">128</p>
+				<p class="text-sm font-medium text-indigo-900">Horas completadas</p>
+			</div>
+		  </div>
+		  <div aria-label="Número de programas activos" class="bg-yellow-50 rounded-lg p-6 flex items-center space-x-4 shadow-sm" role="region">
+			<div class="p-3 bg-yellow-100 rounded-full text-yellow-700"><i class="fas fa-clock fa-2x"></i></div>
+			<div>
+				<p class="text-3xl font-bold text-yellow-700">3</p>
+				<p class="text-sm font-medium text-indigo-900">Eventos próximos</p>
+			</div>
+		  </div>
+		  <div aria-label="Número de programas activos" class="bg-pink-50 rounded-lg p-6 flex items-center space-x-4 shadow-sm" role="region">
+			<div class="p-3 bg-pink-100 rounded-full text-pink-700"><i class="fas fa-clock fa-2x"></i></div>
+			<div>
+				<p class="text-3xl font-bold text-pink-700">11</p>
+				<p class="text-sm font-medium text-indigo-900">Actividades personalizadas</p>
+			</div>
+		  </div>
+	</div>
+{% endblock %}
