@@ -1,1 +1,86 @@
-hola base
+{% extends "base.html" %}
+
+{% block title %}Dashboard - KONECTAi{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'silk-black': '#1a1a1a',
+            'jade-green': '#00a86b',
+            'lantern-red': '#e74c3c',
+            'rice-paper': '#f5f5f0',
+            'bamboo': '#3a5f0b',
+            'primary': '#4f46e5',
+          },
+          fontFamily: {
+            'sans': ['"Noto Sans JP"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    [x-cloak] { display: none !important; }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <!-- Encabezado del dashboard 
+  <header class="fixed top-0 left-0 w-full h-16 bg-silk-black z-50 shadow-lg border-b-2 border-lantern-red flex items-center px-4">
+    <div class="w-10 h-10 bg-primary rounded-full opacity-90"></div>
+  </header> -->
+
+  <!-- PANEL DE CONTROL -->
+  <aside class="fixed top-16 left-0 h-[calc(100vh-4rem)] w-20 md:w-64 bg-silk-black transition-all duration-300 z-40 border-r-2 border-jade-green flex flex-col pt-4 overflow-hidden">
+    <div class="absolute -right-1 top-16 h-[calc(100%-8rem)] w-2 bg-jade-green/70 transform rounded-l-full"></div>
+		<!-- Sección de perfil -->
+		<div class="flex flex-col items-center px-2 space-y-3 mb-6">
+			<div class="relative group">
+				<img class="rounded-full w-20 h-20 object-cover border-4 border-jade-green bg-rice-paper shadow-md" height="80" width="80"/>
+				<div class="absolute inset-0 rounded-full border-2 border-white/30 group-hover:border-jade-green transition-all"></div>
+			</div>			
+			<div class="text-center">
+				<h2 class="text-lg font-bold text-white tracking-tight">María López</h2>
+				<div class="flex items-center justify-center space-x-2 mt-1">
+					<span class="text-xs text-jade-green bg-jade-green/10 px-2 py-1 rounded-full">Voluntario</span>
+					<span class="text-xs text-green-400 bg-green-900/10 px-2 py-1 rounded-full flex items-center">
+						<span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span> Activo
+					</span>
+				</div>
+			</div>      
+			<button class="mt-2 bg-jade-green hover:bg-jade-green/90 text-white text-sm rounded-full py-1.5 px-5 transition-all duration-200 shadow-sm hover:shadow-jade-green/30">
+				Editar Perfil
+			</button>
+		</div>		
+		<!-- Separador -->
+		<div class="mt-3 mb-3 px-6">
+			<div class="h-px w-full bg-bamboo/40 rounded-full"></div>
+		</div>
+    <!-- Opciones -->
+		<div class="flex-1 overflow-y-auto px-2 py-4 space-y-2">
+      {% block menupanel %} {% endblock %}
+    </div>        
+  </aside>
+
+  <!-- CONTENIDO -->
+    <main class="ml-20 md:ml-64 pt-16 min-h-screen p-4 transition-all duration-300">
+      <section class="flex-1 bg-white rounded-xl shadow-md p-8">
+        <header class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+          <h1 class="text-3xl font-extrabold text-gray-900 mb-4 sm:mb-0">
+            Bienvenida, María
+          </h1>
+          <button class="inline-flex items-center px-5 py-2 border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-600 hover:text-white transition" type="button">
+            <i class="fas fa-plus mr-2"></i>
+            Unirme a nuevo programa
+          </button>
+        </header>
+        {% block contenidodash %} {% endblock %}
+      </section>
+    </main>
+{% endblock %}
