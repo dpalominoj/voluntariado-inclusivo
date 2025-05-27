@@ -74,7 +74,7 @@ main section { padding:30px 0; text-align:center; font-size: 1.2rem; }
 .cta button { background:var(--blanco); color:var(--primario); margin-top:1rem; }
 
 /* Footer */
-footer { background:#1f2937; color:var(--blanco); padding:38px 20px; z-index:2; }
+footer { position:relative; background:#1f2937; color:var(--blanco); padding:38px 20px; z-index:2; }
 .pie-cont { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:2rem; margin: 0 auto; max-width:1200px; align-items:start; }
 .linea { border-bottom:1px solid gray; margin:2rem auto; }
 .cpy { text-align: center; margin-bottom:0px; }
