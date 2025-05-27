@@ -20,7 +20,7 @@
           <span>KONECTAi</span></a> 
         </div>
         <div class="menu-nav" style="display:flex; align-items:center; margin-left:0.25rem;"> <!-- menu central-->
-          <ul class="menu">
+          <ul class="menu" hidden>
             <li><a href="{{ url_for('inicio') }}" class="a-menulink" style="position:relative; padding:0.5rem 0.75rem; font-size:1rem; font-weight:600;">INICIO</a></li>
             <li><a href="{{ url_for('actividades') }}" class="a-menulink" style="position:relative; padding:0.5rem 0.75rem; font-size:1rem; font-weight:600;">ACTIVIDADES</a></li>
             <li><a href="{{ url_for('contacto') }}" class="a-menulink" style="position:relative; padding:0.5rem 0.75rem; font-size:1rem; font-weight:600;">CONTACTO</a></li>
@@ -48,18 +48,18 @@
                     </svg>
               </div>
             </button>
-            <div class="menu de perfil">
+            <div class="menu de perfil" hidden>
               <a href="{{ url_for('dashboard') }}" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-white/10">Dashboard</a>
               <a href="{{ url_for('logout') }}" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-white/10">Cerrar sesión</a>
             </div>
           </div>
-          <div class="icono menu movil">
+          <div class="icono menu movil" hidden>
             <button id="mobileMenuBtn" class="btn-menu">☰</button>
           </div>
         </div>
       </div>    
     </div>
-    <div class="menu nav movil">
+    <div class="menu nav movil" hidden>
       <ul>
           <li><a href="{{ url_for('inicio') }}" class="a-menulink">Inicio</a></li>
           <li><a href="{{ url_for('actividades') }}" class="a-menulink">Actividades</a></li>
