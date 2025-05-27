@@ -19,7 +19,7 @@ a { text-decoration:none; color:blue; }
 }
 
 /* Navbar */
-nav { position:fixed; top:0; width:100%; background:var(--blanco); box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+nav { position:fixed; top:0; width:100%; background:var(--blanco); box-shadow:0 2px 5px rgba(0,0,0,0.1); z-index: 3;}
 nav .cont { display:flex; align-items:center; justify-content:space-between; height:70px; }
 .a-logolink { text-decoration:none; color:blue; }
 .menu, .a-menulink { display:flex; list-style:none; text-decoration: none; font-weight:520; gap:1rem;}
@@ -74,7 +74,7 @@ main section { padding:30px 0; text-align:center; font-size: 1.2rem; }
 .cta button { background:var(--blanco); color:var(--primario); margin-top:1rem; }
 
 /* Footer */
-footer { background:#1f2937; color:var(--blanco); padding:38px 20px; }
+footer { background:#1f2937; color:var(--blanco); padding:38px 20px; z-index: 3}
 .pie-cont { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:2rem; margin: 0 auto; max-width:1200px; align-items:start; }
 .linea { border-bottom:1px solid gray; margin:2rem auto; }
 .cpy { text-align: center; margin-bottom:0px; }
