@@ -147,6 +147,18 @@ def dashboard():
                           actividades=actividades,
                           participaciones=participaciones)
 
+@app.route('/voluntario')
+def actividades():
+    return render_template('voluntario.html')
+
+@app.route('/organizador')
+def actividades():
+    return render_template('organizador.html')
+
+@app.route('/administrador')
+def actividades():
+    return render_template('administrador.html')
+    
 @app.route('/actividades')
 def actividades():
     # Obtener todas las actividades
