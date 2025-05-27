@@ -1,0 +1,53 @@
+<nav>
+  <div class="espacio bordes">
+    <div class="espacio entre los 3 bloques">
+      <div class="icono menu dashboard">
+        <button>⚙️</button>
+      </div>
+      <div class="logo+empresa">
+        
+      </div>
+      <div class="menu de navegación">
+        
+      </div>
+      <div class="controles de usuario">
+        <div class="login">
+          <button>Iniciar Sesión</button>
+        </div>
+        <div class="registro">
+          <button>Registrarse</button>
+        </div>
+        <div class="icono dark">
+          <button>🌙</button>
+          <svg id="theme-icon-dark" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          <svg id="theme-icon-light" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>
+        </div>
+        <div class="perfil">
+          <button>
+            <span class="saludo">¡Hola, dany!</span>
+            <div class="icono">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                  </svg>
+            </div>
+          </button>
+          <div class="menu de perfil">
+            <a href="{{ url_for('dashboard') }}" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-white/10">Dashboard</a>
+            <a href="{{ url_for('logout') }}" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-white/10">Cerrar sesión</a>
+          </div>
+        </div>
+        <div class="icono menu movil">
+          <button id="mobileMenuBtn" class="btn-menu">☰</button>
+        </div>
+      </div>
+    </div>    
+  </div>
+  <div class="menu nav movil">
+    <ul>
+        <li><a href="{{ url_for('inicio') }}" class="a-menulink">Inicio</a></li>
+        <li><a href="{{ url_for('actividades') }}" class="a-menulink">Actividades</a></li>
+        <li><a href="{{ url_for('contacto') }}" class="a-menulink">Contacto</a></li>
+        <li><a href="{{ url_for('ayuda') }}" class="a-menulink">Ayuda</a></li>
+    </ul>
+  </div>
+</nav>
