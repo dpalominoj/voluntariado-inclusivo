@@ -76,7 +76,7 @@ class Actividad(db.Model):
     cupo_maximo = db.Column(db.Integer)
     estado = db.Column(db.Enum('abierto', 'cerrado'))
     imagen = db.Column(db.String(255))
-    compatibilidad = db.Column(db.String(5))
+    compatibilidad = db.Column(db.Integer)
     etiqueta = db.Column(db.String(100))
     fk_organizacion = db.Column(db.Integer, db.ForeignKey('organizaciones.id_organizacion'))
     id_facilidad = db.Column(db.Integer, db.ForeignKey('actividad_facilidad.id_facilidad'))
