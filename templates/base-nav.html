@@ -1,68 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}KONECTAi - Voluntariado Inclusivo{% endblock %}</title>
-  <script src="https://cdn.userway.org/widget.js" data-account="w1p59Fihx2" data-position="5"></script>
-  {% block styles %}{% endblock %}
-  <script src="{{ url_for('static', filename='javascript.js') }}" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}KONECTAi - Voluntariado Inclusivo{% endblock %}</title>
+  <script src="https://cdn.userway.org/widget.js" data-account="w1p59Fihx2" data-position="5"></script>
+  {% block styles %}{% endblock %}
+  <script src="{{ url_for('static', filename='javascript.js') }}" defer></script>
 </head>
 <body>
-  <nav style="position:fixed;  width:100%; z-index:2; background:green;">    
-    <div class="between" style="max-width:80rem; margin-left:auto; margin-right:auto; padding-left:1rem; padding-right:1rem;">       <div class="between3" style="display:flex; align-items:center; justify-content:space-between; height:4rem;">         <div class="icono-mdash" style="display:none;">           <button>⚙️</button>
-        </div>
-        <div class="logo-empresa" style="margin-left:0.75rem; font-size:1.25rem; font-weight:700; color:#4f46e5;">           <span>🌐</span>
-          <span>KONECTAi</span></a> 
-        </div>
-        <div class="menu-nav" style="display:flex; align-items:center; margin-left:0.25rem;">           <ul class="menu" hidden>
-            <li><a href="{{ url_for('inicio') }}" class="a-menulink" style="position:relative; padding:0.5rem 0.75rem; font-size:1rem; font-weight:600;">INICIO</a></li>
-            <li><a href="{{ url_for('actividades') }}" class="a-menulink" style="position:relative; padding:0.5rem 0.75rem; font-size:1rem; font-weight:600;">ACTIVIDADES</a></li>
-            <li><a href="{{ url_for('contacto') }}" class="a-menulink" style="position:relative; padding:0.5rem 0.75rem; font-size:1rem; font-weight:600;">CONTACTO</a></li>
-            <li><a href="{{ url_for('ayuda') }}" class="a-menulink" style="position:relative; padding:0.5rem 0.75rem; font-size:1rem; font-weight:600;">AYUDA</a></li>
-          </ul>
-        </div>
-        <div class="controls" style="display:flex; align-items:center; margin-left:1rem;">           <div class="login" style="padding:0.5rem 1rem; font-weight:600; border: 1px solid red;">
-            <button>Iniciar Sesión</button>
-          </div>
-          <div class="registro" style="padding:0.5rem 1rem; font-weight:600; border: 1px solid #4f46e5;">
-            <button>Registrarse</button>
-          </div>
-          <div class="icono dark">
-            <button>🌙</button>
-            <svg id="theme-icon-dark" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-            <svg id="theme-icon-light" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>
-          </div>
-          <div class="perfil" hidden>
-            <button>
-              <span class="saludo">¡Hola, dany!</span>
-              <div class="icono">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                    </svg>
-              </div>
-            </button>
-            <div class="menu de perfil">
-              <a href="{{ url_for('dashboard') }}" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-white/10">Dashboard</a>
-              <a href="{{ url_for('logout') }}" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-white/10">Cerrar sesión</a>
-            </div>
-          </div>
-          <div class="icono menu movil" hidden>
-            <button id="mobileMenuBtn" class="btn-menu">☰</button>
-          </div>
-        </div>
-      </div>    
-    </div>
-    <div class="menu nav movil" hidden>
-      <ul>
-          <li><a href="{{ url_for('inicio') }}" class="a-menulink">Inicio</a></li>
-          <li><a href="{{ url_for('actividades') }}" class="a-menulink">Actividades</a></li>
-          <li><a href="{{ url_for('contacto') }}" class="a-menulink">Contacto</a></li>
-          <li><a href="{{ url_for('ayuda') }}" class="a-menulink">Ayuda</a></li>
-      </ul>
-    </div>
-  </nav>
-  {% block content %}{% endblock %}
-  {% include "base-footer.html" %}
+  <nav style="position:fixed;  width:100%; z-index:2; background:green;">    
+    <div class="between" style="max-width:80rem; margin-left:auto; margin-right:auto; padding-left:1rem; padding-right:1rem;"> <!-- espacio bordes -->
+      <div class="between3" style="display:flex; align-items:center; justify-content:space-between; height:4rem;"> <!-- espacio entre los 3 bloques -->
+        <div class="icono-mdash" style="display:none;"> <!-- icono menu dashboard -->
+          <button>⚙️</button>
+        </div>
+        <div class="logo-empresa" style="margin-left:0.75rem; font-size:1.25rem; font-weight:700; color:#4f46e5;"> <!-- logo+empresa -->
+          <span>🌐</span>
+          <span>KONECTAi</span></a> 
+        </div>
+        <div class="menu-nav" style="display:flex; align-items:center; margin-left:0.25rem;"> <!-- menu central-->
+          <ul class="menu" hidden>
+            <li><a href="{{ url_for('inicio') }}" class="a-menulink" style="position:relative; padding:0.5rem 0.75rem; font-size:1rem; font-weight:600;">INICIO</a></li>
+            <li><a href="{{ url_for('actividades') }}" class="a-menulink" style="position:relative; padding:0.5rem 0.75rem; font-size:1rem; font-weight:600;">ACTIVIDADES</a></li>
+            <li><a href="{{ url_for('contacto') }}" class="a-menulink" style="position:relative; padding:0.5rem 0.75rem; font-size:1rem; font-weight:600;">CONTACTO</a></li>
+            <li><a href="{{ url_for('ayuda') }}" class="a-menulink" style="position:relative; padding:0.5rem 0.75rem; font-size:1rem; font-weight:600;">AYUDA</a></li>
+          </ul>
+        </div>
+        <div class="controls" style="display:flex; align-items:center; margin-left:1rem;"> <!-- controles de usuario -->
+          <div class="login" style="padding:0.5rem 1rem; font-weight:600; border: 1px solid red;">
+            <button>Iniciar Sesión</button>
+          </div>
+          <div class="registro" style="padding:0.5rem 1rem; font-weight:600; border: 1px solid #4f46e5;">
+            <button>Registrarse</button>
+          </div>
+          <div class="icono dark">
+            <button>🌙</button>
+            <svg id="theme-icon-dark" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-icon-light" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>
+          </div>
+          <div class="perfil" hidden>
+            <button>
+              <span class="saludo">¡Hola, dany!</span>
+              <div class="icono">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                    </svg>
+              </div>
+            </button>
+            <div class="menu de perfil">
+              <a href="{{ url_for('dashboard') }}" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-white/10">Dashboard</a>
+              <a href="{{ url_for('logout') }}" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-white/10">Cerrar sesión</a>
+            </div>
+          </div>
+          <div class="icono menu movil" hidden>
+            <button id="mobileMenuBtn" class="btn-menu">☰</button>
+          </div>
+        </div>
+      </div>    
+    </div>
+    <div class="menu nav movil" hidden>
+      <ul>
+          <li><a href="{{ url_for('inicio') }}" class="a-menulink">Inicio</a></li>
+          <li><a href="{{ url_for('actividades') }}" class="a-menulink">Actividades</a></li>
+          <li><a href="{{ url_for('contacto') }}" class="a-menulink">Contacto</a></li>
+          <li><a href="{{ url_for('ayuda') }}" class="a-menulink">Ayuda</a></li>
+      </ul>
+    </div>
+  </nav>
+  {% block content %}{% endblock %}
 </body>
 </html>
