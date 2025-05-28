@@ -1,5 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
+
+peru_tz = timezone(timedelta(hours=-5))
+fecha_peru = datetime.now(peru_tz)
 
 db = SQLAlchemy()
 
@@ -10,7 +13,7 @@ class Organizacion(db.Model):
     descripcion_org = db.Column(db.Text)
     direccion_fisica = db.Column(db.String(255))
     logo = db.Column(db.Text)
-    fecha_registro = db.Column(db.DateTime, default=datetime.utcnow)
+    fecha_registro = db.Column(db.DateTime, default=lambda: datetime.now(peru_tz))
 
 class Usuario(db.Model):
     __tablename__ = 'usuarios'
@@ -27,7 +30,7 @@ class Usuario(db.Model):
     perfil = db.Column(db.Enum('voluntario', 'organizador', 'administrador'))
     tiene_discapacidad = db.Column(db.Boolean)
     estado_usuario = db.Column(db.Enum('activo', 'inactivo', 'pendiente'))
-    fecha_registro = db.Column(db.DateTime, default=datetime.utcnow)
+    fecha_registro = db.Column(db.DateTime, default=lambda: datetime.now(peru_tz))
     fk_organizacion = db.Column(db.Integer, db.ForeignKey('organizaciones.id_organizacion'))
 
 class Preferencia(db.Model):
@@ -89,7 +92,7 @@ class AuditoriaActividad(db.Model):
     id_actividad = db.Column(db.Integer, db.ForeignKey('actividades.id_actividad'))
     id_usuario = db.Column(db.Integer, db.ForeignKey('usuarios.id_usuario'))
     IP_usuario = db.Column(db.String(45))
-    fecha_registro = db.Column(db.DateTime, default=datetime.utcnow)
+    fecha_registro = db.Column(db.DateTime, default=lambda: datetime.now(peru_tz))
 
 class Inscripcion(db.Model):
     __tablename__ = 'inscripciones'
