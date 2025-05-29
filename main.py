@@ -51,13 +51,7 @@ def ayuda():
 def registro():
     # Recuperar variables de formulario registro
     nombre = request.form.get('nombres') 
-    # apellido = request.form.get('apellidos')
     dni = request.form.get('dni')
-    # email = request.form.get('email')
-    # celular = request.form.get('celular')
-    # direccion = request.form.get('direccion')
-    # fecha_nacimiento_str = request.form.get('fecha_nacimiento')
-    # genero = request.form.get('genero')
     perfil = 'voluntario'
     tiene_discapacidad_str = request.form.get('accs')
     discapacidad_ids = request.form.getlist('disc[]')
@@ -69,28 +63,26 @@ def registro():
     if passw1 != passw2:
         flash('Las contraseñas no coinciden. Por favor, inténtelo de nuevo.', 'error')
         return redirect(url_for('inicio'))
+    
     # Verificar existencia de DNI
     if Usuario.query.filter_by(DNI=dni).first():
         flash('El DNI ya está registrado. Por favor, inicie sesión o utilice otro DNI.', 'error')
         return redirect(url_for('inicio'))
+    
     # Crear nuevo usuario
     hashed_password = generate_password_hash(passw1)
     nuevo_usuario = Usuario(
         DNI=dni,
         nombre=nombre,
-        # apellido=apellido,
-        # email=email,
-        contrasena_hash=hashed_password, # Guarda el hash de la contraseña
-        # celular=celular,
-        # direccion=direccion,
-        # fecha_nacimiento=fecha_nacimiento,
-        # genero=genero,
+        contrasena_hash=hashed_password,
         perfil=perfil,
-        tiene_discapacidad=(tiene_discapacidad_str == 'si'), # Convierte a booleano
+        tiene_discapacidad=(tiene_discapacidad_str == 'si'),
         estado_usuario='activo'
     )
-db.session.add(nuevo_usuario)
-db.session.commit()
+    
+    db.session.add(nuevo_usuario)
+    db.session.commit()
+
     # Añadir discapacidades seleccionadas
     if nuevo_usuario.tiene_discapacidad and discapacidad_ids:
         for disc_name in discapacidad_ids:
@@ -99,14 +91,14 @@ db.session.commit()
                 usuario_discapacidad = UsuarioDiscapacidad(
                     id_usuario=nuevo_usuario.id_usuario,
                     id_discapacidad=discapacidad.id_discapacidad,
-                    gravedad='moderada',  # valor por defecto
-                    apoyo_requerido='otros'  # valor por defecto
+                    gravedad='moderada',
+                    apoyo_requerido='otros'
                 )
                 db.session.add(usuario_discapacidad)
 
     # Añadir preferencias seleccionadas
     if preferencia_ids:
-        for pref_name in preferencia_ids:  # 'pref[]' envía nombres de preferencia
+        for pref_name in preferencia_ids:
             preferencia = Preferencia.query.filter_by(nombre_corto=pref_name).first()
             if preferencia:
                 usuario_preferencia = UsuarioPreferencia(
@@ -120,9 +112,9 @@ db.session.commit()
         flash('¡Registro exitoso! Ahora puedes iniciar sesión.', 'success')
         return redirect(url_for('inicio'))
     except Exception as e:
-        db.session.rollback()  # Deshacer si hay un error
+        db.session.rollback()
         flash(f'Ocurrió un error al registrar: {e}. Por favor, inténtelo de nuevo.', 'error')
-        print(f"Error al registrar usuario: {e}")  # Para depuración
+        print(f"Error al registrar usuario: {e}")
         return redirect(url_for('inicio'))
 
 # --- Rutas de Autenticación ---
@@ -130,14 +122,17 @@ db.session.commit()
 def login():
     dni_o_email = request.form.get('usuario')
     contraseña = request.form.get('contraseña')
-        usuario = Usuario.query.filter_by(DNI=dni).first()
+    
+    usuario = Usuario.query.filter_by(DNI=dni_o_email).first()
     if usuario and check_password_hash(usuario.contrasena_hash, contraseña):
         # Guardar información en la sesión
-            session['usuario_id'] = usuario.id_usuario
-            session['usuario_dni'] = usuario.DNI
-            session['usuario_nombre_completo'] = f"{usuario.nombre} {usuario.apellido}"
-            session['usuario_perfil'] = usuario.perfil
+        session['usuario_id'] = usuario.id_usuario
+        session['usuario_dni'] = usuario.DNI
+        session['usuario_nombre_completo'] = f"{usuario.nombre} {usuario.apellido}"
+        session['usuario_perfil'] = usuario.perfil
+        
         flash(f'¡Bienvenido, {usuario.nombre}!', 'success')
+        
         # Redirigir según el perfil
         if usuario.perfil == 'voluntario':
             return redirect(url_for('voluntario'))
@@ -150,6 +145,7 @@ def login():
     else:
         flash('DNI o contraseña incorrectos. Por favor, inténtelo de nuevo.', 'error')
         return redirect(url_for('inicio'))
+      
 @app.route('/logout')
 def logout():
     session.clear()
@@ -199,6 +195,7 @@ def dashboard_organizador():
     if 'usuario_id' not in session or session.get('usuario_perfil') != 'organizador':
         flash('Acceso denegado. Debe iniciar sesión como organizador.', 'error')
         return redirect(url_for('inicio'))
+    
     # Obtener las actividades creadas por la organización asociada al usuario
     usuario = Usuario.query.get(session['usuario_id'])
     if usuario and usuario.fk_organizacion:
@@ -207,7 +204,7 @@ def dashboard_organizador():
         return render_template('dashboard/organizador.html', organizacion=organizacion, actividades=actividades_organizacion)
     else:
         flash('No estás asociado a ninguna organización.', 'warning')
-return render_template('dashboard/organizador.html', organizacion=None, actividades=[])
+        return render_template('dashboard/organizador.html', organizacion=None, actividades=[])
 
 @app.route('/dashboard/administrador')
 def dashboard_administrador():
