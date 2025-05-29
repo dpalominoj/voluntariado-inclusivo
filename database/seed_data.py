@@ -632,3 +632,4 @@ def seed_database():
         db.session.add(Inscripcion(id_usuario=5, id_actividad=11, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=2)))
         db.session.add(Inscripcion(id_usuario=6, id_actividad=13, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=3)))
         db.session.add(Inscripcion(id_usuario=7, id_actividad=5, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=18)))
+db.session.commit() 
