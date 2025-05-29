@@ -1,10 +1,8 @@
 from datetime import datetime, timezone, timedelta
 from models import (
     db,
-    Discapacidad,
-    Voluntario,
-    VoluntarioDiscapacidad,
     Organizacion,
+    Discapacidad,
     Preferencia,
     ActividadFacilidad,
     Usuario,
