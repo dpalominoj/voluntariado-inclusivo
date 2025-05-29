@@ -20,8 +20,8 @@ def create_app():
         db.create_all()
         try:
             seed_database()
-            print("Base de datos poblada exitosamente.")
-            pass
+            # print("Base de datos poblada exitosamente.")
+            # pass
         except Exception as e:
             print(f"Error al poblar la base de datos: {e}")
     return app
