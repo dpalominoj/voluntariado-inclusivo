@@ -3,8 +3,8 @@ from datetime import datetime, timedelta
 
 peru_tz = timezone(timedelta(hours=-5))
 
-def seed_database():
-    """Poblar la base de datos con registros iniciales"""
+#Poblar la base de datos con registros iniciales
+def seed_database():   
 
 # Crea organizaciones
 if Organizacion.query.count() == 0: #si no existe, crea
@@ -13,51 +13,51 @@ if Organizacion.query.count() == 0: #si no existe, crea
         descripcion_org="Organización dedicada a promover la inclusión social de personas con discapacidad",
         direccion_fisica="Av. Arequipa 123, Lima"
         logo="☺",
-		fecha_registro=datetime(2025, 1, 13, 15, 0),
+	fecha_registro=datetime(2025, 1, 13, 15, 0),
     )
     org2 = Organizacion(
         nombre_org="Voluntarios Unidos",
         descripcion_org="Red de voluntarios para causas sociales",
         direccion_fisica="Jr. Huancavelica 456, Huancayo"
         logo="☺",
-		fecha_registro=datetime(2025, 1, 13, 15, 0),
+	fecha_registro=datetime(2025, 1, 13, 15, 0),
     )
     org3 = Organizacion(
         nombre_org="Manos Solidarias",
         descripcion_org="Ayuda a comunidades vulnerables",
         direccion_fisica="Calle Los Olivos 789, Lima"
         logo="☺",
-		fecha_registro=datetime(2025, 1, 13, 15, 0),
+	fecha_registro=datetime(2025, 1, 13, 15, 0),
     )    
-    org5 = Organizacion(
+    org4 = Organizacion(
         nombre_org="Fundación Somos Uno",
         descripcion_org="Centro de rehabilitación infantil para niños con discapacidad",
         direccion_fisica="Calle Rehabilitación 456, Arequipa",
         logo="☺",
-		fecha_registro=datetime(2025, 1, 13, 15, 0),
+	fecha_registro=datetime(2025, 1, 13, 15, 0),
     )    
-    org6 = Organizacion(
+    org5 = Organizacion(
         nombre_org="Red de Apoyo Solidario",
         descripcion_org="Red de comedores populares en zonas vulnerables",
         direccion_fisica="Jr. Solidaridad 101, Huancayo",
         logo="☺",
-		fecha_registro=datetime(2025, 1, 13, 15, 0),
+	fecha_registro=datetime(2025, 1, 13, 15, 0),
     )
-    org7 = Organizacion(
+    org6 = Organizacion(
         nombre_org="Educa Rural",
         descripcion_org="Educación inclusiva en zonas rurales del Perú",
         direccion_fisica="Calle Educación 303, Huancavelica",
         logo="☺",
-		fecha_registro=datetime(2025, 1, 13, 15, 0),
+	fecha_registro=datetime(2025, 1, 13, 15, 0),
     )    
-    org8 = Organizacion(
+    org7 = Organizacion(
         nombre_org="Manos que Suman",
         descripcion_org="Mejora de infraestructura escolar inclusiva",
         direccion_fisica="Calle Escuela 606, Huancayo",
         logo="☺",
-		fecha_registro=datetime(2025, 1, 13, 15, 0),
+	fecha_registro=datetime(2025, 1, 13, 15, 0),
     )
-db.session.add_all([org1, org2, org3, org4, org5, org6, org7, org8])
+db.session.add_all([org1, org2, org3, org4, org5, org6, org7])
 db.session.commit()
 
 # Crea discapacidades
@@ -84,7 +84,7 @@ if ActividadFacilidad.query.count() == 0:
     facilidad3 = ActividadFacilidad(nombre_facilidad="Material braille", descripcion="Material disponible en sistema braille")
     facilidad4 = ActividadFacilidad(nombre_facilidad="Materiales en audio", descripcion="Material accesible en audio")
     facilidad5 = ActividadFacilidad(nombre_facilidad="Otros", descripcion="Otros")
-db.session.add_all([facilidad1, facilidad2, facilidad3])
+db.session.add_all([facilidad1, facilidad2, facilidad3, facilidad4, facilidad5])
 db.session.commit()
 
 # Crea usuarios
@@ -325,7 +325,7 @@ db.session.commit()
     db.session.add(UsuarioPreferencia(id_usuario=2, id_preferencia=1))
     db.session.add(UsuarioPreferencia(id_usuario=2, id_preferencia=2))
     db.session.add(UsuarioPreferencia(id_usuario=3, id_preferencia=3))
-    db.session.add(UsuarioPreferencia(id_usuario=3, id_preferencia=5))
+    db.session.add(UsuarioPreferencia(id_usuario=3, id_preferencia=4))
     db.session.add(UsuarioPreferencia(id_usuario=4, id_preferencia=1))
     db.session.add(UsuarioPreferencia(id_usuario=4, id_preferencia=4))
     # voluntarios
@@ -333,7 +333,7 @@ db.session.commit()
     db.session.add(UsuarioPreferencia(id_usuario=6, id_preferencia=3))
     db.session.add(UsuarioPreferencia(id_usuario=7, id_preferencia=1))
     db.session.add(UsuarioPreferencia(id_usuario=8, id_preferencia=4))
-    db.session.add(UsuarioPreferencia(id_usuario=9, id_preferencia=5))
+    db.session.add(UsuarioPreferencia(id_usuario=9, id_preferencia=4))
     db.session.add(UsuarioPreferencia(id_usuario=10, id_preferencia=2))
 
 # Crear actividades
@@ -420,7 +420,7 @@ if Actividad.query.count() == 0:
     )
     actividad6 = Actividad(
         nombre='Voluntariado en Centro de Rehabilitación Infantil',
-        descripcion='Apoyo en juegos y dinámicas inclusivas para niños con discapacidad motriz,
+        descripcion='Apoyo en juegos y dinámicas inclusivas para niños con discapacidad motriz',
         fecha_actividad=datetime(2025, 1, 12, 8, 0),
         ubicacion='Arequipa, Perú',
         tipo="presencial",
@@ -431,7 +431,7 @@ if Actividad.query.count() == 0:
         imagen='voluntariado_rehabilitacion.jpg',
         compatibilidad="92",
         etiqueta="niños y adolescentes",
-        fk_organizacion=5,
+        fk_organizacion=4,
         id_facilidad=1
     )
     actividad7 = Actividad(
@@ -447,7 +447,7 @@ if Actividad.query.count() == 0:
         imagen='tecnologia_asistiva.jpg',
         compatibilidad="88",
         etiqueta="formación",
-        fk_organizacion=5,
+        fk_organizacion=1,
         id_facilidad=4
     )
     actividad8 = Actividad(
@@ -463,7 +463,7 @@ if Actividad.query.count() == 0:
         imagen='comedor_popular.jpg',
         compatibilidad="50",
         etiqueta="sostenibilidad",
-        fk_organizacion=6,
+        fk_organizacion=5,
         id_facilidad=5
     )
     actividad9 = Actividad(
@@ -479,7 +479,7 @@ if Actividad.query.count() == 0:
         imagen="limpieza_costera.jpg",
         compatibilidad="15",
         etiqueta="medio ambiente",
-        fk_organizacion=3,
+        fk_organizacion=2,
         id_facilidad=1  # Rampas
     )
     actividad10 = Actividad(
@@ -495,7 +495,7 @@ if Actividad.query.count() == 0:
         imagen="tutorias_rurales.jpg'",
         compatibilidad="60",
         etiqueta="educacion",
-        fk_organizacion=7,
+        fk_organizacion=6,
         id_facilidad=5  
     )
     actividad11 = Actividad(
@@ -511,7 +511,7 @@ if Actividad.query.count() == 0:
         imagen="arte_urbano.jpg",
         compatibilidad="70",
         etiqueta="recreación",
-        fk_organizacion=2,
+        fk_organizacion=3,
         id_facilidad=1  
     )
     actividad12 = Actividad(
@@ -527,7 +527,7 @@ if Actividad.query.count() == 0:
         imagen="brigada_emergencia.jpg",
         compatibilidad="80",
         etiqueta="formación",
-        fk_organizacion=2,
+        fk_organizacion=1,
         id_facilidad=2  
     )
     actividad13 = Actividad(
@@ -543,7 +543,7 @@ if Actividad.query.count() == 0:
         imagen="pintado_escuelas.jpg",
         compatibilidad="70",
         etiqueta="sostenibilidad",
-        fk_organizacion=8,
+        fk_organizacion=7,
         id_facilidad=1  
     )
     actividad14 = Actividad(
@@ -559,10 +559,10 @@ if Actividad.query.count() == 0:
         imagen="festival_deportivo.jpg",
         compatibilidad="95",  # Porcentaje de compatibilidad
         etiqueta="deporte",
-        fk_organizacion=1,
+        fk_organizacion=2,
         id_facilidad=1
     )
-    actividad14 = Actividad(
+    actividad15 = Actividad(
         nombre="Apoyo psicológico con señas a adolescentes",
         descripcion="Apoyo emocional a adolescentes en riesgo",
         fecha_actividad=datetime(2025, 3, 12, 10, 0),
@@ -575,7 +575,7 @@ if Actividad.query.count() == 0:
         imagen="festival_deportivo.jpg",
         compatibilidad="87",  # Porcentaje de compatibilidad
         etiqueta="niños y adolescentes",
-        fk_organizacion=5,
+        fk_organizacion=4,
         id_facilidad=2
     )
 db.session.add_all([actividad1, actividad2, actividad3, actividad4, actividad5, actividad6, actividad7, actividad8, actividad9, actividad10, actividad11, actividad12, actividad13, actividad14, actividad15])
@@ -583,11 +583,21 @@ db.session.commit()
 
 # Asignar discapacidades compatibles con las actividades
     # Taller de lectura (visual)
-    db.session.add(ActividadDiscapacidad(id_actividad=1, id_discapacidad=2))    
+    db.session.add(ActividadDiscapacidad(id_actividad=1, id_discapacidad=2))
+	db.session.add(ActividadDiscapacidad(id_actividad=4, id_discapacidad=2))
+	db.session.add(ActividadDiscapacidad(id_actividad=7, id_discapacidad=2))
+	db.session.add(ActividadDiscapacidad(id_actividad=14, id_discapacidad=2))
     # Charla sobre derechos (auditiva)
-    db.session.add(ActividadDiscapacidad(id_actividad=2, id_discapacidad=1))    
+    db.session.add(ActividadDiscapacidad(id_actividad=2, id_discapacidad=1))
+	db.session.add(ActividadDiscapacidad(id_actividad=12, id_discapacidad=1))
+	db.session.add(ActividadDiscapacidad(id_actividad=15, id_discapacidad=1))
     # Limpieza de playas (motriz)
     db.session.add(ActividadDiscapacidad(id_actividad=3, id_discapacidad=3))
+	db.session.add(ActividadDiscapacidad(id_actividad=5, id_discapacidad=3))
+	db.session.add(ActividadDiscapacidad(id_actividad=6, id_discapacidad=3))
+	db.session.add(ActividadDiscapacidad(id_actividad=11, id_discapacidad=3))
+	db.session.add(ActividadDiscapacidad(id_actividad=13, id_discapacidad=3))
+	db.session.add(ActividadDiscapacidad(id_actividad=14, id_discapacidad=3))
 
 # Crea inscripciones
     # Voluntarios con discapacidad visual inscritos en taller de lectura
