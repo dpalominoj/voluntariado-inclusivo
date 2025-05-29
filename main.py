@@ -2,8 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime, timezone, timedelta
-import os # Para variables de entorno
+from datetime import datetime
+import os
+
 from models import db, Usuario, Organizacion, Preferencia, UsuarioPreferencia, Discapacidad, UsuarioDiscapacidad, ActividadFacilidad, Actividad, \
                    ActividadDiscapacidad, AuditoriaActividad, Inscripcion, Notificacion, Feedback, Recomendacion, Tendencia, InteraccionChatbot, AnalisisParticipacion
 from database.seed_data import seed_database
@@ -20,8 +21,6 @@ def create_app():
         db.create_all()
         try:
             seed_database()
-            # print("Base de datos poblada exitosamente.")
-            # pass
         except Exception as e:
             print(f"Error al poblar la base de datos: {e}")
     return app
@@ -88,24 +87,28 @@ def registro():
         for disc_name in discapacidad_ids:
             discapacidad = Discapacidad.query.filter_by(nombre=disc_name).first()
             if discapacidad:
-                usuario_discapacidad = UsuarioDiscapacidad(
-                    id_usuario=nuevo_usuario.id_usuario,
-                    id_discapacidad=discapacidad.id_discapacidad,
-                    gravedad='moderada',
-                    apoyo_requerido='otros'
-                )
-                db.session.add(usuario_discapacidad)
+                # Evitar duplicados
+                if not UsuarioDiscapacidad.query.filter_by(id_usuario=nuevo_usuario.id_usuario, id_discapacidad=discapacidad.id_discapacidad).first():
+                    usuario_discapacidad = UsuarioDiscapacidad(
+                        id_usuario=nuevo_usuario.id_usuario,
+                        id_discapacidad=discapacidad.id_discapacidad,
+                        gravedad='moderada',
+                        apoyo_requerido='otros'
+                    )
+                    db.session.add(usuario_discapacidad)
 
     # Añadir preferencias seleccionadas
     if preferencia_ids:
         for pref_name in preferencia_ids:
             preferencia = Preferencia.query.filter_by(nombre_corto=pref_name).first()
             if preferencia:
-                usuario_preferencia = UsuarioPreferencia(
-                    id_usuario=nuevo_usuario.id_usuario,
-                    id_preferencia=preferencia.id_preferencia
-                )
-                db.session.add(usuario_preferencia)
+                # Evitar duplicados
+                if not UsuarioPreferencia.query.filter_by(id_usuario=nuevo_usuario.id_usuario, id_preferencia=preferencia.id_preferencia).first():
+                    usuario_preferencia = UsuarioPreferencia(
+                        id_usuario=nuevo_usuario.id_usuario,
+                        id_preferencia=preferencia.id_preferencia
+                    )
+                    db.session.add(usuario_preferencia)
     
     try:
         db.session.commit()
@@ -137,9 +140,9 @@ def login():
         if usuario.perfil == 'voluntario':
             return redirect(url_for('voluntario'))
         elif usuario.perfil == 'organizador':
-            return redirect(url_for('organizador'))
+            return redirect(url_for('dashboard_organizador'))
         elif usuario.perfil == 'administrador':
-            return redirect(url_for('administrador'))
+            return redirect(url_for('dashboard_administrador'))
         else:
             return redirect(url_for('dashboard'))
     else:
@@ -151,6 +154,7 @@ def logout():
     session.clear()
     flash('¡Sesión cerrada correctamente!', 'success')
     return redirect(url_for('inicio'))
+
 # fallback si no se especifica el perfil
 @app.route('/dashboard')
 def dashboard():
@@ -169,9 +173,9 @@ def dashboard():
         if perfil == 'voluntario':
             return redirect(url_for('voluntario'))
         elif perfil == 'organizador':
-            return redirect(url_for('organizador'))
+            return redirect(url_for('dashboard_organizador'))
         elif perfil == 'administrador':
-            return redirect(url_for('administrador'))
+            return redirect(url_for('dashboard_administrador'))
     flash('Su perfil no tiene un dashboard asignado.', 'warning')
     return redirect(url_for('inicio'))
 
@@ -184,19 +188,20 @@ def voluntario():
     usuario = Usuario.query.get(usuario_id)
     # Obtener actividades en las que el usuario está inscrito
     inscripciones = Inscripcion.query.filter_by(id_usuario=usuario_id).all()
-    actividades_inscritas = [inscripcion.actividad for inscripcion in inscripciones if inscripcion.actividad]
+    # Debes definir la relación entre Inscripcion y Actividad si no existe
+    actividades_inscritas = [inscripcion.actividad for inscripcion in inscripciones if hasattr(inscripcion, 'actividad') and inscripcion.actividad]
     return render_template(
         'dashboard/voluntario.html',
         usuario=usuario,
         actividades_inscritas=actividades_inscritas,
     )
+
 @app.route('/dashboard/organizador')
 def dashboard_organizador():
     if 'usuario_id' not in session or session.get('usuario_perfil') != 'organizador':
         flash('Acceso denegado. Debe iniciar sesión como organizador.', 'error')
         return redirect(url_for('inicio'))
     
-    # Obtener las actividades creadas por la organización asociada al usuario
     usuario = Usuario.query.get(session['usuario_id'])
     if usuario and usuario.fk_organizacion:
         organizacion = Organizacion.query.get(usuario.fk_organizacion)
@@ -208,7 +213,6 @@ def dashboard_organizador():
 
 @app.route('/dashboard/administrador')
 def dashboard_administrador():
-    # Validación de acceso más robusta
     if 'usuario_id' not in session:
         flash('Debe iniciar sesión para acceder.', 'error')
         return redirect(url_for('inicio'))
@@ -217,19 +221,13 @@ def dashboard_administrador():
         flash('Acceso restringido: Solo para administradores.', 'error')
         return redirect(url_for('inicio'))
     
-    # Obtener datos estadísticos para el dashboard
     try:
-        # Estadísticas generales
         total_usuarios = Usuario.query.count()
         total_organizaciones = Organizacion.query.count()
         total_actividades = Actividad.query.count()
-        
-        # Últimas actividades creadas
-        ultimas_actividades = Actividad.query.order_by(Actividad.fecha_creacion.desc()).limit(5).all()
-        
-        # Usuarios recientes
+        # Si no existe fecha_creacion, usa fecha_actividad para actividades recientes
+        ultimas_actividades = Actividad.query.order_by(Actividad.fecha_actividad.desc()).limit(5).all()
         nuevos_usuarios = Usuario.query.order_by(Usuario.fecha_registro.desc()).limit(5).all()
-        
         return render_template(
             'dashboard/administrador.html',
             total_usuarios=total_usuarios,
@@ -238,7 +236,6 @@ def dashboard_administrador():
             ultimas_actividades=ultimas_actividades,
             nuevos_usuarios=nuevos_usuarios
         )
-        
     except Exception as e:
         flash(f'Error al cargar el dashboard: {str(e)}', 'error')
         return redirect(url_for('inicio'))
@@ -265,8 +262,10 @@ def actividades_filtradas():
             (Actividad.nombre.ilike(f'%{busqueda_texto}%')) |
             (Actividad.descripcion.ilike(f'%{busqueda_texto}%'))
         )
-    from sqlalchemy.orm import joinedload
-    todas_actividades = query.options(joinedload(Actividad.organizacion)).all()
+    # Si tienes relación con organización definida, puedes cargarla con joinedload
+    # from sqlalchemy.orm import joinedload
+    # todas_actividades = query.options(joinedload(Actividad.organizacion)).all()
+    todas_actividades = query.all()
 
     return render_template('actividades.html',
                            actividades=todas_actividades,
@@ -292,15 +291,13 @@ def inscribir_actividad(actividad_id):
     ).first()
     if inscripcion_existente:
         flash('¡Ya estás inscrito en esta actividad!', 'info')
-        return redirect(url_for('dashboard_voluntario'))
-    # Verificar cupo máximo si Actividad.cupo_maximo es relevante
+        return redirect(url_for('voluntario'))
     current_inscripciones = Inscripcion.query.filter_by(id_actividad=actividad_id).count()
     if actividad.cupo_maximo and current_inscripciones >= actividad.cupo_maximo:
         flash('¡Lo sentimos! El cupo para esta actividad está completo.', 'error')
         return redirect(url_for('actividades_filtradas'))
     try:
-        # Asegura que 'peru_tz' esté definido, o usa UTC si no hay tz info
-        fecha_inscripcion = datetime.now(timezone.utc)
+        fecha_inscripcion = datetime.utcnow()
         nueva_inscripcion = Inscripcion(
             id_usuario=usuario_id,
             id_actividad=actividad_id,
@@ -314,7 +311,6 @@ def inscribir_actividad(actividad_id):
         flash(f'Ocurrió un error al inscribirte: {e}. Por favor, inténtelo de nuevo.', 'error')
         print(f"Error al inscribir usuario a actividad: {e}")
     return redirect(url_for('voluntario'))
-
 
 if __name__ == "__main__":
     app.run(debug=True)
