@@ -244,7 +244,7 @@ def dashboard_administrador():
         return redirect(url_for('inicio'))
 
 # --- Rutas de Actividades ---
-@app.route('/actividades')
+@app.route('/actividades', endpoint='actividades')
 @app.route('/actividades_filtradas')
 def actividades_filtradas():
     tipo_filtro = request.args.get('tipo')
@@ -299,10 +299,12 @@ def inscribir_actividad(actividad_id):
         flash('¡Lo sentimos! El cupo para esta actividad está completo.', 'error')
         return redirect(url_for('actividades_filtradas'))
     try:
+        # Asegura que 'peru_tz' esté definido, o usa UTC si no hay tz info
+        fecha_inscripcion = datetime.now(timezone.utc)
         nueva_inscripcion = Inscripcion(
             id_usuario=usuario_id,
             id_actividad=actividad_id,
-            fecha_inscripcion=datetime.now(peru_tz)
+            fecha_inscripcion=fecha_inscripcion
         )
         db.session.add(nueva_inscripcion)
         db.session.commit()
