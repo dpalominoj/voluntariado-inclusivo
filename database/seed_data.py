@@ -313,16 +313,16 @@ if Usuario.query.count() == 0:
 db.session.add_all(usuarios)
 
 # Asignar discapacidades a los voluntarios
-    # Discapacidad auditiva
-    db.session.add(UsuarioDiscapacidad(id_usuario=4, id_discapacidad=1, gravedad="moderada", apoyo_requerido="interprete"))
-    db.session.add(UsuarioDiscapacidad(id_usuario=5, id_discapacidad=1, gravedad="leve", apoyo_requerido="otros"))
-    db.session.add(UsuarioDiscapacidad(id_usuario=6, id_discapacidad=1, gravedad="grave", apoyo_requerido="interprete"))
-    # Discapacidad visual
-    db.session.add(UsuarioDiscapacidad(id_usuario=7, id_discapacidad=2, gravedad="moderada", apoyo_requerido="otros"))
-    db.session.add(UsuarioDiscapacidad(id_usuario=8, id_discapacidad=2, gravedad="leve", apoyo_requerido="otros"))
-    # Discapacidad motriz
-    db.session.add(UsuarioDiscapacidad(id_usuario=9, id_discapacidad=3, gravedad="grave", apoyo_requerido="otros"))
-    db.session.add(UsuarioDiscapacidad(id_usuario=10, id_discapacidad=3, gravedad="moderada", apoyo_requerido="otros"))
+# Discapacidad auditiva
+db.session.add(UsuarioDiscapacidad(id_usuario=4, id_discapacidad=1, gravedad="moderada", apoyo_requerido="interprete"))
+db.session.add(UsuarioDiscapacidad(id_usuario=5, id_discapacidad=1, gravedad="leve", apoyo_requerido="otros"))
+db.session.add(UsuarioDiscapacidad(id_usuario=6, id_discapacidad=1, gravedad="grave", apoyo_requerido="interprete"))
+# Discapacidad visual
+db.session.add(UsuarioDiscapacidad(id_usuario=7, id_discapacidad=2, gravedad="moderada", apoyo_requerido="otros"))
+db.session.add(UsuarioDiscapacidad(id_usuario=8, id_discapacidad=2, gravedad="leve", apoyo_requerido="otros"))
+# Discapacidad motriz
+db.session.add(UsuarioDiscapacidad(id_usuario=9, id_discapacidad=3, gravedad="grave", apoyo_requerido="otros"))
+db.session.add(UsuarioDiscapacidad(id_usuario=10, id_discapacidad=3, gravedad="moderada", apoyo_requerido="otros"))
 
 # Asignar preferencias a usuarios
     #  organizadores
