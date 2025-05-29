@@ -96,32 +96,33 @@ db.session.commit()
         for disc_name in discapacidad_ids:
             discapacidad = Discapacidad.query.filter_by(nombre=disc_name).first()
             if discapacidad:
-              usuario_discapacidad = UsuarioDiscapacidad(
+                usuario_discapacidad = UsuarioDiscapacidad(
                     id_usuario=nuevo_usuario.id_usuario,
                     id_discapacidad=discapacidad.id_discapacidad,
-                    gravedad='moderada', # valor por defecto
-                    apoyo_requerido='otros' # valor por defecto
+                    gravedad='moderada',  # valor por defecto
+                    apoyo_requerido='otros'  # valor por defecto
                 )
-    db.session.add(usuario_discapacidad)
+                db.session.add(usuario_discapacidad)
+
     # Añadir preferencias seleccionadas
     if preferencia_ids:
-        for pref_name in preferencia_ids: # 'pref[]' envía nombres de preferencia
+        for pref_name in preferencia_ids:  # 'pref[]' envía nombres de preferencia
             preferencia = Preferencia.query.filter_by(nombre_corto=pref_name).first()
             if preferencia:
                 usuario_preferencia = UsuarioPreferencia(
                     id_usuario=nuevo_usuario.id_usuario,
                     id_preferencia=preferencia.id_preferencia
                 )
-    db.session.add(usuario_preferencia)
-
+                db.session.add(usuario_preferencia)
+    
     try:
         db.session.commit()
         flash('¡Registro exitoso! Ahora puedes iniciar sesión.', 'success')
         return redirect(url_for('inicio'))
     except Exception as e:
-        db.session.rollback() # Deshacer si hay un error
+        db.session.rollback()  # Deshacer si hay un error
         flash(f'Ocurrió un error al registrar: {e}. Por favor, inténtelo de nuevo.', 'error')
-        print(f"Error al registrar usuario: {e}") # Para depuración
+        print(f"Error al registrar usuario: {e}")  # Para depuración
         return redirect(url_for('inicio'))
 
 # --- Rutas de Autenticación ---
