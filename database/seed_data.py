@@ -59,6 +59,7 @@ def seed_database():
 		    )
 		]
 	db.session.add_all(organizaciones)
+	db.session.commit()
 
 # Crea discapacidades
 if Discapacidad.query.count() == 0:
@@ -68,6 +69,7 @@ if Discapacidad.query.count() == 0:
         Discapacidad(nombre="Motriz", descripcion="Dificultad o imposibilidad de moverse o desplazarse")
     ]
     db.session.add_all(discapacidades)  # Esta línea debe estar indentada dentro del if
+    db.session.commit()
     
 # Crea preferencias
 if Preferencia.query.count() == 0:
@@ -78,6 +80,7 @@ if Preferencia.query.count() == 0:
         Preferencia(nombre_corto="Deporte y recreación", descripcion_detallada="Actividades educativas")
     ]
 db.session.add_all(preferencias)
+db.session.commit()
 
 # Crea facilidades para actividades
 if ActividadFacilidad.query.count() == 0:
@@ -89,6 +92,7 @@ if ActividadFacilidad.query.count() == 0:
         ActividadFacilidad(nombre_facilidad="Otros", descripcion="Otros")
     ]
 db.session.add_all(actividadfacilidad)
+db.session.commit()
 
 # Crea usuarios
 if Usuario.query.count() == 0:
@@ -311,6 +315,7 @@ if Usuario.query.count() == 0:
     )
 	]
 db.session.add_all(usuarios)
+db.session.commit()
 
 # Asignar discapacidades a los voluntarios
 # Discapacidad auditiva
@@ -585,6 +590,7 @@ if Actividad.query.count() == 0:
     )
 	]
 db.session.add_all(actividades)
+db.session.commit()
 
 # Asignar discapacidades compatibles con las actividades
 # Taller de lectura (visual)
@@ -633,5 +639,4 @@ db.session.add(Inscripcion(id_usuario=5, id_actividad=11, fecha_inscripcion=date
 db.session.add(Inscripcion(id_usuario=6, id_actividad=13, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=3))) # Ana, en Pintado de Escuelas
 db.session.add(Inscripcion(id_usuario=7, id_actividad=5, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=18))) # Jorge, en Reforestación Accesible
 
-db.session.commit()
 
