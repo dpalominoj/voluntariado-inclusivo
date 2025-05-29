@@ -9,49 +9,49 @@ def seed_database():
 # Crea organizaciones
 if Organizacion.query.count() == 0:
 	organizaciones = [
-	    org1 = Organizacion(
+	    Organizacion(
 	        nombre_org="Fundación Inclusión Perú",
 	        descripcion_org="Organización dedicada a promover la inclusión social de personas con discapacidad",
-	        direccion_fisica="Av. Arequipa 123, Lima"
+	        direccion_fisica="Av. Arequipa 123, Lima",
 	        logo="☺",
 		fecha_registro=datetime(2025, 1, 13, 15, 0),
 	    ),
-	    org2 = Organizacion(
+	    Organizacion(
 	        nombre_org="Voluntarios Unidos",
 	        descripcion_org="Red de voluntarios para causas sociales",
-	        direccion_fisica="Jr. Huancavelica 456, Huancayo"
+	        direccion_fisica="Jr. Huancavelica 456, Huancayo",
 	        logo="☺",
 		fecha_registro=datetime(2025, 1, 13, 15, 0),
 	    ),
-	    org3 = Organizacion(
+	    Organizacion(
 	        nombre_org="Manos Solidarias",
 	        descripcion_org="Ayuda a comunidades vulnerables",
-	        direccion_fisica="Calle Los Olivos 789, Lima"
+	        direccion_fisica="Calle Los Olivos 789, Lima",
 	        logo="☺",
 		fecha_registro=datetime(2025, 1, 13, 15, 0),
 	    ),    
-	    org4 = Organizacion(
+	    Organizacion(
 	        nombre_org="Fundación Somos Uno",
 	        descripcion_org="Centro de rehabilitación infantil para niños con discapacidad",
 	        direccion_fisica="Calle Rehabilitación 456, Arequipa",
 	        logo="☺",
 		fecha_registro=datetime(2025, 1, 13, 15, 0),
 	    ),    
-	    org5 = Organizacion(
+	    Organizacion(
 	        nombre_org="Red de Apoyo Solidario",
 	        descripcion_org="Red de comedores populares en zonas vulnerables",
 	        direccion_fisica="Jr. Solidaridad 101, Huancayo",
 	        logo="☺",
 		fecha_registro=datetime(2025, 1, 13, 15, 0),
 	    ),
-	    org6 = Organizacion(
+	    Organizacion(
 	        nombre_org="Educa Rural",
 	        descripcion_org="Educación inclusiva en zonas rurales del Perú",
 	        direccion_fisica="Calle Educación 303, Huancavelica",
 	        logo="☺",
 		fecha_registro=datetime(2025, 1, 13, 15, 0),
 	    ),    
-	    org7 = Organizacion(
+	    Organizacion(
 	        nombre_org="Manos que Suman",
 	        descripcion_org="Mejora de infraestructura escolar inclusiva",
 	        direccion_fisica="Calle Escuela 606, Huancayo",
@@ -64,30 +64,30 @@ db.session.add_all(organizaciones)
 # Crea discapacidades
 if Discapacidad.query.count() == 0:
 	discapacidades = [
-    disc1 = Discapacidad(nombre="Auditiva", descripcion="Dificultad o imposibilidad de usar el sentido del oído"),
-    disc2 = Discapacidad(nombre="Visual", descripcion="Dificultad o imposibilidad de usar el sentido de la vista"),
-    disc3 = Discapacidad(nombre="Motriz", descripcion="Dificultad o imposibilidad de moverse o desplazarse")
+    Discapacidad(nombre="Auditiva", descripcion="Dificultad o imposibilidad de usar el sentido del oído"),
+    Discapacidad(nombre="Visual", descripcion="Dificultad o imposibilidad de usar el sentido de la vista"),
+    Discapacidad(nombre="Motriz", descripcion="Dificultad o imposibilidad de moverse o desplazarse")
 	]
 db.session.add_all(discapacidades)
     
 # Crea preferencias
 if Preferencia.query.count() == 0:
 	preferencias = [
-    pref1 = Preferencia(nombre_corto="Niños y Adolescentes", descripcion_detallada="Trabajar con niños y adolescentes"),
-    pref2 = Preferencia(nombre_corto="Educación y formación", descripcion_detallada="Actividades educativas"),
-    pref3 = Preferencia(nombre_corto="Ambiente y sostenibilidad", descripcion_detallada="Actividades ambientales"),
-    pref4 = Preferencia(nombre_corto="Deporte y recreación", descripcion_detallada="Actividades educativas")
+    Preferencia(nombre_corto="Niños y Adolescentes", descripcion_detallada="Trabajar con niños y adolescentes"),
+    Preferencia(nombre_corto="Educación y formación", descripcion_detallada="Actividades educativas"),
+    Preferencia(nombre_corto="Ambiente y sostenibilidad", descripcion_detallada="Actividades ambientales"),
+    Preferencia(nombre_corto="Deporte y recreación", descripcion_detallada="Actividades educativas")
 	]
 db.session.add_all(preferencias)
 
 # Crea facilidades para actividades
 if ActividadFacilidad.query.count() == 0:
 	actividadfacilidad = [
-    facilidad1 = ActividadFacilidad(nombre_facilidad="Rampas", descripcion="Acceso con rampas para sillas de ruedas"),
-    facilidad2 = ActividadFacilidad(nombre_facilidad="Intérpretes", descripcion="Intérpretes de lengua de señas disponibles"),
-    facilidad3 = ActividadFacilidad(nombre_facilidad="Material braille", descripcion="Material disponible en sistema braille"),
-    facilidad4 = ActividadFacilidad(nombre_facilidad="Materiales en audio", descripcion="Material accesible en audio"),
-    facilidad5 = ActividadFacilidad(nombre_facilidad="Otros", descripcion="Otros")
+    ActividadFacilidad(nombre_facilidad="Rampas", descripcion="Acceso con rampas para sillas de ruedas"),
+    ActividadFacilidad(nombre_facilidad="Intérpretes", descripcion="Intérpretes de lengua de señas disponibles"),
+    ActividadFacilidad(nombre_facilidad="Material braille", descripcion="Material disponible en sistema braille"),
+    ActividadFacilidad(nombre_facilidad="Materiales en audio", descripcion="Material accesible en audio"),
+    ActividadFacilidad(nombre_facilidad="Otros", descripcion="Otros")
 	]
 db.session.add_all(actividadfacilidad)
 
@@ -95,7 +95,7 @@ db.session.add_all(actividadfacilidad)
 if Usuario.query.count() == 0:
 	usuarios = [
     # Administrador
-    admin = Usuario(
+    Usuario(
         DNI="12345678",
         nombre="Dany",
         apellido="Palomino",
@@ -111,7 +111,7 @@ if Usuario.query.count() == 0:
         fecha_registro=datetime.now(peru_tz)
     ),
     # Organizadores
-    org1 = Usuario(
+    Usuario(
         DNI="23456789",
         nombre="María",
         apellido="Gómez",
@@ -127,7 +127,7 @@ if Usuario.query.count() == 0:
         fecha_registro=datetime.now(peru_tz),
         fk_organizacion=1
     ),
-    org2 = Usuario(
+    Usuario(
         DNI="34567890",
         nombre="Carlos",
         apellido="Rodríguez",
@@ -143,7 +143,7 @@ if Usuario.query.count() == 0:
         fecha_registro=datetime.now(peru_tz),
         fk_organizacion=2
     ),
-    org3 = Usuario(
+    Usuario(
         DNI="45678901",
         nombre="Lucía",
         apellido="Fernández",
@@ -160,7 +160,7 @@ if Usuario.query.count() == 0:
         fk_organizacion=3
     ),
     # Voluntarios
-    vol1 = Usuario(
+    Usuario(
         DNI="56789012",
         nombre="Pedro",
         apellido="López",
@@ -175,7 +175,7 @@ if Usuario.query.count() == 0:
         estado_usuario="activo",
         fecha_registro=datetime.now(peru_tz)
     ),
-    vol2 = Usuario(
+    Usuario(
         DNI="67890123",
         nombre="Ana",
         apellido="Martínez",
@@ -190,7 +190,7 @@ if Usuario.query.count() == 0:
         estado_usuario="activo",
         fecha_registro=datetime.now(peru_tz)
     ),    
-    vol3 = Usuario(
+    Usuario(
         DNI="78901234",
         nombre="Jorge",
         apellido="Silva",
@@ -205,7 +205,7 @@ if Usuario.query.count() == 0:
         estado_usuario="activo",
         fecha_registro=datetime.now(peru_tz)
     ),
-    vol4 = Usuario(
+    Usuario(
         DNI="89012345",
         nombre="Rosa",
         apellido="Quispe",
@@ -220,7 +220,7 @@ if Usuario.query.count() == 0:
         estado_usuario="activo",
         fecha_registro=datetime.now(peru_tz)
     ),    
-    vol5 = Usuario(
+    Usuario(
         DNI="90123456",
         nombre="Luis",
         apellido="Vargas",
@@ -235,7 +235,7 @@ if Usuario.query.count() == 0:
         estado_usuario="activo",
         fecha_registro=datetime.now(peru_tz)
     ),    
-    vol6 = Usuario(
+    Usuario(
         DNI="01234567",
         nombre="Carmen",
         apellido="Díaz",
@@ -250,7 +250,7 @@ if Usuario.query.count() == 0:
         estado_usuario="activo",
         fecha_registro=datetime.now(peru_tz)
     ),
-    vol7 = Usuario(
+    Usuario(
         DNI="11223344",
         nombre="Miguel",
         apellido="Torres",
@@ -265,7 +265,7 @@ if Usuario.query.count() == 0:
         estado_usuario="activo",
         fecha_registro=datetime.now(peru_tz)
     ),    
-    vol8 = Usuario(
+    Usuario(
         DNI="22334455",
         nombre="Sofía",
         apellido="Castro",
@@ -280,7 +280,7 @@ if Usuario.query.count() == 0:
         estado_usuario="activo",
         fecha_registro=datetime.now(peru_tz)
     ),
-    vol9 = Usuario(
+    Usuario(
         DNI="33445566",
         nombre="Roberto",
         apellido="Mendoza",
@@ -295,7 +295,7 @@ if Usuario.query.count() == 0:
         estado_usuario="activo",
         fecha_registro=datetime.now(peru_tz)
     ),    
-    vol10 = Usuario(
+    Usuario(
         DNI="44556677",
         nombre="Elena",
         apellido="Rojas",
@@ -344,7 +344,7 @@ db.session.add_all(usuarios)
 # Crear actividades
 if Actividad.query.count() == 0:
 	actividades = [
-    actividad1 = Actividad(
+    Actividad(
         nombre="Taller de lectura inclusiva",
         descripcion="Taller de lectura para personas con discapacidad visual",
         fecha_actividad=datetime(2025, 1, 15, 10, 0),
@@ -360,7 +360,7 @@ if Actividad.query.count() == 0:
         fk_organizacion=1,
         id_facilidad=3  # Material braille
     ),    
-    actividad2 = Actividad(
+    Actividad(
         nombre="Charla sobre derechos de personas con discapacidad",
         descripcion="Charla informativa sobre derechos y leyes",
         fecha_actividad=datetime(2025, 1, 20, 15, 0),
@@ -371,12 +371,12 @@ if Actividad.query.count() == 0:
         cupo_maximo=50,
         estado="abierto",
         imagen="tecnologia_asistiva.jpg",
-        compatibilidad="85"
+        compatibilidad="85",
         etiqueta="formación",
         fk_organizacion=2,
         id_facilidad=2  # Intérpretes
     ),    
-    actividad3 = Actividad(
+    Actividad(
         nombre="Jornada de limpieza de playas accesible",
         descripcion="Limpieza de playas con accesibilidad para personas con movilidad reducida",
         fecha_actividad=datetime(2025, 3, 7, 8, 0),
@@ -392,7 +392,7 @@ if Actividad.query.count() == 0:
         fk_organizacion=3,
         id_facilidad=1  # Rampas
     ),
-    actividad4 = Actividad(
+    Actividad(
         nombre="Taller de Cocina Inclusiva",
         descripcion="Taller práctico de cocina adaptado para personas con discapacidad visual",
         fecha_actividad=datetime(2025, 4, 15, 10, 0),
@@ -408,7 +408,7 @@ if Actividad.query.count() == 0:
         fk_organizacion=3,
         id_facilidad=3  # Material braille
     ),
-    actividad5 = Actividad(
+    Actividad(
         nombre='Jornada de Reforestación Accesible',
         descripcion='Actividad ambiental con caminos adaptados para voluntarios con movilidad reducida',
         fecha_actividad=datetime(2025, 1, 12, 8, 0),
@@ -424,7 +424,7 @@ if Actividad.query.count() == 0:
         fk_organizacion=2,
         id_facilidad=1
     ),
-    actividad6 = Actividad(
+    Actividad(
         nombre='Voluntariado en Centro de Rehabilitación Infantil',
         descripcion='Apoyo en juegos y dinámicas inclusivas para niños con discapacidad motriz',
         fecha_actividad=datetime(2025, 1, 12, 8, 0),
@@ -440,7 +440,7 @@ if Actividad.query.count() == 0:
         fk_organizacion=4,
         id_facilidad=1
     ),
-    actividad7 = Actividad(
+    Actividad(
         nombre='Capacitación en Tecnología Asistiva',
         descripcion='Capacitación en el uso de software de accesibilidad, orientado a voluntarios con discapacidad visual',
         fecha_actividad=datetime(2025, 1, 13, 6, 0),
@@ -456,7 +456,7 @@ if Actividad.query.count() == 0:
         fk_organizacion=1,
         id_facilidad=4
     ),
-    actividad8 = Actividad(
+    Actividad(
         nombre='Voluntariado en Comedor Popular',
         descripcion='Apoyo logístico en la preparación y distribución de alimentos en zonas vulnerables',
         fecha_actividad=datetime(2025, 2, 13, 6, 0),
@@ -472,7 +472,7 @@ if Actividad.query.count() == 0:
         fk_organizacion=5,
         id_facilidad=5
     ),
-    actividad9 = Actividad(
+    Actividad(
         nombre="Campaña de Limpieza Costera",
         descripcion="Recojo de residuos sólidos en playas del litoral para proteger el ecosistema marino",
         fecha_actividad=datetime(2025, 3, 5, 8, 0),
@@ -488,7 +488,7 @@ if Actividad.query.count() == 0:
         fk_organizacion=2,
         id_facilidad=1  # Rampas
     ),
-    actividad10 = Actividad(
+    Actividad(
         nombre="Tutorías Escolares en Zonas Rurales",
         descripcion="Reforzamiento escolar en comunidades rurales",
         fecha_actividad=datetime(2025, 3, 5, 8, 0),
@@ -504,7 +504,7 @@ if Actividad.query.count() == 0:
         fk_organizacion=6,
         id_facilidad=5  
     ),
-    actividad11 = Actividad(
+    Actividad(
         nombre="Festival Juvenil Inclusivo de Arte Urbano",
         descripcion="Organización de festival artístico para jóvenes",
         fecha_actividad=datetime(2025, 3, 5, 8, 0),
@@ -520,7 +520,7 @@ if Actividad.query.count() == 0:
         fk_organizacion=3,
         id_facilidad=1  
     ),
-    actividad12 = Actividad(
+    Actividad(
         nombre="Brigada de Emergencia Comunitaria",
         descripcion="Simulacros y talleres sobre primeros auxilios y evacuación ante desastres",
         fecha_actividad=datetime(2025, 1, 12, 8, 0),
@@ -536,7 +536,7 @@ if Actividad.query.count() == 0:
         fk_organizacion=1,
         id_facilidad=2  
     ),
-    actividad13 = Actividad(
+    Actividad(
         nombre="Pintado de Escuelas en Renovación",
         descripcion="Apoyo en tareas de pintado y reparaciones básicas de infraestructura escolar",
         fecha_actividad=datetime(2025, 1, 22, 8, 0),
@@ -552,7 +552,7 @@ if Actividad.query.count() == 0:
         fk_organizacion=7,
         id_facilidad=1  
     ),
-    actividad14 = Actividad(
+    Actividad(
         nombre="Festival Deportivo Inclusivo",
         descripcion="Evento deportivo con actividades adaptadas a distintas habilidades",
         fecha_actividad=datetime(2025, 3, 11, 10, 0),
@@ -568,7 +568,7 @@ if Actividad.query.count() == 0:
         fk_organizacion=2,
         id_facilidad=1
     ),
-    actividad15 = Actividad(
+    Actividad(
         nombre="Apoyo psicológico con señas a adolescentes",
         descripcion="Apoyo emocional a adolescentes en riesgo",
         fecha_actividad=datetime(2025, 3, 12, 10, 0),
