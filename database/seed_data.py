@@ -12,18 +12,52 @@ if Organizacion.query.count() == 0: #si no existe, crea
         nombre_org="Fundación Inclusión Perú",
         descripcion_org="Organización dedicada a promover la inclusión social de personas con discapacidad",
         direccion_fisica="Av. Arequipa 123, Lima"
+        logo="☺",
+		fecha_registro=datetime(2025, 1, 13, 15, 0),
     )
     org2 = Organizacion(
         nombre_org="Voluntarios Unidos",
         descripcion_org="Red de voluntarios para causas sociales",
-        direccion_fisica="Jr. Huancavelica 456, Lima"
+        direccion_fisica="Jr. Huancavelica 456, Huancayo"
+        logo="☺",
+		fecha_registro=datetime(2025, 1, 13, 15, 0),
     )
     org3 = Organizacion(
         nombre_org="Manos Solidarias",
         descripcion_org="Ayuda a comunidades vulnerables",
         direccion_fisica="Calle Los Olivos 789, Lima"
+        logo="☺",
+		fecha_registro=datetime(2025, 1, 13, 15, 0),
+    )    
+    org5 = Organizacion(
+        nombre_org="Fundación Somos Uno",
+        descripcion_org="Centro de rehabilitación infantil para niños con discapacidad",
+        direccion_fisica="Calle Rehabilitación 456, Arequipa",
+        logo="☺",
+		fecha_registro=datetime(2025, 1, 13, 15, 0),
+    )    
+    org6 = Organizacion(
+        nombre_org="Red de Apoyo Solidario",
+        descripcion_org="Red de comedores populares en zonas vulnerables",
+        direccion_fisica="Jr. Solidaridad 101, Huancayo",
+        logo="☺",
+		fecha_registro=datetime(2025, 1, 13, 15, 0),
     )
-db.session.add_all([org1, org2, org3])
+    org7 = Organizacion(
+        nombre_org="Educa Rural",
+        descripcion_org="Educación inclusiva en zonas rurales del Perú",
+        direccion_fisica="Calle Educación 303, Huancavelica",
+        logo="☺",
+		fecha_registro=datetime(2025, 1, 13, 15, 0),
+    )    
+    org8 = Organizacion(
+        nombre_org="Manos que Suman",
+        descripcion_org="Mejora de infraestructura escolar inclusiva",
+        direccion_fisica="Calle Escuela 606, Huancayo",
+        logo="☺",
+		fecha_registro=datetime(2025, 1, 13, 15, 0),
+    )
+db.session.add_all([org1, org2, org3, org4, org5, org6, org7, org8])
 db.session.commit()
 
 # Crea discapacidades
@@ -36,12 +70,11 @@ db.session.commit()
     
 # Crea preferencias
 if Preferencia.query.count() == 0:
-    pref1 = Preferencia(nombre_corto="Niños", descripcion_detallada="Trabajar con niños")
-    pref2 = Preferencia(nombre_corto="Adultos mayores", descripcion_detallada="Trabajar con adultos mayores")
-    pref3 = Preferencia(nombre_corto="Animales", descripcion_detallada="Trabajar con animales")
-    pref4 = Preferencia(nombre_corto="Educación", descripcion_detallada="Actividades educativas")
-    pref5 = Preferencia(nombre_corto="Medio ambiente", descripcion_detallada="Actividades ambientales")
-db.session.add_all([pref1, pref2, pref3, pref4, pref5])
+    pref1 = Preferencia(nombre_corto="Niños y Adolescentes", descripcion_detallada="Trabajar con niños y adolescentes")
+    pref2 = Preferencia(nombre_corto="Educación y formación", descripcion_detallada="Actividades educativas")
+    pref3 = Preferencia(nombre_corto="Ambiente y sostenibilidad", descripcion_detallada="Actividades ambientales")
+    pref4 = Preferencia(nombre_corto="Deporte y recreación", descripcion_detallada="Actividades educativas")
+db.session.add_all([pref1, pref2, pref3, pref4])
 db.session.commit()
 
 # Crea facilidades para actividades
@@ -49,6 +82,8 @@ if ActividadFacilidad.query.count() == 0:
     facilidad1 = ActividadFacilidad(nombre_facilidad="Rampas", descripcion="Acceso con rampas para sillas de ruedas")
     facilidad2 = ActividadFacilidad(nombre_facilidad="Intérpretes", descripcion="Intérpretes de lengua de señas disponibles")
     facilidad3 = ActividadFacilidad(nombre_facilidad="Material braille", descripcion="Material disponible en sistema braille")
+    facilidad4 = ActividadFacilidad(nombre_facilidad="Materiales en audio", descripcion="Material accesible en audio")
+    facilidad5 = ActividadFacilidad(nombre_facilidad="Otros", descripcion="Otros")
 db.session.add_all([facilidad1, facilidad2, facilidad3])
 db.session.commit()
 
@@ -57,10 +92,10 @@ if Usuario.query.count() == 0:
     # Administrador
     admin = Usuario(
         DNI="12345678",
-        nombre="Juan",
-        apellido="Pérez",
-        email="admin@inclusivo.com",
-        contrasena_hash="hashed_password_123",
+        nombre="Dany",
+        apellido="Palomino",
+        email="admin@konectai.com",
+        contrasena_hash="Hashed12",
         celular="987654321",
         direccion="Av. Principal 123",
         fecha_nacimiento=date(1980, 5, 15),
@@ -76,7 +111,7 @@ if Usuario.query.count() == 0:
         nombre="María",
         apellido="Gómez",
         email="maria@fundacion.org",
-        contrasena_hash="hashed_password_234",
+        contrasena_hash="Hashed23",
         celular="987654322",
         direccion="Av. Libertad 456",
         fecha_nacimiento=date(1985, 7, 20),
@@ -92,7 +127,7 @@ if Usuario.query.count() == 0:
         nombre="Carlos",
         apellido="Rodríguez",
         email="carlos@voluntarios.org",
-        contrasena_hash="hashed_password_345",
+        contrasena_hash="Hashed34",
         celular="987654323",
         direccion="Jr. Unión 789",
         fecha_nacimiento=date(1978, 3, 10),
@@ -108,7 +143,7 @@ if Usuario.query.count() == 0:
         nombre="Lucía",
         apellido="Fernández",
         email="lucia@manos.org",
-        contrasena_hash="hashed_password_456",
+        contrasena_hash="Hashed45",
         celular="987654324",
         direccion="Av. Sol 1011",
         fecha_nacimiento=date(1990, 11, 25),
@@ -125,7 +160,7 @@ if Usuario.query.count() == 0:
         nombre="Pedro",
         apellido="López",
         email="pedro@email.com",
-        contrasena_hash="hashed_password_567",
+        contrasena_hash="Hashed56",
         celular="987654325",
         direccion="Calle Lima 1213",
         fecha_nacimiento=date(1995, 2, 14),
@@ -140,7 +175,7 @@ if Usuario.query.count() == 0:
         nombre="Ana",
         apellido="Martínez",
         email="ana@email.com",
-        contrasena_hash="hashed_password_678",
+        contrasena_hash="Hashed67",
         celular="987654326",
         direccion="Av. Brasil 1415",
         fecha_nacimiento=date(1992, 8, 30),
@@ -155,7 +190,7 @@ if Usuario.query.count() == 0:
         nombre="Jorge",
         apellido="Silva",
         email="jorge@email.com",
-        contrasena_hash="hashed_password_789",
+        contrasena_hash="Hashed78",
         celular="987654327",
         direccion="Jr. Ayacucho 1617",
         fecha_nacimiento=date(1998, 4, 5),
@@ -170,7 +205,7 @@ if Usuario.query.count() == 0:
         nombre="Rosa",
         apellido="Quispe",
         email="rosa@email.com",
-        contrasena_hash="hashed_password_890",
+        contrasena_hash="Hashed89",
         celular="987654328",
         direccion="Av. Argentina 1819",
         fecha_nacimiento=date(1993, 6, 12),
@@ -185,7 +220,7 @@ if Usuario.query.count() == 0:
         nombre="Luis",
         apellido="Vargas",
         email="luis@email.com",
-        contrasena_hash="hashed_password_901",
+        contrasena_hash="Hashed12",
         celular="987654329",
         direccion="Calle Tacna 2021",
         fecha_nacimiento=date(1987, 9, 18),
@@ -200,7 +235,7 @@ if Usuario.query.count() == 0:
         nombre="Carmen",
         apellido="Díaz",
         email="carmen@email.com",
-        contrasena_hash="hashed_password_012",
+        contrasena_hash="Hashed01",
         celular="987654330",
         direccion="Jr. Ica 2223",
         fecha_nacimiento=date(1996, 1, 22),
@@ -215,7 +250,7 @@ if Usuario.query.count() == 0:
         nombre="Miguel",
         apellido="Torres",
         email="miguel@email.com",
-        contrasena_hash="hashed_password_112",
+        contrasena_hash="Hashed11",
         celular="987654331",
         direccion="Av. Bolivia 2425",
         fecha_nacimiento=date(1989, 12, 8),
@@ -230,7 +265,7 @@ if Usuario.query.count() == 0:
         nombre="Sofía",
         apellido="Castro",
         email="sofia@email.com",
-        contrasena_hash="hashed_password_223",
+        contrasena_hash="Hashed22",
         celular="987654332",
         direccion="Calle Junín 2627",
         fecha_nacimiento=date(1994, 7, 3),
@@ -245,7 +280,7 @@ if Usuario.query.count() == 0:
         nombre="Roberto",
         apellido="Mendoza",
         email="roberto@email.com",
-        contrasena_hash="hashed_password_334",
+        contrasena_hash="Hashed33",
         celular="987654333",
         direccion="Av. Venezuela 2829",
         fecha_nacimiento=date(1991, 10, 15),
@@ -260,7 +295,7 @@ if Usuario.query.count() == 0:
         nombre="Elena",
         apellido="Rojas",
         email="elena@email.com",
-        contrasena_hash="hashed_password_445",
+        contrasena_hash="Hashed44",
         celular="987654334",
         direccion="Jr. Cusco 3031",
         fecha_nacimiento=date(1988, 4, 27),
@@ -306,14 +341,15 @@ if Actividad.query.count() == 0:
     actividad1 = Actividad(
         nombre="Taller de lectura inclusiva",
         descripcion="Taller de lectura para personas con discapacidad visual",
-        fecha_actividad=datetime(2023, 12, 15, 10, 0),
+        fecha_actividad=datetime(2025, 1, 15, 10, 0),
         ubicacion="Biblioteca Nacional, Lima",
         tipo="presencial",
         habilidades_requeridas="Paciencia, conocimiento básico de braille",
         es_inclusiva=True,
         cupo_maximo=20,
         estado="abierto",
-        compatibilidad="A1",
+        imagen="lectura_inclusiva.jpg",
+        compatibilidad="95",  # Porcentaje de compatibilidad
         etiqueta="educación",
         fk_organizacion=1,
         id_facilidad=3  # Material braille
@@ -321,178 +357,228 @@ if Actividad.query.count() == 0:
     actividad2 = Actividad(
         nombre="Charla sobre derechos de personas con discapacidad",
         descripcion="Charla informativa sobre derechos y leyes",
-        fecha_actividad=datetime(2023, 12, 20, 15, 0),
+        fecha_actividad=datetime(2025, 1, 20, 15, 0),
         ubicacion="Zoom",
         tipo="virtual",
         habilidades_requeridas="Conocimiento básico de leyes",
         es_inclusiva=True,
         cupo_maximo=50,
         estado="abierto",
-        compatibilidad="A2",
-        etiqueta="derechos",
+        imagen="tecnologia_asistiva.jpg",
+        compatibilidad="85"
+        etiqueta="formación",
         fk_organizacion=2,
         id_facilidad=2  # Intérpretes
     )    
     actividad3 = Actividad(
         nombre="Jornada de limpieza de playas accesible",
         descripcion="Limpieza de playas con accesibilidad para personas con movilidad reducida",
-        fecha_actividad=datetime(2024, 1, 10, 8, 0),
+        fecha_actividad=datetime(2025, 3, 7, 8, 0),
         ubicacion="Playa Agua Dulce, Chorrillos",
         tipo="presencial",
         habilidades_requeridas="Conciencia ambiental",
         es_inclusiva=True,
         cupo_maximo=30,
         estado="abierto",
-        compatibilidad="A3",
+        imagen="limpieza_costera.jpg",
+        compatibilidad="90",
         etiqueta="medio ambiente",
         fk_organizacion=3,
         id_facilidad=1  # Rampas
     )
-    ''' actividad4 = Actividad(
-                nombre='Taller de Lectura Inclusiva',
-                descripcion='Sesiones semanales de lectura accesible con voluntarios oyentes y personas con discapacidad auditiva.',
-                fecha_actividad=datetime(2025, 1, 10, 8, 0),
-                ubicacion='Lima, Perú',
-                cupo_maximo=20,
-                estado='activa',
-                organizacion='Biblioteca Nacional del Perú',
-                imagen='lectura_inclusiva.jpg',
-                compatibilidad=85,
-                nivel_accesibilidad=5
-            ) 
+    actividad4 = Actividad(
+        nombre="Taller de Cocina Inclusiva",
+        descripcion="Taller práctico de cocina adaptado para personas con discapacidad visual",
+        fecha_actividad=datetime(2025, 4, 15, 10, 0),
+        ubicacion="Av. Gastronómica 250, Miraflores, Lima",
+        tipo="presencial",
+        habilidades_requeridas="Interés por la cocina",
+        es_inclusiva=True,
+        cupo_maximo=12,
+        estado="abierto",
+        imagen="comedor_popular.jpg",
+        compatibilidad="85",
+        etiqueta="formación",
+        fk_organizacion=3,
+        id_facilidad=3  # Material braille
+    )
     actividad5 = Actividad(
-                nombre='Jornada de Reforestación Accesible',
-                descripcion='Actividad ambiental con caminos adaptados para voluntarios con movilidad reducida. Incluye interpretación en lengua de señas.',
-                fecha_actividad=datetime(2025, 1, 12, 8, 0),
-                ubicacion='Cusco, Perú',
-                cupo_maximo=30,
-                estado='activa',
-                organizacion='ONG Verde Esperanza',
-                imagen='reforestacion_accesible.jpg',
-                compatibilidad=92,
-                nivel_accesibilidad=4
-            )
+        nombre='Jornada de Reforestación Accesible',
+        descripcion='Actividad ambiental con caminos adaptados para voluntarios con movilidad reducida',
+        fecha_actividad=datetime(2025, 1, 12, 8, 0),
+        ubicacion='Cusco, Perú',
+        tipo="presencial",
+        habilidades_requeridas="Interés por la reforestación",
+        es_inclusiva=True,
+        cupo_maximo=20,                
+        estado='abierto',
+        imagen='reforestacion_accesible.jpg',
+        compatibilidad="92",
+        etiqueta="medio ambiente",
+        fk_organizacion=2,
+        id_facilidad=1
+    )
     actividad6 = Actividad(
-                nombre='Voluntariado en Centro de Rehabilitación Infantil',
-                descripcion='Apoyo en juegos y dinámicas inclusivas para niños con discapacidad motriz y cognitiva.',
-                fecha_actividad=datetime(2025, 1, 12, 8, 0),
-                ubicacion='Arequipa, Perú',
-                cupo_maximo=15,
-                estado='activa',
-                organizacion='Fundación Somos Uno',
-                imagen='voluntariado_rehabilitacion.jpg',
-                compatibilidad=78,
-                nivel_accesibilidad=3
-            )
+        nombre='Voluntariado en Centro de Rehabilitación Infantil',
+        descripcion='Apoyo en juegos y dinámicas inclusivas para niños con discapacidad motriz,
+        fecha_actividad=datetime(2025, 1, 12, 8, 0),
+        ubicacion='Arequipa, Perú',
+        tipo="presencial",
+        habilidades_requeridas="Interés por la recuperación",
+        es_inclusiva=True,
+        cupo_maximo=15,                
+        estado='abierto',
+        imagen='voluntariado_rehabilitacion.jpg',
+        compatibilidad="92",
+        etiqueta="niños y adolescentes",
+        fk_organizacion=5,
+        id_facilidad=1
+    )
     actividad7 = Actividad(
-                nombre='Capacitación en Tecnología Asistiva',
-                descripcion='Capacitación para el uso de software de accesibilidad, orientado a voluntarios que apoyan a personas con discapacidad visual.',
-                fecha_actividad=datetime(2025, 1, 12, 8, 0),
-                ubicacion='Trujillo, Perú',
-                cupo_maximo=25,
-                estado='activa',
-                organizacion='TecnoInclusión Perú',
-                imagen='tecnologia_asistiva.jpg',
-                compatibilidad=88,
-                nivel_accesibilidad=5
-            )
+        nombre='Capacitación en Tecnología Asistiva',
+        descripcion='Capacitación en el uso de software de accesibilidad, orientado a voluntarios con discapacidad visual',
+        fecha_actividad=datetime(2025, 1, 13, 6, 0),
+        ubicacion='Trujillo, Perú',
+        tipo="virtual",
+        habilidades_requeridas="Interés por la tecnología",
+        es_inclusiva=True,
+        cupo_maximo=18,                
+        estado='abierto',
+        imagen='tecnologia_asistiva.jpg',
+        compatibilidad="88",
+        etiqueta="formación",
+        fk_organizacion=5,
+        id_facilidad=4
+    )
     actividad8 = Actividad(
-                nombre='Voluntariado en Comedor Popular',
-                descripcion='Apoyo logístico en la preparación y distribución de alimentos en zonas vulnerables. No se requieren adaptaciones especiales.',
-                fecha_actividad=datetime(2025, 1, 12, 8, 0),
-                ubicacion='Callao, Perú',
-                cupo_maximo=40,
-                estado='activa',
-                organizacion='Red de Apoyo Solidario',
-                imagen='comedor_popular.jpg',
-                compatibilidad=100,
-                nivel_accesibilidad=1
-            )
+        nombre='Voluntariado en Comedor Popular',
+        descripcion='Apoyo logístico en la preparación y distribución de alimentos en zonas vulnerables',
+        fecha_actividad=datetime(2025, 2, 13, 6, 0),
+        ubicacion='Huancayo, Perú',
+        tipo="presencial",
+        habilidades_requeridas="Interés por la cocina",
+        es_inclusiva=False,
+        cupo_maximo=10,                
+        estado='cancelado',
+        imagen='comedor_popular.jpg',
+        compatibilidad="50",
+        etiqueta="sostenibilidad",
+        fk_organizacion=6,
+        id_facilidad=5
+    )
     actividad9 = Actividad(
-                nombre='Campaña de Limpieza Costera',
-                descripcion='Recojo de residuos sólidos en playas del litoral para proteger el ecosistema marino. Requiere desplazamiento prolongado.',
-                fecha_actividad=datetime(2025, 1, 12, 8, 0),
-                ubicacion='Chorrillos, Lima, Perú',
-                cupo_maximo=35,
-                estado='activa',
-                organizacion='EcoMar Perú',
-                imagen='limpieza_costera.jpg',
-                compatibilidad=100,
-                nivel_accesibilidad=1
-            )
+        nombre="Campaña de Limpieza Costera",
+        descripcion="Recojo de residuos sólidos en playas del litoral para proteger el ecosistema marino",
+        fecha_actividad=datetime(2025, 3, 5, 8, 0),
+        ubicacion="Playa Palomino, Perú",
+        tipo="presencial",
+        habilidades_requeridas="Conciencia ambiental",
+        es_inclusiva=False,
+        cupo_maximo=30,
+        estado="abierto",
+        imagen="limpieza_costera.jpg",
+        compatibilidad="15",
+        etiqueta="medio ambiente",
+        fk_organizacion=3,
+        id_facilidad=1  # Rampas
+    )
     actividad10 = Actividad(
-                nombre='Tutorías Escolares en Zonas Rurales',
-                descripcion='Voluntariado presencial para reforzamiento escolar en comunidades rurales. Implica caminatas y acceso limitado a servicios.',
-                fecha_actividad=datetime(2025, 1, 12, 8, 0),
-                ubicacion='Huancavelica, Perú',
-                cupo_maximo=10,
-                estado='activa',
-                organizacion='Educa Rural',
-                imagen='tutorias_rurales.jpg',
-                compatibilidad=98,
-                nivel_accesibilidad=1
-            )
+        nombre="Tutorías Escolares en Zonas Rurales",
+        descripcion="Reforzamiento escolar en comunidades rurales",
+        fecha_actividad=datetime(2025, 3, 5, 8, 0),
+        ubicacion="Playa Palomino, Perú",
+        tipo="presencial",
+        habilidades_requeridas="Amabilidad",
+        es_inclusiva=False,
+        cupo_maximo=5,
+        estado="finalizada",
+        imagen="tutorias_rurales.jpg'",
+        compatibilidad="60",
+        etiqueta="educacion",
+        fk_organizacion=7,
+        id_facilidad=5  
+    )
     actividad11 = Actividad(
-                nombre='Festival Juvenil de Arte Urbano',
-                descripcion='Organización y montaje de espacios artísticos para jóvenes. Incluye armado de estructuras y coordinación en campo.',
-                fecha_actividad=datetime(2025, 1, 12, 8, 0),
-                ubicacion='Barranco, Lima, Perú',
-                cupo_maximo=20,
-                estado='activa',
-                organizacion='Colectivo Cultura Viva',
-                imagen='arte_urbano.jpg',
-                compatibilidad=97,
-                nivel_accesibilidad=2
-            )
-    activida12 = Actividad(
-                nombre='Brigada de Emergencia Comunitaria',
-                descripcion='Simulacros y talleres sobre primeros auxilios y evacuación ante desastres. Participación física activa requerida.',
-                fecha_actividad=datetime(2025, 1, 12, 8, 0),
-                ubicacion='Chiclayo, Perú',
-                cupo_maximo=25,
-                estado='activa',
-                organizacion='Defensa Civil Joven',
-                imagen='brigada_emergencia.jpg',
-                compatibilidad=99,
-                nivel_accesibilidad=1
-            )
-    activida13 = Actividad(
-                nombre='Pintado de Escuelas en Renovación',
-                descripcion='Apoyo en mejora de infraestructura escolar mediante tareas de pintado, limpieza y reparaciones básicas.',
-                fecha_actividad=datetime(2025, 1, 12, 8, 0),
-                ubicacion='Ayacucho, Perú',
-                cupo_maximo=30,
-                estado='activa',
-                organizacion='Manos que Suman',
-                imagen='pintado_escuelas.jpg',
-                compatibilidad=100,
-                nivel_accesibilidad=1
-            )
-    activida14 = Actividad(
-                nombre='Festival Deportivo Inclusivo',
-                descripcion='Evento deportivo con actividades adaptadas para voluntarios y participantes con distintas habilidades.',
-                fecha_actividad=datetime(2025, 1, 12, 8, 0),
-                ubicacion='Piura, Perú',
-                cupo_maximo=50,
-                estado='activa',
-                organizacion='Red Peruana de Deporte Inclusivo',
-                imagen='festival_deportivo.jpg',
-                compatibilidad=95,
-                nivel_accesibilidad=4
-            )
-    activida15 = Actividad(
-                nombre='Apoyo psicológico con señas a adolescentes',
-                descripcion='Apoyo emocional a adolescentes en riesgo',
-                fecha_actividad=datetime(2025, 3, 12, 8, 0),
-                ubicacion='Piura, Perú',
-                cupo_maximo=50,
-                estado='activa',
-                organizacion='Red Peruana de Deporte Inclusivo',
-                imagen='festival_deportivo.jpg',
-                compatibilidad=95,
-                nivel_accesibilidad=4
-            ) '''
-db.session.add_all([actividad1, actividad2, actividad3])
+        nombre="Festival Juvenil Inclusivo de Arte Urbano",
+        descripcion="Organización de festival artístico para jóvenes",
+        fecha_actividad=datetime(2025, 3, 5, 8, 0),
+        ubicacion="Barranco, Lima",
+        tipo="presencial",
+        habilidades_requeridas="Interés en festivales",
+        es_inclusiva=True,
+        cupo_maximo=6,
+        estado="abierto",
+        imagen="arte_urbano.jpg",
+        compatibilidad="70",
+        etiqueta="recreación",
+        fk_organizacion=2,
+        id_facilidad=1  
+    )
+    actividad12 = Actividad(
+        nombre="Brigada de Emergencia Comunitaria",
+        descripcion="Simulacros y talleres sobre primeros auxilios y evacuación ante desastres",
+        fecha_actividad=datetime(2025, 1, 12, 8, 0),
+        ubicacion="Chiclayo, Perú",
+        tipo="presencial",
+        habilidades_requeridas="Apoyo comunitario",
+        es_inclusiva=True,
+        cupo_maximo=12,
+        estado="abierto",
+        imagen="brigada_emergencia.jpg",
+        compatibilidad="80",
+        etiqueta="formación",
+        fk_organizacion=2,
+        id_facilidad=2  
+    )
+    actividad13 = Actividad(
+        nombre="Pintado de Escuelas en Renovación",
+        descripcion="Apoyo en tareas de pintado y reparaciones básicas de infraestructura escolar",
+        fecha_actividad=datetime(2025, 1, 22, 8, 0),
+        ubicacion="Ayacucho, Perú",
+        tipo="presencial",
+        habilidades_requeridas="Apoyo comunitario",
+        es_inclusiva=True,
+        cupo_maximo=15,
+        estado="abierto",
+        imagen="pintado_escuelas.jpg",
+        compatibilidad="70",
+        etiqueta="sostenibilidad",
+        fk_organizacion=8,
+        id_facilidad=1  
+    )
+    actividad14 = Actividad(
+        nombre="Festival Deportivo Inclusivo",
+        descripcion="Evento deportivo con actividades adaptadas a distintas habilidades",
+        fecha_actividad=datetime(2025, 3, 11, 10, 0),
+        ubicacion="Huancayo, Perú",
+        tipo="presencial",
+        habilidades_requeridas="habilidades deportivas",
+        es_inclusiva=True,
+        cupo_maximo=20,
+        estado="abierto",
+        imagen="festival_deportivo.jpg",
+        compatibilidad="95",  # Porcentaje de compatibilidad
+        etiqueta="deporte",
+        fk_organizacion=1,
+        id_facilidad=1
+    )
+    actividad14 = Actividad(
+        nombre="Apoyo psicológico con señas a adolescentes",
+        descripcion="Apoyo emocional a adolescentes en riesgo",
+        fecha_actividad=datetime(2025, 3, 12, 10, 0),
+        ubicacion="Huancayo, Perú",
+        tipo="virtual",
+        habilidades_requeridas="conocimiento de señas",
+        es_inclusiva=True,
+        cupo_maximo=26,
+        estado="abierto",
+        imagen="festival_deportivo.jpg",
+        compatibilidad="87",  # Porcentaje de compatibilidad
+        etiqueta="niños y adolescentes",
+        fk_organizacion=5,
+        id_facilidad=2
+    )
+db.session.add_all([actividad1, actividad2, actividad3, actividad4, actividad5, actividad6, actividad7, actividad8, actividad9, actividad10, actividad11, actividad12, actividad13, actividad14, actividad15])
 db.session.commit()
 
 # Asignar discapacidades compatibles con las actividades
