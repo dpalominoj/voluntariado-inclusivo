@@ -79,7 +79,7 @@ class Actividad(db.Model):
     compatibilidad = db.Column(db.Integer)
     etiqueta = db.Column(db.String(100))
     fk_organizacion = db.Column(db.Integer, db.ForeignKey('organizaciones.id_organizacion'))
-    organizacion = db.relationship('Organizacion', backref='actividades', lazy=True) #agregado
+    #organizacion = db.relationship('Organizacion', backref='actividades', lazy=True) #agregado
     id_facilidad = db.Column(db.Integer, db.ForeignKey('actividad_facilidad.id_facilidad'))
 
 class ActividadDiscapacidad(db.Model):
@@ -100,8 +100,8 @@ class Inscripcion(db.Model):
     id_inscripcion = db.Column(db.Integer, primary_key=True, autoincrement=True)
     id_usuario = db.Column(db.Integer, db.ForeignKey('usuarios.id_usuario'))
     id_actividad = db.Column(db.Integer, db.ForeignKey('actividades.id_actividad'))
-    usuario = db.relationship('Usuario', backref='inscripciones', lazy=True) #agregado
-    actividad = db.relationship('Actividad', backref='inscripciones', lazy=True) #agregado
+    #usuario = db.relationship('Usuario', backref='inscripciones', lazy=True) #agregado
+    #actividad = db.relationship('Actividad', backref='inscripciones', lazy=True) #agregado
     fecha_inscripcion = db.Column(db.DateTime, default=datetime.utcnow)
 
 class Notificacion(db.Model):
