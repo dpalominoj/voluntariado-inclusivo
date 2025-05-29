@@ -36,7 +36,7 @@
                 <div class="actividad-card">
                     <div class="actividad-imagen">
                         {# Asegúrate que actividad.imagen contenga una URL válida o una ruta estática #}
-                        <img src="{{ actividad.imagen if actividad.imagen.startswith('http') else url_for('static', filename='img/' + actividad.imagen) }}" alt="{{ actividad.nombre }}">
+                        <img src="{{ actividad.imagen if actividad.imagen.startswith('http') else url_for('static', filename='images/' + actividad.imagen) }}" alt="{{ actividad.nombre }}">
                         <div class="compatibilidad-badge">{{ actividad.compatibilidad }}% Compatible</div>
                     </div>
                     
