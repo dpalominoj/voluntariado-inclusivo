@@ -1,5 +1,5 @@
 from models import db, Discapacidad, Preferencia, Actividad
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timedelta
 
 peru_tz = timezone(timedelta(hours=-5))
 
