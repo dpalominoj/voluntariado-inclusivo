@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import os
+
+import requests #API REST
 
 from models import db, Usuario, Organizacion, Preferencia, UsuarioPreferencia, Discapacidad, UsuarioDiscapacidad, ActividadFacilidad, Actividad, \
                    ActividadDiscapacidad, AuditoriaActividad, Inscripcion, Notificacion, Feedback, Recomendacion, Tendencia, InteraccionChatbot, AnalisisParticipacion
@@ -239,6 +241,33 @@ def dashboard_administrador():
     except Exception as e:
         flash(f'Error al cargar el dashboard: {str(e)}', 'error')
         return redirect(url_for('inicio'))
+      
+@app.route('/api/colab/actualizar_compatibilidad/<int:actividad_id>', methods=['POST'])
+def actualizar_compatibilidad_desde_colab(actividad_id):
+    colab_api_url = f"https://<NGROK-URL>.ngrok.io/compatibilidad_api/{actividad_id}"
+
+    try:
+        r = requests.get(colab_api_url)
+        r.raise_for_status()
+        data = r.json()
+        compat = data.get("compatibilidad")
+        if not (isinstance(compat, int) and 1 <= compat <= 100):
+            return jsonify({"error": "Compatibilidad inválida recibida de Colab"}), 400
+    except Exception as e:
+        return jsonify({"error": f"Error al consultar Colab: {str(e)}"}), 500
+
+    actividad = Actividad.query.get(actividad_id)
+    if not actividad:
+        return jsonify({"error": "Actividad no encontrada"}), 404
+
+    actividad.compatibilidad = compat
+    db.session.commit()
+    return jsonify({
+        "success": True,
+        "actividad_id": actividad_id,
+        "nueva_compatibilidad": compat
+    }), 200
+
 
 # --- Rutas de Actividades ---
 @app.route('/actividades', endpoint='actividades')
