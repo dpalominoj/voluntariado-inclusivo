@@ -7,7 +7,7 @@ peru_tz = timezone(timedelta(hours=-5))
 def seed_database():   
 
 # Crea organizaciones
-if Organizacion.query.count() == 0: #si no existe, crea
+if Organizacion.query.count() == 0:
     org1 = Organizacion(
         nombre_org="Fundación Inclusión Perú",
         descripcion_org="Organización dedicada a promover la inclusión social de personas con discapacidad",
