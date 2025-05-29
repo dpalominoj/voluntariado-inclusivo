@@ -4,62 +4,61 @@ from datetime import datetime, timedelta
 peru_tz = timezone(timedelta(hours=-5))
 
 #Poblar la base de datos con registros iniciales
-def seed_database():   
-
-# Crea organizaciones
-if Organizacion.query.count() == 0:
-	organizaciones = [
-	    Organizacion(
-	        nombre_org="Fundación Inclusión Perú",
-	        descripcion_org="Organización dedicada a promover la inclusión social de personas con discapacidad",
-	        direccion_fisica="Av. Arequipa 123, Lima",
-	        logo="☺",
-		fecha_registro=datetime(2025, 1, 13, 15, 0),
-	    ),
-	    Organizacion(
-	        nombre_org="Voluntarios Unidos",
-	        descripcion_org="Red de voluntarios para causas sociales",
-	        direccion_fisica="Jr. Huancavelica 456, Huancayo",
-	        logo="☺",
-		fecha_registro=datetime(2025, 1, 13, 15, 0),
-	    ),
-	    Organizacion(
-	        nombre_org="Manos Solidarias",
-	        descripcion_org="Ayuda a comunidades vulnerables",
-	        direccion_fisica="Calle Los Olivos 789, Lima",
-	        logo="☺",
-		fecha_registro=datetime(2025, 1, 13, 15, 0),
-	    ),    
-	    Organizacion(
-	        nombre_org="Fundación Somos Uno",
-	        descripcion_org="Centro de rehabilitación infantil para niños con discapacidad",
-	        direccion_fisica="Calle Rehabilitación 456, Arequipa",
-	        logo="☺",
-		fecha_registro=datetime(2025, 1, 13, 15, 0),
-	    ),    
-	    Organizacion(
-	        nombre_org="Red de Apoyo Solidario",
-	        descripcion_org="Red de comedores populares en zonas vulnerables",
-	        direccion_fisica="Jr. Solidaridad 101, Huancayo",
-	        logo="☺",
-		fecha_registro=datetime(2025, 1, 13, 15, 0),
-	    ),
-	    Organizacion(
-	        nombre_org="Educa Rural",
-	        descripcion_org="Educación inclusiva en zonas rurales del Perú",
-	        direccion_fisica="Calle Educación 303, Huancavelica",
-	        logo="☺",
-		fecha_registro=datetime(2025, 1, 13, 15, 0),
-	    ),    
-	    Organizacion(
-	        nombre_org="Manos que Suman",
-	        descripcion_org="Mejora de infraestructura escolar inclusiva",
-	        direccion_fisica="Calle Escuela 606, Huancayo",
-	        logo="☺",
-		fecha_registro=datetime(2025, 1, 13, 15, 0),
-	    )
-	]
-db.session.add_all(organizaciones)
+def seed_database():
+	# Crea organizaciones
+	if Organizacion.query.count() == 0:
+		organizaciones = [
+		    Organizacion(
+		        nombre_org="Fundación Inclusión Perú",
+		        descripcion_org="Organización dedicada a promover la inclusión social de personas con discapacidad",
+		        direccion_fisica="Av. Arequipa 123, Lima",
+		        logo="☺",
+			fecha_registro=datetime(2025, 1, 13, 15, 0),
+		    ),
+		    Organizacion(
+		        nombre_org="Voluntarios Unidos",
+		        descripcion_org="Red de voluntarios para causas sociales",
+		        direccion_fisica="Jr. Huancavelica 456, Huancayo",
+		        logo="☺",
+			fecha_registro=datetime(2025, 1, 13, 15, 0),
+		    ),
+		    Organizacion(
+		        nombre_org="Manos Solidarias",
+		        descripcion_org="Ayuda a comunidades vulnerables",
+		        direccion_fisica="Calle Los Olivos 789, Lima",
+		        logo="☺",
+			fecha_registro=datetime(2025, 1, 13, 15, 0),
+		    ),    
+		    Organizacion(
+		        nombre_org="Fundación Somos Uno",
+		        descripcion_org="Centro de rehabilitación infantil para niños con discapacidad",
+		        direccion_fisica="Calle Rehabilitación 456, Arequipa",
+		        logo="☺",
+			fecha_registro=datetime(2025, 1, 13, 15, 0),
+		    ),    
+		    Organizacion(
+		        nombre_org="Red de Apoyo Solidario",
+		        descripcion_org="Red de comedores populares en zonas vulnerables",
+		        direccion_fisica="Jr. Solidaridad 101, Huancayo",
+		        logo="☺",
+			fecha_registro=datetime(2025, 1, 13, 15, 0),
+		    ),
+		    Organizacion(
+		        nombre_org="Educa Rural",
+		        descripcion_org="Educación inclusiva en zonas rurales del Perú",
+		        direccion_fisica="Calle Educación 303, Huancavelica",
+		        logo="☺",
+			fecha_registro=datetime(2025, 1, 13, 15, 0),
+		    ),    
+		    Organizacion(
+		        nombre_org="Manos que Suman",
+		        descripcion_org="Mejora de infraestructura escolar inclusiva",
+		        direccion_fisica="Calle Escuela 606, Huancayo",
+		        logo="☺",
+			fecha_registro=datetime(2025, 1, 13, 15, 0),
+		    )
+		]
+	db.session.add_all(organizaciones)
 
 # Crea discapacidades
 if Discapacidad.query.count() == 0:
