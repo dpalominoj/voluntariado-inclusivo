@@ -18,6 +18,7 @@ def create_app():
     Migrate(app, db)
     
     with app.app_context():
+        db.drop_all()  # Add this line
         db.create_all()
         try:
             seed_database()
@@ -49,7 +50,7 @@ def ayuda():
 @app.route('/registro', methods=['POST'])
 def registro():
     # Recuperar variables de formulario registro
-    nombre = request.form.get('nombres') 
+    nombre = request.form.get('nombre') 
     dni = request.form.get('dni')
     perfil = 'voluntario'
     tiene_discapacidad_str = request.form.get('accs')
@@ -188,12 +189,26 @@ def voluntario():
     usuario = Usuario.query.get(usuario_id)
     # Obtener actividades en las que el usuario está inscrito
     inscripciones = Inscripcion.query.filter_by(id_usuario=usuario_id).all()
-    # Debes definir la relación entre Inscripcion y Actividad si no existe
     actividades_inscritas = [inscripcion.actividad for inscripcion in inscripciones if hasattr(inscripcion, 'actividad') and inscripcion.actividad]
+    
+    # Obtener discapacidades del usuario
+    discapacidades_usuario = UsuarioDiscapacidad.query.filter_by(id_usuario=usuario_id).all()
+    discapacidades = [Discapacidad.query.get(du.id_discapacidad) for du in discapacidades_usuario]
+    
+    # Obtener preferencias del usuario
+    preferencias_usuario = UsuarioPreferencia.query.filter_by(id_usuario=usuario_id).all()
+    preferencias = [Preferencia.query.get(pu.id_preferencia) for pu in preferencias_usuario]
+    
+    # Obtener actividades disponibles (estado 'abierto', limit 10, order by fecha_actividad desc)
+    actividades_disponibles = Actividad.query.filter_by(estado='abierto').order_by(Actividad.fecha_actividad.desc()).limit(10).all()
+    
     return render_template(
         'dashboard/voluntario.html',
         usuario=usuario,
         actividades_inscritas=actividades_inscritas,
+        discapacidades=discapacidades,
+        preferencias=preferencias,
+        actividades_disponibles=actividades_disponibles
     )
 
 @app.route('/dashboard/organizador')
@@ -241,8 +256,8 @@ def dashboard_administrador():
         return redirect(url_for('inicio'))
 
 # --- Rutas de Actividades ---
-@app.route('/actividades', endpoint='actividades')
 @app.route('/actividades_filtradas')
+@app.route('/actividades')
 def actividades_filtradas():
     tipo_filtro = request.args.get('tipo')
     accesibilidad_filtro = request.args.get('accesibilidad')
