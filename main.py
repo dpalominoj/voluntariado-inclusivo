@@ -208,10 +208,40 @@ def dashboard_organizador():
 
 @app.route('/dashboard/administrador')
 def dashboard_administrador():
-    if 'usuario_id' not in session or session.get('usuario_perfil') != 'administrador':
-        flash('Acceso denegado. Debe iniciar sesión como administrador.', 'error')
+    # Validación de acceso más robusta
+    if 'usuario_id' not in session:
+        flash('Debe iniciar sesión para acceder.', 'error')
         return redirect(url_for('inicio'))
-return render_template('dashboard/administrador.html')
+    
+    if session.get('usuario_perfil') != 'administrador':
+        flash('Acceso restringido: Solo para administradores.', 'error')
+        return redirect(url_for('inicio'))
+    
+    # Obtener datos estadísticos para el dashboard
+    try:
+        # Estadísticas generales
+        total_usuarios = Usuario.query.count()
+        total_organizaciones = Organizacion.query.count()
+        total_actividades = Actividad.query.count()
+        
+        # Últimas actividades creadas
+        ultimas_actividades = Actividad.query.order_by(Actividad.fecha_creacion.desc()).limit(5).all()
+        
+        # Usuarios recientes
+        nuevos_usuarios = Usuario.query.order_by(Usuario.fecha_registro.desc()).limit(5).all()
+        
+        return render_template(
+            'dashboard/administrador.html',
+            total_usuarios=total_usuarios,
+            total_organizaciones=total_organizaciones,
+            total_actividades=total_actividades,
+            ultimas_actividades=ultimas_actividades,
+            nuevos_usuarios=nuevos_usuarios
+        )
+        
+    except Exception as e:
+        flash(f'Error al cargar el dashboard: {str(e)}', 'error')
+        return redirect(url_for('inicio'))
 
 # --- Rutas de Actividades ---
 @app.route('/actividades')
