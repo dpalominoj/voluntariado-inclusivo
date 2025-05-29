@@ -650,5 +650,4 @@ db.session.add(Inscripcion(id_usuario=9, id_actividad=14, fecha_inscripcion=date
 db.session.add(Inscripcion(id_usuario=5, id_actividad=11, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=2))) # Pedro, en Festival Juvenil (no inclusivo para su discapacidad, pero posible)
 db.session.add(Inscripcion(id_usuario=6, id_actividad=13, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=3))) # Ana, en Pintado de Escuelas
 db.session.add(Inscripcion(id_usuario=7, id_actividad=5, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=18))) # Jorge, en Reforestación Accesible
-
-
+db.session.commit()
