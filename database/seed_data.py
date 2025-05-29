@@ -17,6 +17,7 @@ peru_tz = timezone(timedelta(hours=-5))
 
 #Poblar la base de datos con registros iniciales
 def seed_database():
+	with db.session.begin():
 	# Crea organizaciones
 	if Organizacion.query.count() == 0:
 		organizaciones = [
