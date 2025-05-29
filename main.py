@@ -93,10 +93,10 @@ db.session.add(nuevo_usuario)
 db.session.commit()
     # Añadir discapacidades seleccionadas
     if nuevo_usuario.tiene_discapacidad and discapacidad_ids:
-        for disc_name in discapacidad_ids: # 'disc[]' envía nombres de discapacidad
+        for disc_name in discapacidad_ids:
             discapacidad = Discapacidad.query.filter_by(nombre=disc_name).first()
             if discapacidad:
-                usuario_discapacidad = UsuarioDiscapacidad(
+              usuario_discapacidad = UsuarioDiscapacidad(
                     id_usuario=nuevo_usuario.id_usuario,
                     id_discapacidad=discapacidad.id_discapacidad,
                     gravedad='moderada', # valor por defecto
