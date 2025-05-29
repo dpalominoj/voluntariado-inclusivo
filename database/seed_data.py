@@ -325,20 +325,20 @@ db.session.add(UsuarioDiscapacidad(id_usuario=9, id_discapacidad=3, gravedad="gr
 db.session.add(UsuarioDiscapacidad(id_usuario=10, id_discapacidad=3, gravedad="moderada", apoyo_requerido="otros"))
 
 # Asignar preferencias a usuarios
-    #  organizadores
-    db.session.add(UsuarioPreferencia(id_usuario=2, id_preferencia=1))
-    db.session.add(UsuarioPreferencia(id_usuario=2, id_preferencia=2))
-    db.session.add(UsuarioPreferencia(id_usuario=3, id_preferencia=3))
-    db.session.add(UsuarioPreferencia(id_usuario=3, id_preferencia=4))
-    db.session.add(UsuarioPreferencia(id_usuario=4, id_preferencia=1))
-    db.session.add(UsuarioPreferencia(id_usuario=4, id_preferencia=4))
-    # voluntarios
-    db.session.add(UsuarioPreferencia(id_usuario=5, id_preferencia=2))
-    db.session.add(UsuarioPreferencia(id_usuario=6, id_preferencia=3))
-    db.session.add(UsuarioPreferencia(id_usuario=7, id_preferencia=1))
-    db.session.add(UsuarioPreferencia(id_usuario=8, id_preferencia=4))
-    db.session.add(UsuarioPreferencia(id_usuario=9, id_preferencia=4))
-    db.session.add(UsuarioPreferencia(id_usuario=10, id_preferencia=2))
+#  organizadores
+db.session.add(UsuarioPreferencia(id_usuario=2, id_preferencia=1))
+db.session.add(UsuarioPreferencia(id_usuario=2, id_preferencia=2))
+db.session.add(UsuarioPreferencia(id_usuario=3, id_preferencia=3))
+db.session.add(UsuarioPreferencia(id_usuario=3, id_preferencia=4))
+db.session.add(UsuarioPreferencia(id_usuario=4, id_preferencia=1))
+db.session.add(UsuarioPreferencia(id_usuario=4, id_preferencia=4))
+# voluntarios
+db.session.add(UsuarioPreferencia(id_usuario=5, id_preferencia=2))
+db.session.add(UsuarioPreferencia(id_usuario=6, id_preferencia=3))
+db.session.add(UsuarioPreferencia(id_usuario=7, id_preferencia=1))
+db.session.add(UsuarioPreferencia(id_usuario=8, id_preferencia=4))
+db.session.add(UsuarioPreferencia(id_usuario=9, id_preferencia=4))
+db.session.add(UsuarioPreferencia(id_usuario=10, id_preferencia=2))
 
 # Crear actividades
 if Actividad.query.count() == 0:
