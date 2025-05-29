@@ -587,50 +587,51 @@ if Actividad.query.count() == 0:
 db.session.add_all(actividades)
 
 # Asignar discapacidades compatibles con las actividades
-    # Taller de lectura (visual)
-    db.session.add(ActividadDiscapacidad(id_actividad=1, id_discapacidad=2))
-	db.session.add(ActividadDiscapacidad(id_actividad=4, id_discapacidad=2))
-	db.session.add(ActividadDiscapacidad(id_actividad=7, id_discapacidad=2))
-	db.session.add(ActividadDiscapacidad(id_actividad=14, id_discapacidad=2))
-    # Charla sobre derechos (auditiva)
-    db.session.add(ActividadDiscapacidad(id_actividad=2, id_discapacidad=1))
-	db.session.add(ActividadDiscapacidad(id_actividad=12, id_discapacidad=1))
-	db.session.add(ActividadDiscapacidad(id_actividad=15, id_discapacidad=1))
-    # Limpieza de playas (motriz)
-    db.session.add(ActividadDiscapacidad(id_actividad=3, id_discapacidad=3))
-	db.session.add(ActividadDiscapacidad(id_actividad=5, id_discapacidad=3))
-	db.session.add(ActividadDiscapacidad(id_actividad=6, id_discapacidad=3))
-	db.session.add(ActividadDiscapacidad(id_actividad=11, id_discapacidad=3))
-	db.session.add(ActividadDiscapacidad(id_actividad=13, id_discapacidad=3))
-	db.session.add(ActividadDiscapacidad(id_actividad=14, id_discapacidad=3))
+# Taller de lectura (visual)
+db.session.add(ActividadDiscapacidad(id_actividad=1, id_discapacidad=2))
+db.session.add(ActividadDiscapacidad(id_actividad=4, id_discapacidad=2))
+db.session.add(ActividadDiscapacidad(id_actividad=7, id_discapacidad=2))
+db.session.add(ActividadDiscapacidad(id_actividad=14, id_discapacidad=2))
+# Charla sobre derechos (auditiva)
+db.session.add(ActividadDiscapacidad(id_actividad=2, id_discapacidad=1))
+db.session.add(ActividadDiscapacidad(id_actividad=12, id_discapacidad=1))
+db.session.add(ActividadDiscapacidad(id_actividad=15, id_discapacidad=1))
+# Limpieza de playas (motriz)
+db.session.add(ActividadDiscapacidad(id_actividad=3, id_discapacidad=3))
+db.session.add(ActividadDiscapacidad(id_actividad=5, id_discapacidad=3))
+db.session.add(ActividadDiscapacidad(id_actividad=6, id_discapacidad=3))
+db.session.add(ActividadDiscapacidad(id_actividad=11, id_discapacidad=3))
+db.session.add(ActividadDiscapacidad(id_actividad=13, id_discapacidad=3))
+db.session.add(ActividadDiscapacidad(id_actividad=14, id_discapacidad=3))
 
 # Crea inscripciones
-	# Voluntarios sin discapacidad inscritos en actividades no inclusivas
-	db.session.add(Inscripcion(id_usuario=5, id_actividad=9, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=8)))
-	db.session.add(Inscripcion(id_usuario=6, id_actividad=10, fecha_inscripcion=datetime(2025, 2, 28, 10, 0, tzinfo=peru_tz)))
-	db.session.add(Inscripcion(id_usuario=7, id_actividad=8, fecha_inscripcion=datetime(2025, 2, 1, 9, 0, tzinfo=peru_tz)))
-    # Voluntarios con discapacidad visual inscritos en taller de lectura
-    db.session.add(Inscripcion(id_usuario=7, id_actividad=1, fecha_inscripcion=datetime.now(peru_tz)))
-    db.session.add(Inscripcion(id_usuario=8, id_actividad=1, fecha_inscripcion=datetime.now(peru_tz)))
-	db.session.add(Inscripcion(id_usuario=7, id_actividad=4, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=12)))
-        db.session.add(Inscripcion(id_usuario=8, id_actividad=7, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=11)))
-	db.session.add(Inscripcion(id_usuario=7, id_actividad=14, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=15)))
-    # Voluntarios con discapacidad auditiva inscritos en charla
-    db.session.add(Inscripcion(id_usuario=4, id_actividad=2, fecha_inscripcion=datetime.now(peru_tz)))
-    db.session.add(Inscripcion(id_usuario=5, id_actividad=2, fecha_inscripcion=datetime.now(peru_tz)))
-    db.session.add(Inscripcion(id_usuario=6, id_actividad=2, fecha_inscripcion=datetime.now(peru_tz)))
-	db.session.add(Inscripcion(id_usuario=4, id_actividad=12, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=10)))
-	db.session.add(Inscripcion(id_usuario=5, id_actividad=15, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=9)))
-	db.session.add(Inscripcion(id_usuario=6, id_actividad=15, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=9)))
-    # Voluntarios con discapacidad motriz y otros en limpieza de playas
-    db.session.add(Inscripcion(id_usuario=9, id_actividad=3, fecha_inscripcion=datetime.now(peru_tz)))
-    db.session.add(Inscripcion(id_usuario=10, id_actividad=3, fecha_inscripcion=datetime.now(peru_tz)))
-	db.session.add(Inscripcion(id_usuario=9, id_actividad=11, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=13)))
-        db.session.add(Inscripcion(id_usuario=10, id_actividad=13, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=14)))
-	db.session.add(Inscripcion(id_usuario=9, id_actividad=14, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=16)))
-        # Inscripciones para actividades con fecha futura, mostrando diversos estados
-        db.session.add(Inscripcion(id_usuario=5, id_actividad=11, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=2))) # Pedro, en Festival Juvenil (no inclusivo para su discapacidad, pero posible)
-        db.session.add(Inscripcion(id_usuario=6, id_actividad=13, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=3))) # Ana, en Pintado de Escuelas
-        db.session.add(Inscripcion(id_usuario=7, id_actividad=5, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=18))) # Jorge, en Reforestación Accesible      
+# Voluntarios sin discapacidad inscritos en actividades no inclusivas
+db.session.add(Inscripcion(id_usuario=5, id_actividad=9, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=8)))
+db.session.add(Inscripcion(id_usuario=6, id_actividad=10, fecha_inscripcion=datetime(2025, 2, 28, 10, 0, tzinfo=peru_tz)))
+db.session.add(Inscripcion(id_usuario=7, id_actividad=8, fecha_inscripcion=datetime(2025, 2, 1, 9, 0, tzinfo=peru_tz)))
+# Voluntarios con discapacidad visual inscritos en taller de lectura
+db.session.add(Inscripcion(id_usuario=7, id_actividad=1, fecha_inscripcion=datetime.now(peru_tz)))
+db.session.add(Inscripcion(id_usuario=8, id_actividad=1, fecha_inscripcion=datetime.now(peru_tz)))
+db.session.add(Inscripcion(id_usuario=7, id_actividad=4, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=12)))
+db.session.add(Inscripcion(id_usuario=8, id_actividad=7, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=11)))
+db.session.add(Inscripcion(id_usuario=7, id_actividad=14, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=15)))
+# Voluntarios con discapacidad auditiva inscritos en charla
+db.session.add(Inscripcion(id_usuario=4, id_actividad=2, fecha_inscripcion=datetime.now(peru_tz)))
+db.session.add(Inscripcion(id_usuario=5, id_actividad=2, fecha_inscripcion=datetime.now(peru_tz)))
+db.session.add(Inscripcion(id_usuario=6, id_actividad=2, fecha_inscripcion=datetime.now(peru_tz)))
+db.session.add(Inscripcion(id_usuario=4, id_actividad=12, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=10)))
+db.session.add(Inscripcion(id_usuario=5, id_actividad=15, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=9)))
+db.session.add(Inscripcion(id_usuario=6, id_actividad=15, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=9)))
+# Voluntarios con discapacidad motriz y otros en limpieza de playas
+db.session.add(Inscripcion(id_usuario=9, id_actividad=3, fecha_inscripcion=datetime.now(peru_tz)))
+db.session.add(Inscripcion(id_usuario=10, id_actividad=3, fecha_inscripcion=datetime.now(peru_tz)))
+db.session.add(Inscripcion(id_usuario=9, id_actividad=11, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=13)))
+db.session.add(Inscripcion(id_usuario=10, id_actividad=13, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=14)))
+db.session.add(Inscripcion(id_usuario=9, id_actividad=14, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=16)))
+# Inscripciones para actividades con fecha futura, mostrando diversos estados
+db.session.add(Inscripcion(id_usuario=5, id_actividad=11, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=2))) # Pedro, en Festival Juvenil (no inclusivo para su discapacidad, pero posible)
+db.session.add(Inscripcion(id_usuario=6, id_actividad=13, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=3))) # Ana, en Pintado de Escuelas
+db.session.add(Inscripcion(id_usuario=7, id_actividad=5, fecha_inscripcion=datetime.now(peru_tz) - timedelta(days=18))) # Jorge, en Reforestación Accesible
+
 db.session.commit()
 
