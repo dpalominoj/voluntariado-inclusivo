@@ -62,32 +62,32 @@ def seed_database():
 
 # Crea discapacidades
 if Discapacidad.query.count() == 0:
-	discapacidades = [
-    Discapacidad(nombre="Auditiva", descripcion="Dificultad o imposibilidad de usar el sentido del oído"),
-    Discapacidad(nombre="Visual", descripcion="Dificultad o imposibilidad de usar el sentido de la vista"),
-    Discapacidad(nombre="Motriz", descripcion="Dificultad o imposibilidad de moverse o desplazarse")
-	]
-db.session.add_all(discapacidades)
+    discapacidades = [
+        Discapacidad(nombre="Auditiva", descripcion="Dificultad o imposibilidad de usar el sentido del oído"),
+        Discapacidad(nombre="Visual", descripcion="Dificultad o imposibilidad de usar el sentido de la vista"),
+        Discapacidad(nombre="Motriz", descripcion="Dificultad o imposibilidad de moverse o desplazarse")
+    ]
+    db.session.add_all(discapacidades)  # Esta línea debe estar indentada dentro del if
     
 # Crea preferencias
 if Preferencia.query.count() == 0:
-	preferencias = [
-    Preferencia(nombre_corto="Niños y Adolescentes", descripcion_detallada="Trabajar con niños y adolescentes"),
-    Preferencia(nombre_corto="Educación y formación", descripcion_detallada="Actividades educativas"),
-    Preferencia(nombre_corto="Ambiente y sostenibilidad", descripcion_detallada="Actividades ambientales"),
-    Preferencia(nombre_corto="Deporte y recreación", descripcion_detallada="Actividades educativas")
-	]
+    preferencias = [
+        Preferencia(nombre_corto="Niños y Adolescentes", descripcion_detallada="Trabajar con niños y adolescentes"),
+        Preferencia(nombre_corto="Educación y formación", descripcion_detallada="Actividades educativas"),
+        Preferencia(nombre_corto="Ambiente y sostenibilidad", descripcion_detallada="Actividades ambientales"),
+        Preferencia(nombre_corto="Deporte y recreación", descripcion_detallada="Actividades educativas")
+    ]
 db.session.add_all(preferencias)
 
 # Crea facilidades para actividades
 if ActividadFacilidad.query.count() == 0:
-	actividadfacilidad = [
-    ActividadFacilidad(nombre_facilidad="Rampas", descripcion="Acceso con rampas para sillas de ruedas"),
-    ActividadFacilidad(nombre_facilidad="Intérpretes", descripcion="Intérpretes de lengua de señas disponibles"),
-    ActividadFacilidad(nombre_facilidad="Material braille", descripcion="Material disponible en sistema braille"),
-    ActividadFacilidad(nombre_facilidad="Materiales en audio", descripcion="Material accesible en audio"),
-    ActividadFacilidad(nombre_facilidad="Otros", descripcion="Otros")
-	]
+    actividadfacilidad = [
+        ActividadFacilidad(nombre_facilidad="Rampas", descripcion="Acceso con rampas para sillas de ruedas"),
+        ActividadFacilidad(nombre_facilidad="Intérpretes", descripcion="Intérpretes de lengua de señas disponibles"),
+        ActividadFacilidad(nombre_facilidad="Material braille", descripcion="Material disponible en sistema braille"),
+        ActividadFacilidad(nombre_facilidad="Materiales en audio", descripcion="Material accesible en audio"),
+        ActividadFacilidad(nombre_facilidad="Otros", descripcion="Otros")
+    ]
 db.session.add_all(actividadfacilidad)
 
 # Crea usuarios
