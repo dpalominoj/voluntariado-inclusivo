@@ -1,5 +1,19 @@
-from models import db, Discapacidad, Voluntario, VoluntarioDiscapacidad
 from datetime import datetime, timezone, timedelta
+from models import (
+    db,
+    Discapacidad,
+    Voluntario,
+    VoluntarioDiscapacidad,
+    Organizacion,
+    Preferencia,
+    ActividadFacilidad,
+    Usuario,
+    UsuarioDiscapacidad,
+    UsuarioPreferencia,
+    Actividad,
+    ActividadDiscapacidad,
+    Inscripcion
+)
 
 peru_tz = timezone(timedelta(hours=-5))
 
